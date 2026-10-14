@@ -9,6 +9,12 @@
 body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
 a{color:#1F5FD1}a:hover{color:#174AA6}
 .shell{display:flex;flex-wrap:wrap;min-height:100vh}
+.menubtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:8px;border:1px solid #C4CDD8;background:#fff;font:600 14px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
+#navtoggle:focus-visible ~ .shell .menubtn{outline:2px solid #1F5FD1;outline-offset:2px}
+.nav .sub{padding:8px 14px 8px 28px;font-size:13px;color:#AFC0D8}
+@media (max-width:899px){.side{display:none}#navtoggle:checked ~ .shell .side{display:block;flex-basis:100%}}
+@media (min-width:900px){#navtoggle:checked ~ .shell .side{display:none}}
+@media (max-width:600px){.topbar,.content{padding-left:16px;padding-right:16px}.h1{font-size:24px}.who{display:none}}
 .side{flex:1 1 240px;background:#0F1E36;padding:20px 12px;box-sizing:border-box}
 @media (min-width:900px){.side{min-height:100vh}}
 .mainc{flex:999 1 560px;min-width:0;display:flex;flex-direction:column}
@@ -37,15 +43,17 @@ a{color:#1F5FD1}a:hover{color:#174AA6}
 .lead{margin:0;color:#5A6778;font-size:15px}
 .sr{position:absolute;left:-9999px}
 </style>
-
-
 <style>
 body{margin:0;background:#F3F5F8}
 .cap{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;padding:12px 14px;border-radius:12px;border:1px solid #C4CDD8;background:#fff;text-align:left;font:15px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
 .cap.done{border-color:#9FD3B5;background:#F3FAF6}
 .cap.need{border:2px solid #B42318;background:#FFF8F7}
+.big{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border-radius:12px;border:1px solid #C4CDD8;background:#fff;font:600 16px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer;text-decoration:none;box-sizing:border-box}
+.big.p{background:#1F5FD1;border-color:#1F5FD1;color:#fff}
+.opt{flex:1 1 30%;min-height:52px;border-radius:12px;border:1px solid #C4CDD8;background:#fff;font:600 14px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
+.opt.sel{background:#16202E;border-color:#16202E;color:#fff}
+.row{display:flex;align-items:center;gap:12px;width:100%;min-height:60px;padding:10px 14px;border:1px solid #DDE3EA;border-radius:12px;background:#fff;text-align:left;font:15px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
 </style>
-
 <style>body{display:flex;justify-content:center;padding:24px 0;background:#DDE3EA}</style>
 </head>
 <body>
@@ -53,51 +61,94 @@ body{margin:0;background:#F3F5F8}
 <script type="text/x-template" id="dc-tpl">
 
 <div style="width: 390px; height: 844px; box-sizing: border-box; display: flex; flex-direction: column; font-family: 'IBM Plex Sans', system-ui, sans-serif; color: #16202E; background: #F3F5F8; overflow: hidden">
-<header style="background: #0F1E36; color: #FFFFFF; padding: 16px 18px 14px">
-<div style="display: flex; justify-content: space-between; align-items: center">
-<a href="05-job-details.html" aria-label="Back to job" style="display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; color: #FFFFFF; margin-left: -10px">
+<header style="background: #0F1E36; color: #FFFFFF; padding: 14px 16px 12px">
+<div style="display: flex; justify-content: space-between; align-items: center; min-height: 44px">
+<sc-if value="{{canBack}}" hint-placeholder-val="{{ true }}">
+<button onClick="{{back}}" aria-label="Back" style="display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; color: #FFFFFF; background: none; border: 0; margin-left: -10px; cursor: pointer">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg>
-</a>
+</button>
+</sc-if>
+<sc-if value="{{noBack}}" hint-placeholder-val="{{ false }}"><a href="01-dashboard.html" style="color: #C9D3E3; font-size: 13px; min-height: 44px; display: inline-flex; align-items: center">Desktop</a></sc-if>
 <div style="text-align: center">
-<div style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 16px">WC-24817</div>
-<div style="font-size: 12px; color: #C9D3E3">Skip &amp; RORO · Collection</div>
+<div style="font-weight: 600; font-size: 16px">{{hTitle}}</div>
+<div style="font-size: 12px; color: #C9D3E3">{{hSub}}</div>
 </div>
-<span style="width: 44px"></span>
+<span style="width: 44px; text-align: right; font-size: 12px; color: #C9D3E3">ME</span>
 </div>
-<div style="margin-top: 12px; display: flex; justify-content: space-between; font-size: 13px; color: #C9D3E3"><span>Step 4 of 12</span><span>{{doneCount}} of 4 captured</span></div>
-<div style="height: 6px; background: #22385A; border-radius: 3px; margin-top: 6px"><div style="height: 6px; width: 33%; background: #4C8DF6; border-radius: 3px"></div></div>
+<sc-if value="{{showProgress}}" hint-placeholder-val="{{ false }}">
+<div style="margin-top: 8px; display: flex; justify-content: space-between; font-size: 13px; color: #C9D3E3"><span>{{doneSteps}} of {{totalSteps}} steps</span><span>{{issues}} issue(s)</span></div>
+<div style="height: 6px; background: #22385A; border-radius: 3px; margin-top: 6px"><div style="height: 6px; width: {{pct}}; background: #4C8DF6; border-radius: 3px"></div></div>
+</sc-if>
 </header>
 <div style="flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px">
-<div>
-<h1 style="margin: 0; font-size: 22px; font-weight: 700">Street Works evidence</h1>
-<p style="margin: 6px 0 0; font-size: 14px; color: #4A5666; line-height: 1.45">Skip is on a public highway. Capture these before moving the container.</p>
-</div>
-<sc-for list="{{items}}" as="i" hint-placeholder-count="4">
-<button class="{{i.cls}}" aria-pressed="{{i.on}}" onClick="{{i.toggle}}">
-<span style="display: inline-flex; flex: none; width: 40px; height: 40px; border-radius: 10px; align-items: center; justify-content: center; background: {{i.iconBg}}; color: {{i.iconFg}}">
-<sc-if value="{{i.isDone}}" hint-placeholder-val="{{ false }}">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>
-</sc-if>
-<sc-if value="{{i.notDone}}" hint-placeholder-val="{{ true }}">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path><circle cx="12" cy="13" r="3"></circle></svg>
-</sc-if>
-</span>
-<span style="flex: 1; min-width: 0">
-<span style="display: block; font-weight: 600">{{i.label}}</span>
-<span style="display: block; font-size: 13px; color: {{i.subFg}}; margin-top: 2px">{{i.sub}}</span>
-</span>
+<sc-if value="{{scr.jobs}}" hint-placeholder-val="{{ true }}">
+<h1 style="margin: 0; font-size: 22px">Today · 3 jobs</h1>
+<sc-for list="{{jobs}}" as="j" hint-placeholder-count="3">
+<button class="row" onClick="{{j.open}}">
+<span style="flex: 1; min-width: 0"><span style="display: block; font-family: 'IBM Plex Mono', monospace; font-weight: 600">{{j.ref}}</span><span style="display: block; font-size: 13px; color: #4A5666">{{j.module}} · {{j.time}}</span><span style="display: block; font-size: 13px; color: #4A5666">{{j.site}}</span></span>
+<span class="b {{j.cls}}" style="display: inline-flex; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: {{j.bg}}; color: {{j.fg}}">{{j.status}}</span>
 </button>
 </sc-for>
-<sc-if value="{{blocked}}" hint-placeholder-val="{{ true }}">
-<div role="alert" style="padding: 12px 14px; border-radius: 12px; background: #FDE7E5; color: #8A1A14; font-size: 14px; line-height: 1.45">
-<strong>Permit missing.</strong> You can continue, but a non-compliance will be raised and shown to your manager.
+<p style="margin: 4px 0 0; font-size: 13px; color: #5A6778">Works with a signal. Offline capture is not available in this version.</p>
+</sc-if>
+<sc-if value="{{scr.job}}" hint-placeholder-val="{{ false }}">
+<div style="background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 8px; font-size: 14px">
+<div><span style="color: #5A6778">Customer</span><div style="font-weight: 600">{{job.customer}}</div></div>
+<div><span style="color: #5A6778">Site</span><div style="font-weight: 600">{{job.site}}</div></div>
+<div><span style="color: #5A6778">Task</span><div style="font-weight: 600">{{job.task}}</div></div>
+<div><span style="color: #5A6778">Notes</span><div>{{job.notes}}</div></div>
+</div>
+<sc-if value="{{notArrived}}" hint-placeholder-val="{{ true }}"><button class="big p" onClick="{{arrive}}">I have arrived on site</button></sc-if>
+<sc-if value="{{arrived}}" hint-placeholder-val="{{ false }}">
+<div role="status" style="padding: 12px 14px; border-radius: 12px; background: #E3F3EA; color: #17633D; font-size: 14px"><strong>Arrived 08:39.</strong> Location captured: ±6 m, inside site.</div>
+<button class="big p" onClick="{{toSteps}}">Continue workflow</button>
+</sc-if>
+</sc-if>
+<sc-if value="{{scr.steps}}" hint-placeholder-val="{{ false }}">
+<h1 style="margin: 0; font-size: 20px">Workflow steps</h1>
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="10">
+<button class="row" onClick="{{s.open}}">
+<span style="display: inline-flex; flex: none; width: 30px; height: 30px; border-radius: 50%; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; background: {{s.dotBg}}; color: {{s.dotFg}}">{{s.n}}</span>
+<span style="flex: 1">{{s.title}}</span>
+<span style="font-size: 12px; font-weight: 600; color: {{s.stFg}}">{{s.st}}</span>
+</button>
+</sc-for>
+</sc-if>
+<sc-if value="{{scr.step}}" hint-placeholder-val="{{ false }}">
+<div><div style="font-size: 13px; color: #5A6778">Step {{step.n}} of {{totalSteps}}</div><h1 style="margin: 2px 0 0; font-size: 22px">{{step.title}}</h1>
+<p style="margin: 6px 0 0; font-size: 14px; color: #4A5666; line-height: 1.45">{{step.help}}</p></div>
+<sc-for list="{{items}}" as="i" hint-placeholder-count="3">
+<button class="{{i.cls}}" aria-pressed="{{i.on}}" onClick="{{i.toggle}}">
+<span style="display: inline-flex; flex: none; width: 40px; height: 40px; border-radius: 10px; align-items: center; justify-content: center; background: {{i.iconBg}}; color: {{i.iconFg}}; font-weight: 700">{{i.icon}}</span>
+<span style="flex: 1; min-width: 0"><span style="display: block; font-weight: 600">{{i.label}}</span><span style="display: block; font-size: 13px; color: {{i.subFg}}; margin-top: 2px">{{i.sub}}</span></span>
+</button>
+</sc-for>
+<sc-if value="{{hasChoices}}" hint-placeholder-val="{{ false }}">
+<div style="font-size: 14px; font-weight: 600">{{step.choiceLabel}}</div>
+<div role="radiogroup" aria-label="{{step.choiceLabel}}" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{choices}}" as="c" hint-placeholder-count="3"><button role="radio" aria-checked="{{c.on}}" class="{{c.cls}}" onClick="{{c.pick}}">{{c.label}}</button></sc-for>
 </div>
 </sc-if>
+<sc-if value="{{blocked}}" hint-placeholder-val="{{ false }}">
+<div role="alert" style="padding: 12px 14px; border-radius: 12px; background: #FDE7E5; color: #8A1A14; font-size: 14px; line-height: 1.45"><strong>{{blockedText}}</strong> You can continue, but a non-compliance will be raised and shown to your manager.</div>
+</sc-if>
+</sc-if>
+<sc-if value="{{scr.cop}}" hint-placeholder-val="{{ false }}">
+<div style="background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 12px; padding: 18px; display: flex; flex-direction: column; gap: 10px; align-items: flex-start">
+<span style="display: inline-flex; padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; background: {{cop.bg}}; color: {{cop.fg}}">{{cop.status}}</span>
+<h1 style="margin: 0; font-size: 20px">Chain of Proof</h1>
+<p style="margin: 0; font-size: 14px; color: #3A4656; line-height: 1.5">{{cop.text}}</p>
 </div>
+<a class="big" href="27-chain-of-proof.html">View example Chain of Proof</a>
+<button class="big p" onClick="{{toJobs}}">Back to today's jobs</button>
+</sc-if>
+</div>
+<sc-if value="{{scr.step}}" hint-placeholder-val="{{ false }}">
 <footer style="padding: 12px 16px 20px; background: #FFFFFF; border-top: 1px solid #DDE3EA; display: flex; gap: 10px">
-<a href="06-workflow.html" style="flex: 1; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 12px; border: 1px solid #C4CDD8; color: #16202E; text-decoration: none; font-weight: 600; font-size: 15px">All steps</a>
-<a href="06-workflow.html" style="flex: 2; display: inline-flex; align-items: center; justify-content: center; min-height: 52px; border-radius: 12px; background: #1F5FD1; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 16px">{{nextLabel}}</a>
+<button class="big" style="flex: 1" onClick="{{toSteps}}">All steps</button>
+<button class="big p" style="flex: 2" onClick="{{saveStep}}">{{saveLabel}}</button>
 </footer>
+</sc-if>
 </div>
 </script>
 <script>// Minimal renderer for the prototype's .dc templates: {{holes}}, <sc-for>, <sc-if>,
@@ -183,29 +234,100 @@ body{margin:0;background:#F3F5F8}
 </script>
 <script>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { done: { safety: true, position: true } }; }
-  renderVals() {
-    const defs = [
-      ['permit', 'Street Works permit', 'Scan or photograph the permit', true],
-      ['safety', 'Safety zone', 'Cones and signage in place', false],
-      ['position', 'Vehicle positioning', 'Lorry and skip position photo', false],
-      ['traffic', 'Traffic management', 'Only if the permit requires it', false]
+  constructor(props) {
+    super(props);
+    this.state = { scr: 'jobs', job: 0, arrived: { 0: true }, stepIdx: 0, status: {}, cap: {}, choice: {} };
+  }
+  defs() {
+    const P = (label, hint, critical) => ({ label, hint, critical: !!critical });
+    const skip = [
+      { title: 'Arrive on site', help: 'Confirm arrival. Your location is captured automatically.', items: [P('Arrival and GPS location', 'Tap to capture', true)] },
+      { title: 'Capture location evidence', help: 'Stand next to the container so the location matches the site.', items: [P('GPS location', 'Must be inside the site area', true)] },
+      { title: 'Confirm waste type', help: 'Check the waste matches what was booked.', items: [P('Photo of the waste', 'Clear view of the load', true)], choiceLabel: 'What is in the skip?', choices: ['Mixed C&D (as booked)', 'Different waste', 'Hazardous items'] },
+      { title: 'Street Works evidence', help: 'Skip is on a public highway. Capture these before moving the container.', items: [P('Street Works permit', 'Scan or photograph the permit', true), P('Safety zone', 'Cones and signage in place'), P('Vehicle positioning', 'Lorry and skip position photo'), P('Traffic management', 'Only if the permit requires it')] },
+      { title: 'Drop or collect container', help: 'Record the container action.', items: [P('Container collected', 'Tap when the skip is on the vehicle', true)] },
+      { title: 'Before / after photos', help: 'Photograph the site before and after.', items: [P('Before photo', 'Whole area', true), P('After photo', 'Same angle', true)] },
+      { title: 'Load integrity photos', help: 'Collections only: show the load is secure and not overfilled.', items: [P('Load integrity photo', 'Net or cover visible', true)] },
+      { title: 'Contamination check', help: 'Look for items that should not be in the load.', items: [P('Contamination photo', 'Top of the load', true)], choiceLabel: 'Contamination found?', choices: ['None', 'Minor', 'Significant'] },
+      { title: 'Weighbridge ticket', help: 'At the facility, scan the weighbridge ticket.', items: [P('Scan ticket', 'Camera or upload the PDF', true), P('Upload document', 'If the ticket was emailed')] },
+      { title: 'Customer signature', help: 'Optional for this module.', items: [P('Customer signature', 'Ask the site contact to sign')] },
+      { title: 'Completion evidence', help: 'Confirm the job is finished.', items: [P('Completion photo', 'Final state of the site', true)], choiceLabel: 'Job complete?', choices: ['Yes, complete'] },
+      { title: 'Generate Chain of Proof', help: 'Runs the completion checks and sends the record for review.', items: [] }
     ];
-    const d = this.state.done;
-    const items = defs.map(([id, label, hint, critical]) => {
-      const on = !!d[id];
+    const haz = [
+      skip[0], skip[1],
+      { title: 'Confirm hazardous waste type', help: 'Check labels against the booking.', items: [P('Label photo', 'All containers', true)] },
+      { title: 'Hazard classification', help: 'Enter or confirm UN, ADR and EWC details.', items: [P('UN / ADR details', 'UN 3082 · Class 9', true), P('EWC code', '13 05 07*', true)] },
+      { title: 'Seal checks', help: 'Check every container is sealed.', items: [P('IBC 1 seal', 'Photo of seal', true), P('IBC 2 seal', 'Photo of seal', true)] },
+      skip[7],
+      { title: 'Consignment note', help: 'Upload the signed consignment note.', items: [P('Upload document', 'Signed by the customer', true)] },
+      { title: 'Weighbridge ticket', help: 'If weighed at the facility.', items: [P('Scan ticket', 'Camera or upload')] },
+      skip[10], skip[11]
+    ];
+    return [
+      { ref: 'WC-24817', module: 'Skip & RORO', time: '07:00 – 10:00', site: 'Holbeck Yard, LS11 9XX', customer: 'Northgate Builders Ltd', task: '8 yd skip · Collection', notes: 'Skip on Holbeck Lane outside gate 2. Permit should be on site.', steps: skip },
+      { ref: 'WC-24812', module: 'Hazardous Waste', time: '10:30 – 12:00', site: 'Unit 4, Stourton, LS10 1XX', customer: 'Kingsway Facilities', task: '2 IBCs waste oil / water', notes: 'Ask for the site supervisor. PPE level 2.', steps: haz },
+      { ref: 'WC-24821', module: 'Skip & RORO', time: '13:00 – 15:00', site: 'Kingsway House, LS1 5XX', customer: 'Kingsway Facilities', task: '8 yd skip · Delivery', notes: 'Private car park, no permit needed.', steps: skip }
+    ];
+  }
+  key(i) { return this.state.job + ':' + i; }
+  renderVals() {
+    const jobs = this.defs();
+    const st = this.state;
+    const job = jobs[st.job];
+    const steps = job.steps;
+    const status = (i) => st.status[this.key(i)] || (st.job === 0 && i < 3 ? 'done' : 'todo');
+    const doneSteps = steps.filter((s, i) => status(i) !== 'todo').length;
+    const issues = steps.filter((s, i) => status(i) === 'issue').length;
+    const set = (patch) => this.setState(patch);
+    const SC = { done: ['Done', '#17633D', '#1F7A4D', '#FFFFFF'], issue: ['Issue', '#A1201A', '#B42318', '#FFFFFF'], todo: ['To do', '#5A6778', '#EEF1F5', '#4A5666'] };
+    const step = steps[st.stepIdx];
+    const capKey = (k) => this.key(st.stepIdx) + ':' + k;
+    const items = step.items.map((it, k) => {
+      const on = !!st.cap[capKey(k)];
       return {
-        label, on: on ? 'true' : 'false', isDone: on, notDone: !on,
-        cls: on ? 'cap done' : (critical ? 'cap need' : 'cap'),
-        sub: on ? 'Captured · tap to retake' : hint,
-        subFg: on ? '#17633D' : (critical ? '#A1201A' : '#5A6778'),
-        iconBg: on ? '#1F7A4D' : (critical ? '#FDE7E5' : '#EEF1F5'),
-        iconFg: on ? '#FFFFFF' : (critical ? '#A1201A' : '#3A4656'),
-        toggle: () => this.setState({ done: { ...d, [id]: !on } })
+        label: it.label, on: on ? 'true' : 'false', icon: on ? '✓' : '+',
+        cls: on ? 'cap done' : (it.critical ? 'cap need' : 'cap'),
+        sub: on ? 'Captured · tap to retake' : it.hint,
+        subFg: on ? '#17633D' : (it.critical ? '#A1201A' : '#5A6778'),
+        iconBg: on ? '#1F7A4D' : (it.critical ? '#FDE7E5' : '#EEF1F5'), iconFg: on ? '#FFFFFF' : (it.critical ? '#A1201A' : '#3A4656'),
+        toggle: () => set({ cap: { ...st.cap, [capKey(k)]: !on } })
       };
     });
-    const doneCount = defs.filter(([id]) => d[id]).length;
-    return { items, doneCount, blocked: !d.permit, nextLabel: d.permit ? 'Save and continue' : 'Continue with issue' };
+    const missing = step.items.filter((it, k) => it.critical && !st.cap[capKey(k)]);
+    const choiceSel = st.choice[this.key(st.stepIdx)];
+    const isLast = st.stepIdx === steps.length - 1;
+    const saveStep = () => {
+      const s = missing.length ? 'issue' : 'done';
+      const next = { status: { ...st.status, [this.key(st.stepIdx)]: s } };
+      if (isLast) set({ ...next, scr: 'cop' });
+      else set({ ...next, stepIdx: st.stepIdx + 1 });
+    };
+    const statusColor = { 'Not started': ['#EEF1F5', '#4A5666'], 'In progress': ['#E6EEFB', '#1A4FAF'] };
+    const headers = { jobs: ['My jobs', 'Mark Evans · Thu 15 Oct'], job: [job.ref, job.module], steps: [job.ref, job.module], step: [job.ref, job.module], cop: [job.ref, 'Submitted'] };
+    const copIssues = issues;
+    return {
+      scr: { jobs: st.scr === 'jobs', job: st.scr === 'job', steps: st.scr === 'steps', step: st.scr === 'step', cop: st.scr === 'cop' },
+      hTitle: headers[st.scr][0], hSub: headers[st.scr][1],
+      canBack: st.scr !== 'jobs', noBack: st.scr === 'jobs',
+      back: () => set({ scr: { job: 'jobs', steps: 'job', step: 'steps', cop: 'steps' }[st.scr] }),
+      showProgress: ['steps', 'step'].indexOf(st.scr) >= 0, doneSteps, totalSteps: steps.length, issues, pct: Math.round(doneSteps / steps.length * 100) + '%',
+      jobs: jobs.map((j, i) => {
+        const started = i === 0 || !!st.arrived[i];
+        const label = started ? 'In progress' : 'Not started';
+        return { ref: j.ref, module: j.module, time: j.time, site: j.site, status: label, bg: statusColor[label][0], fg: statusColor[label][1], open: () => set({ job: i, scr: 'job' }) };
+      }),
+      job, arrived: !!st.arrived[st.job], notArrived: !st.arrived[st.job],
+      arrive: () => set({ arrived: { ...st.arrived, [st.job]: true }, status: { ...st.status, [this.key(0)]: 'done' } }),
+      toSteps: () => set({ scr: 'steps' }), toJobs: () => set({ scr: 'jobs' }),
+      steps: steps.map((s, i) => { const x = SC[status(i)]; return { n: i + 1, title: s.title, st: x[0], stFg: x[1], dotBg: x[2], dotFg: x[3], open: () => set({ scr: 'step', stepIdx: i }) }; }),
+      step: { ...step, n: st.stepIdx + 1 }, items,
+      hasChoices: !!step.choices, choices: (step.choices || []).map(c => ({ label: c, on: c === choiceSel ? 'true' : 'false', cls: c === choiceSel ? 'opt sel' : 'opt', pick: () => set({ choice: { ...st.choice, [this.key(st.stepIdx)]: c } }) })),
+      blocked: missing.length > 0, blockedText: missing.length ? missing[0].label + ' missing.' : '',
+      saveStep, saveLabel: isLast ? 'Generate Chain of Proof' : (missing.length ? 'Continue with issue' : 'Save and continue'),
+      cop: copIssues ? { status: 'Non-compliant — draft', bg: '#FDE7E5', fg: '#A1201A', text: copIssues + ' step(s) have issues. Your manager has been notified. The Chain of Proof stays in draft and cannot be marked compliant until the issues are resolved.' }
+                     : { status: 'Sent for review', bg: '#E3F3EA', fg: '#17633D', text: 'All required evidence captured. The completion checks passed and the Chain of Proof has been generated for review.' }
+    };
   }
 }
 </script>

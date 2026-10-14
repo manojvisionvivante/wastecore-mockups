@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All Jobs — WasteCore mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
+a{color:#1F5FD1}a:hover{color:#174AA6}
+.shell{display:flex;flex-wrap:wrap;min-height:100vh}
+.menubtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:8px;border:1px solid #C4CDD8;background:#fff;font:600 14px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
+#navtoggle:focus-visible ~ .shell .menubtn{outline:2px solid #1F5FD1;outline-offset:2px}
+.nav .sub{padding:8px 14px 8px 28px;font-size:13px;color:#AFC0D8}
+@media (max-width:899px){.side{display:none}#navtoggle:checked ~ .shell .side{display:block;flex-basis:100%}}
+@media (min-width:900px){#navtoggle:checked ~ .shell .side{display:none}}
+@media (max-width:600px){.topbar,.content{padding-left:16px;padding-right:16px}.h1{font-size:24px}.who{display:none}}
+.side{flex:1 1 240px;background:#0F1E36;padding:20px 12px;box-sizing:border-box}
+@media (min-width:900px){.side{min-height:100vh}}
+.mainc{flex:999 1 560px;min-width:0;display:flex;flex-direction:column}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:12px 32px;background:#fff;border-bottom:1px solid #DDE3EA}
+.content{padding:24px 32px 48px;box-sizing:border-box}
+.nav a{display:block;padding:11px 14px;border-radius:6px;color:#C9D3E3;text-decoration:none;font-size:14px}
+.nav a:hover{background:#18304F;color:#fff}
+.nav a.on{background:#1F5FD1;color:#fff}
+.grp{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8B9BB4;margin:18px 14px 6px}
+.b{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.ok{background:#E3F3EA;color:#17633D}.warn{background:#FFF1D6;color:#7A4F00}.bad{background:#FDE7E5;color:#A1201A}.info{background:#E6EEFB;color:#1A4FAF}.mute{background:#EEF1F5;color:#4A5666}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;border:1px solid #C4CDD8;background:#fff;color:#16202E;cursor:pointer;text-decoration:none;box-sizing:border-box}
+.btn:hover{border-color:#8D9AAB}
+.btn.p{background:#1F5FD1;border-color:#1F5FD1;color:#fff}.btn.p:hover{background:#174AA6;color:#fff}
+.btn.sel{background:#16202E;border-color:#16202E;color:#fff}
+.card{background:#fff;border:1px solid #DDE3EA;border-radius:10px}
+.tbl{border-collapse:collapse;width:100%}
+.tbl th{text-align:left;font-size:12px;font-weight:600;color:#5A6778;text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;border-bottom:1px solid #DDE3EA;background:#F8FAFC;white-space:nowrap}
+.tbl td{padding:12px;border-bottom:1px solid #EEF1F5;font-size:14px;vertical-align:top}
+.kv dt{color:#5A6778;font-size:13px}.kv dd{margin:0;font-size:14px;font-weight:500}
+.fld{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}
+.fld input,.fld select,.fld textarea{min-height:44px;border:1px solid #C4CDD8;border-radius:8px;padding:0 10px;font:14px 'IBM Plex Sans',sans-serif;box-sizing:border-box}
+.crumb{font-size:13px;color:#5A6778}
+.h1{margin:6px 0 4px;font-size:28px;font-weight:700}
+.lead{margin:0;color:#5A6778;font-size:15px}
+.sr{position:absolute;left:-9999px}
+</style>
+<style>
+.tab{min-height:44px;padding:0 16px;border:0;border-bottom:3px solid transparent;background:none;font:600 14px 'IBM Plex Sans',sans-serif;color:#4A5666;cursor:pointer}
+.tab.sel{color:#1F5FD1;border-bottom-color:#1F5FD1}
+.sk{height:14px;border-radius:4px;background:linear-gradient(90deg,#EEF1F5 0%,#E2E7EE 50%,#EEF1F5 100%);background-size:200% 100%;animation:sh 1.2s infinite}
+@keyframes sh{from{background-position:200% 0}to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.sk{animation:none}}
+</style>
+
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/x-template" id="dc-tpl">
+
+<input type="checkbox" id="navtoggle" class="sr" aria-label="Show or hide the menu">
+<div class="shell">
+<aside class="side">
+<div style="padding: 0 14px 18px; border-bottom: 1px solid #22385A">
+<a href="index.html" style="text-decoration: none"><div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div></a>
+<div style="font-size: 12px; color: #8B9BB4; margin-top: 4px">Waste Sector · Phase 1</div>
+</div>
+<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="" href="01-dashboard.html">Dashboard</a><a class="on" href="jobs.html">Jobs</a><a class="sub" href="jobs.html">All jobs</a><a class="sub" href="04-create-job.html">Create job</a><a class="sub" href="jobs.html#assigned">Assigned jobs</a><a class="sub" href="jobs.html#progress">In progress</a><a class="sub" href="jobs.html#completed">Completed</a><a class="" href="02-subsectors.html">Waste Sector</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="facilities.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="" href="06-workflow.html">Workflows</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="" href="32-settings.html">Settings</a></nav>
+</aside>
+<div class="mainc">
+<header class="topbar">
+<label for="navtoggle" class="menubtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>Menu</label>
+<label for="gq" class="sr">Search jobs, evidence, customers</label>
+<input id="gq" type="search" placeholder="Search jobs, evidence, customers…" style="flex: 1 1 280px; max-width: 520px; height: 44px; padding: 0 14px; border: 1px solid #C4CDD8; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif">
+<div style="display: flex; align-items: center; gap: 10px; margin-left: auto">
+<a class="btn who" href="31-mobile-field-app.html">Field app</a>
+<a class="btn" href="29-notifications.html" aria-label="Notifications, 6 unread">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+<span class="b bad">6</span></a>
+<div style="display: flex; align-items: center; gap: 10px; padding-left: 6px">
+<div style="width: 36px; height: 36px; border-radius: 50%; background: #1C3358; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">PS</div>
+<div class="who" style="font-size: 13px; line-height: 1.3"><div style="font-weight: 600">Priya Shah</div><div style="color: #5A6778">Compliance Officer</div></div>
+</div>
+</div>
+</header>
+<main class="content">
+<div style="max-width: 1360px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: flex-end">
+<div>
+<div class="crumb">Home / Jobs</div>
+<h1 class="h1">Jobs</h1>
+<p class="lead">All Waste Sector jobs across the 12 operational modules. <span class="b mute">Sample data</span></p>
+</div>
+<a class="btn p" href="04-create-job.html">+ Create job</a>
+</div>
+<div role="tablist" aria-label="Job views" style="display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid #DDE3EA">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+<button role="tab" aria-selected="{{t.on}}" class="{{t.cls}}" onClick="{{t.pick}}">{{t.label}} <span class="b mute">{{t.count}}</span></button>
+</sc-for>
+</div>
+<form style="display: flex; flex-wrap: wrap; gap: 12px">
+<label class="sr" for="js">Search jobs</label>
+<input id="js" type="search" placeholder="Search by job, customer or site…" style="flex: 1 1 260px; max-width: 420px; height: 44px; padding: 0 14px; border: 1px solid #C4CDD8; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif">
+<label class="sr" for="jm">Module</label>
+<select id="jm" style="height: 44px; border: 1px solid #C4CDD8; border-radius: 8px; padding: 0 10px; font: 14px 'IBM Plex Sans', sans-serif"><option>All modules</option><option>Skip &amp; RORO</option><option>Bulk Material</option></select>
+<label class="sr" for="jc">Compliance</label>
+<select id="jc" style="height: 44px; border: 1px solid #C4CDD8; border-radius: 8px; padding: 0 10px; font: 14px 'IBM Plex Sans', sans-serif"><option>Any compliance</option><option>Non-compliant</option><option>Compliant</option></select>
+</form>
+<section class="card">
+<sc-if value="{{loading}}" hint-placeholder-val="{{ false }}">
+<div role="status" aria-label="Loading jobs" style="padding: 18px; display: flex; flex-direction: column; gap: 16px">
+<sc-for list="{{skeleton}}" as="s" hint-placeholder-count="5">
+<div style="display: grid; grid-template-columns: 110px 1fr 1fr 120px; gap: 16px"><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div></div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 48px 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#8D9AAB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 9h18"></path><path d="M8 14h8"></path></svg>
+<h2 style="margin: 0; font-size: 18px">No jobs assigned to you</h2>
+<p style="margin: 0; font-size: 14px; color: #5A6778; max-width: 420px">Jobs appear here when a dispatcher assigns them to you. You can still review every job from the All tab.</p>
+<button class="btn" onClick="{{goAll}}">View all jobs</button>
+</div>
+</sc-if>
+<sc-if value="{{hasRows}}" hint-placeholder-val="{{ true }}">
+<div style="overflow-x: auto">
+<table class="tbl">
+<thead><tr><th>Job</th><th>Module</th><th>Category tags</th><th>Customer / site</th><th>Operator</th><th>Date</th><th>Evidence</th><th>Status</th></tr></thead>
+<tbody>
+<sc-for list="{{rows}}" as="j" hint-placeholder-count="10">
+<tr>
+<td><a class="mono" href="05-job-details.html" style="font-weight: 600">{{j.ref}}</a></td><td>{{j.module}}</td><td style="font-size: 13px; color: #4A5666">{{j.tags}}</td><td>{{j.site}}</td><td>{{j.op}}</td><td style="white-space: nowrap">{{j.date}}</td><td class="mono">{{j.ev}}</td><td><span class="b {{j.cls}}">{{j.status}}</span></td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+<div style="padding: 12px 16px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; font-size: 13px; color: #5A6778; align-items: center">
+<span>Showing {{rowCount}} of {{total}}</span>
+<span style="display: flex; gap: 8px"><button class="btn">Previous</button><button class="btn">Next</button></span>
+</div>
+</sc-if>
+</section>
+</div>
+</main></div></div>
+</script>
+<script>// Minimal renderer for the prototype's .dc templates: {{holes}}, <sc-for>, <sc-if>,
+// onX="{{handler}}" events, and a DCLogic base class with setState.
+(function () {
+  var handlers = [], comp, root, TPL;
+  function get(scope, path) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return +path;
+    var v = scope, ks = path.split('.');
+    for (var i = 0; i < ks.length; i++) { if (v == null) return undefined; v = v[ks[i]]; }
+    return v;
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function holes(t, scope) {
+    t = t.replace(/\bon([A-Z]\w*)="\{\{([^}]+)\}\}"/g, function (m, ev, p) {
+      var f = get(scope, p);
+      if (typeof f !== 'function') return '';
+      handlers.push(f);
+      return 'data-dc-' + ev.toLowerCase() + '="' + (handlers.length - 1) + '"';
+    });
+    return t.replace(/\{\{([^}]+)\}\}/g, function (m, p) { var v = get(scope, p); return v == null ? '' : esc(v); });
+  }
+  var OPEN = /<(sc-for|sc-if)\b([^>]*)>/;
+  function findClose(t, tag, from) {
+    var depth = 1, i = from, o = new RegExp('<' + tag + '\\b', 'g'), c = new RegExp('</' + tag + '>', 'g');
+    while (true) {
+      o.lastIndex = i; c.lastIndex = i;
+      var mo = o.exec(t), mc = c.exec(t);
+      if (!mc) throw new Error('unclosed ' + tag);
+      if (mo && mo.index < mc.index) { depth++; i = mo.index + 1; }
+      else { depth--; i = mc.index + mc[0].length; if (depth === 0) return [mc.index, i]; }
+    }
+  }
+  function attr(a, name) {
+    var m = a.match(new RegExp(name + '="\\{\\{([^}]+)\\}\\}"')) || a.match(new RegExp(name + '="([^"]*)"'));
+    return m ? m[1] : null;
+  }
+  function render(t, scope) {
+    var out = '';
+    while (true) {
+      var m = OPEN.exec(t);
+      if (!m) return out + holes(t, scope);
+      out += holes(t.slice(0, m.index), scope);
+      var start = m.index + m[0].length, r = findClose(t, m[1], start), inner = t.slice(start, r[0]);
+      if (m[1] === 'sc-for') {
+        var list = get(scope, attr(m[2], 'list')) || [], as = attr(m[2], 'as') || 'item';
+        for (var i = 0; i < list.length; i++) {
+          var s = Object.create(scope); s[as] = list[i]; s.$index = i; out += render(inner, s);
+        }
+      } else if (get(scope, attr(m[2], 'value'))) {
+        out += render(inner, scope);
+      }
+      t = t.slice(r[1]);
+    }
+  }
+  function draw() {
+    handlers.length = 0;
+    var y = window.scrollY;
+    root.innerHTML = render(TPL, comp.renderVals());
+    window.scrollTo(0, y);
+  }
+  window.DCLogic = function (props) { this.props = props || {}; this.state = {}; };
+  DCLogic.prototype.setState = function (p) {
+    Object.assign(this.state, typeof p === 'function' ? p(this.state) : p); draw();
+  };
+  DCLogic.prototype.forceUpdate = function () { draw(); };
+  window.dcBoot = function (props) {
+    root = document.getElementById('dc-root');
+    TPL = document.getElementById('dc-tpl').textContent;
+    comp = new Component(props || {});
+    draw();
+    root.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-dc-click]');
+      if (el) { e.preventDefault(); handlers[+el.getAttribute('data-dc-click')](e); }
+    });
+  };
+})();
+</script>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const h = (window.location.hash || '').replace('#', '');
+    this.state = { t: ['assigned', 'progress', 'completed'].indexOf(h) >= 0 ? h : 'all', loading: false };
+    window.addEventListener('hashchange', () => {
+      const n = window.location.hash.replace('#', '');
+      this.pick(['assigned', 'progress', 'completed'].indexOf(n) >= 0 ? n : 'all');
+    });
+  }
+  pick(t) {
+    this.setState({ t, loading: true });
+    setTimeout(() => this.setState({ loading: false }), 700);
+  }
+  renderVals() {
+    const S = { 'Non-compliant': 'bad', 'In progress': 'info', Compliant: 'ok', 'Pending clarification': 'warn' };
+    const all = [
+      ['WC-24817', 'Skip & RORO', 'Skip · C&D · Recycling', 'Northgate Builders — Holbeck Yard', 'Mark Evans', '14 Oct', '7/10', 'Non-compliant'],
+      ['WC-24812', 'Hazardous Waste', 'Hazardous · Tanker', 'Kingsway Facilities — Stourton', 'Chris Hall', '14 Oct', '6/9', 'In progress'],
+      ['WC-24802', 'Grab', 'Grab · Aggregates', 'Riverside Developments — Kirkstall Rd', 'Mark Evans', '14 Oct', '8/8', 'Compliant'],
+      ['WC-24799', 'Skip & RORO', 'Skip', 'Northgate Builders — Kirkstall', 'Sam Pearce', '14 Oct', '9/9', 'Compliant'],
+      ['WC-24795', 'Airport', 'Airport · Recycling', 'Northern Regional Airport — Gate 3', 'Amy Ross', '14 Oct', '6/6', 'Compliant'],
+      ['WC-24790', 'Bulk Material', 'Tipper · Aggregates', 'Riverside Quarry — Quarry Rd', 'Ryan Cole', '14 Oct', '7/8', 'Non-compliant'],
+      ['WC-24786', 'Facilities Management', 'FM · Skip', 'Kingsway Facilities — Kingsway House', 'Sam Pearce', '14 Oct', '3/6', 'In progress'],
+      ['WC-24771', 'Bulk Transport', 'Walking Floor · Recycling', 'Eastside TS → Northern EfW', 'Dan Fox', '14 Oct', '5/7', 'Pending clarification'],
+      ['WC-24768', 'Municipal', 'Municipal · Sweeper', 'City Council — Ward 7', 'Lee Morgan', '14 Oct', '4/7', 'In progress'],
+      ['WC-24756', 'Clinical Waste', 'Clinical', 'Riverside General — Bay 3', 'Mark Evans', '14 Oct', '6/9', 'Non-compliant'],
+      ['WC-24749', 'Material Recovery', 'Transfer Station · C&D', 'Eastside Transfer Station', 'Tom Hughes', '14 Oct', '5/10', 'In progress'],
+      ['WC-24781', 'Tanker', 'Tanker', 'Northgate Builders — interceptor', 'Chris Hall', '13 Oct', '7/7', 'Compliant']
+    ];
+    const views = { all: ['All jobs', () => true], assigned: ['Assigned to me', () => false], progress: ['In progress', r => r[7] === 'In progress' || r[7] === 'Pending clarification'], completed: ['Completed', r => r[7] === 'Compliant' || r[7] === 'Non-compliant'] };
+    const t = this.state.t;
+    const rows = all.filter(views[t][1]);
+    const loading = this.state.loading;
+    return {
+      tabs: Object.keys(views).map(k => ({ label: views[k][0], count: all.filter(views[k][1]).length, on: k === t ? 'true' : 'false', cls: k === t ? 'tab sel' : 'tab', pick: () => this.pick(k) })),
+      loading, empty: !loading && rows.length === 0, hasRows: !loading && rows.length > 0,
+      skeleton: [1, 2, 3, 4, 5], rowCount: rows.length, total: t === 'all' ? '1,284' : rows.length,
+      goAll: () => this.pick('all'),
+      rows: rows.map(r => ({ ref: r[0], module: r[1], tags: r[2], site: r[3], op: r[4], date: r[5], ev: r[6], status: r[7], cls: S[r[7]] }))
+    };
+  }
+}
+</script>
+<script>dcBoot({});</script>
+</body>
+</html>

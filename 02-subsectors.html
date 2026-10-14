@@ -9,6 +9,12 @@
 body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
 a{color:#1F5FD1}a:hover{color:#174AA6}
 .shell{display:flex;flex-wrap:wrap;min-height:100vh}
+.menubtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:8px;border:1px solid #C4CDD8;background:#fff;font:600 14px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
+#navtoggle:focus-visible ~ .shell .menubtn{outline:2px solid #1F5FD1;outline-offset:2px}
+.nav .sub{padding:8px 14px 8px 28px;font-size:13px;color:#AFC0D8}
+@media (max-width:899px){.side{display:none}#navtoggle:checked ~ .shell .side{display:block;flex-basis:100%}}
+@media (min-width:900px){#navtoggle:checked ~ .shell .side{display:none}}
+@media (max-width:600px){.topbar,.content{padding-left:16px;padding-right:16px}.h1{font-size:24px}.who{display:none}}
 .side{flex:1 1 240px;background:#0F1E36;padding:20px 12px;box-sizing:border-box}
 @media (min-width:900px){.side{min-height:100vh}}
 .mainc{flex:999 1 560px;min-width:0;display:flex;flex-direction:column}
@@ -60,26 +66,28 @@ a{color:#1F5FD1}a:hover{color:#174AA6}
 <div id="dc-root"></div>
 <script type="text/x-template" id="dc-tpl">
 
+<input type="checkbox" id="navtoggle" class="sr" aria-label="Show or hide the menu">
 <div class="shell">
 <aside class="side">
 <div style="padding: 0 14px 18px; border-bottom: 1px solid #22385A">
 <a href="index.html" style="text-decoration: none"><div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div></a>
 <div style="font-size: 12px; color: #8B9BB4; margin-top: 4px">Waste Sector · Phase 1</div>
 </div>
-<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="" href="01-dashboard.html">Dashboard</a><a class="" href="05-job-details.html">Jobs</a><a class="on" href="02-subsectors.html">Waste Sector</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="21-transfer-station.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="" href="06-workflow.html">Workflows</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="" href="32-settings.html">Settings</a></nav>
+<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="" href="01-dashboard.html">Dashboard</a><a class="" href="jobs.html">Jobs</a><a class="on" href="02-subsectors.html">Waste Sector</a><a class="sub" href="02-subsectors.html">All categories</a><a class="sub" href="02-subsectors.html#ct">Collection &amp; Transport</a><a class="sub" href="02-subsectors.html#ws">Waste &amp; Material Types</a><a class="sub" href="02-subsectors.html#ci">Customer Industries</a><a class="sub" href="02-subsectors.html#fa">Waste Facilities</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="facilities.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="" href="06-workflow.html">Workflows</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="" href="32-settings.html">Settings</a></nav>
 </aside>
 <div class="mainc">
 <header class="topbar">
+<label for="navtoggle" class="menubtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>Menu</label>
 <label for="gq" class="sr">Search jobs, evidence, customers</label>
 <input id="gq" type="search" placeholder="Search jobs, evidence, customers…" style="flex: 1 1 280px; max-width: 520px; height: 44px; padding: 0 14px; border: 1px solid #C4CDD8; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif">
 <div style="display: flex; align-items: center; gap: 10px; margin-left: auto">
-<a class="btn" href="31-mobile-field-app.html">Field app</a>
+<a class="btn who" href="31-mobile-field-app.html">Field app</a>
 <a class="btn" href="29-notifications.html" aria-label="Notifications, 6 unread">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
 <span class="b bad">6</span></a>
 <div style="display: flex; align-items: center; gap: 10px; padding-left: 6px">
 <div style="width: 36px; height: 36px; border-radius: 50%; background: #1C3358; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">PS</div>
-<div style="font-size: 13px; line-height: 1.3"><div style="font-weight: 600">Priya Shah</div><div style="color: #5A6778">Compliance Officer</div></div>
+<div class="who" style="font-size: 13px; line-height: 1.3"><div style="font-weight: 600">Priya Shah</div><div style="color: #5A6778">Compliance Officer</div></div>
 </div>
 </div>
 </header>
@@ -105,7 +113,7 @@ a{color:#1F5FD1}a:hover{color:#174AA6}
 <h2 style="margin: 0; font-size: 19px">{{g.title}}</h2>
 <span style="font-size: 14px; color: #5A6778">{{g.hint}}</span>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px">
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 14px">
 <sc-for list="{{g.items}}" as="c" hint-placeholder-count="4">
 <article style="background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
 <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px">
@@ -114,6 +122,7 @@ a{color:#1F5FD1}a:hover{color:#174AA6}
 </div>
 <p style="margin: 0; font-size: 14px; color: #3A4656; line-height: 1.45">{{c.desc}}</p>
 <dl style="margin: 0; display: grid; grid-template-columns: 110px 1fr; gap: 6px 10px; font-size: 13px">
+<dt style="color: #5A6778">Services</dt><dd style="margin: 0">{{c.svc}}</dd>
 <dt style="color: #5A6778">Module</dt><dd style="margin: 0; font-weight: 600">{{c.module}}</dd>
 <dt style="color: #5A6778">Equipment</dt><dd style="margin: 0">{{c.equip}}</dd>
 <dt style="color: #5A6778">Often with</dt><dd style="margin: 0">{{c.pairs}}</dd>
@@ -216,32 +225,38 @@ a{color:#1F5FD1}a:hover{color:#174AA6}
 </script>
 <script>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { dim: 'all' }; }
+  constructor(props) {
+    super(props);
+    const ok = ['ct', 'ws', 'ci', 'fa'];
+    const h = () => { const x = window.location.hash.replace('#', ''); return ok.indexOf(x) >= 0 ? x : 'all'; };
+    this.state = { dim: h() };
+    window.addEventListener('hashchange', () => this.setState({ dim: h() }));
+  }
   renderVals() {
     const dims = [['all', 'All'], ['ct', 'Collection & Transport'], ['ws', 'Waste & Material'], ['ci', 'Customer Industries'], ['fa', 'Waste Facilities']];
     const groups = [
       { id: 'ct', title: 'Collection & Transport', short: 'Method', hint: 'How waste is collected or moved', cls: 'info', items: [
-        { name: 'Skip', desc: 'Chain-lift skips placed on site or highway, swapped or collected.', module: 'Skip & RORO', equip: 'Skip loader', pairs: 'C&D, Recycling', jobs: 298, href: '03-category-detail.html', cta: 'View category' },
-        { name: 'RORO', desc: 'Hook-lift roll-on/roll-off containers for high-volume sites.', module: 'Skip & RORO', equip: 'Hook-lift vehicle', pairs: 'C&D, Transfer Station', jobs: 114, href: '06-workflow.html', cta: 'Open workflow' },
-        { name: 'Grab', desc: 'Grab loading of soils, aggregates and muck-away from ground or highway.', module: 'Grab', equip: 'Grab lorry', pairs: 'Aggregates, C&D', jobs: 96, href: '20-grab.html', cta: 'Open module' },
-        { name: 'Tipper', desc: 'Loose bulk loads. Runs Bulk Material for site loading, Bulk Transport for haulage.', module: 'Bulk Material / Bulk Transport', equip: 'Tipper', pairs: 'Aggregates, C&D', jobs: 87, href: '14-bulk-material.html', cta: 'Open module' },
-        { name: 'Sweeper', desc: 'Road and vacuum sweeping across routes and public realm.', module: 'Sweeper', equip: 'Road / vacuum sweeper', pairs: 'Municipal', jobs: 41, href: '18-sweeper.html', cta: 'Open module' },
-        { name: 'Tanker', desc: 'Liquid waste, sludge, drainage and interceptor emptying.', module: 'Tanker', equip: 'Vacuum tanker', pairs: 'Hazardous Waste', jobs: 52, href: '19-tanker.html', cta: 'Open module' },
-        { name: 'Walking Floor', desc: 'Bulk haulage of RDF/SRF, biomass and recyclate between facilities.', module: 'Bulk Transport', equip: 'Walking-floor trailer', pairs: 'Recycling', jobs: 74, href: '23-walking-floor.html', cta: 'Open module' }
+        { name: 'Skip', desc: 'Chain-lift skips placed on site or highway, swapped or collected.', svc: 'Delivery, exchange, collection', module: 'Skip & RORO', equip: 'Skip loader', pairs: 'C&D, Recycling', jobs: 298, href: '03-category-detail.html', cta: 'View category' },
+        { name: 'RORO', desc: 'Hook-lift roll-on/roll-off containers for high-volume sites.', svc: 'Container placement, exchange, haulage', module: 'Skip & RORO', equip: 'Hook-lift vehicle', pairs: 'C&D, Transfer Station', jobs: 114, href: '06-workflow.html', cta: 'Open workflow' },
+        { name: 'Grab', desc: 'Grab loading of soils, aggregates and muck-away from ground or highway.', svc: 'Grab & go, muck away, aggregate supply', module: 'Grab', equip: 'Grab lorry', pairs: 'Aggregates, C&D', jobs: 96, href: '20-grab.html', cta: 'Open module' },
+        { name: 'Tipper', desc: 'Loose bulk loads. Runs Bulk Material for site loading, Bulk Transport for haulage.', svc: 'Loose-load collection, haulage', module: 'Bulk Material / Bulk Transport', equip: 'Tipper', pairs: 'Aggregates, C&D', jobs: 87, href: '14-bulk-material.html', cta: 'Open module' },
+        { name: 'Sweeper', desc: 'Road and vacuum sweeping across routes and public realm.', svc: 'Road, site and car-park sweeping', module: 'Sweeper', equip: 'Road / vacuum sweeper', pairs: 'Municipal', jobs: 41, href: '18-sweeper.html', cta: 'Open module' },
+        { name: 'Tanker', desc: 'Liquid waste, sludge, drainage and interceptor emptying.', svc: 'Interceptor, drainage and sludge emptying', module: 'Tanker', equip: 'Vacuum tanker', pairs: 'Hazardous Waste', jobs: 52, href: '19-tanker.html', cta: 'Open module' },
+        { name: 'Walking Floor', desc: 'Bulk haulage of RDF/SRF, biomass and recyclate between facilities.', svc: 'Bulk haulage between facilities', module: 'Bulk Transport', equip: 'Walking-floor trailer', pairs: 'Recycling', jobs: 74, href: '23-walking-floor.html', cta: 'Open module' }
       ]},
       { id: 'ws', title: 'Waste & Material Types', short: 'Stream', hint: 'What is being handled', cls: 'ok', items: [
-        { name: 'Hazardous Waste', desc: 'Chemicals, oils, asbestos and other hazardous streams with UN/ADR/EWC data.', module: 'Hazardous Waste', equip: 'Any approved method', pairs: 'Tanker, Skip, RORO', jobs: 28, href: '13-hazardous.html', cta: 'Open module' },
-        { name: 'Aggregates', desc: 'Stone, sand, soils and hardcore moved as loose bulk.', module: 'Bulk Material', equip: 'Tipper, Grab', pairs: 'Tipper, Grab', jobs: 121, href: '14-bulk-material.html', cta: 'Open module' },
-        { name: 'Construction & Demolition', desc: 'Mixed C&D waste from build, refurb and demolition sites.', module: 'Bulk Material', equip: 'Skip, RORO, Tipper', pairs: 'Skip, Recycling', jobs: 115, href: '14-bulk-material.html', cta: 'Open module' },
-        { name: 'Recycling', desc: 'Segregated recyclate sorted and processed into material outputs.', module: 'Material Recovery', equip: 'Facility plant', pairs: 'Transfer Station, Walking Floor', jobs: 104, href: '22-recycling.html', cta: 'Open module' }
+        { name: 'Hazardous Waste', desc: 'Chemicals, oils, asbestos and other hazardous streams with UN/ADR/EWC data.', svc: 'Collection, classification, consignment', module: 'Hazardous Waste', equip: 'Any approved method', pairs: 'Tanker, Skip, RORO', jobs: 28, href: '13-hazardous.html', cta: 'Open module' },
+        { name: 'Aggregates', desc: 'Stone, sand, soils and hardcore moved as loose bulk.', svc: 'Supply, removal, recycling', module: 'Bulk Material', equip: 'Tipper, Grab', pairs: 'Tipper, Grab', jobs: 121, href: '14-bulk-material.html', cta: 'Open module' },
+        { name: 'Construction & Demolition', desc: 'Mixed C&D waste from build, refurb and demolition sites.', svc: 'Site clearance, segregation, removal', module: 'Bulk Material', equip: 'Skip, RORO, Tipper', pairs: 'Skip, Recycling', jobs: 115, href: '14-bulk-material.html', cta: 'Open module' },
+        { name: 'Recycling', desc: 'Segregated recyclate sorted and processed into material outputs.', svc: 'Sorting, processing, material sales', module: 'Material Recovery', equip: 'Facility plant', pairs: 'Transfer Station, Walking Floor', jobs: 104, href: '22-recycling.html', cta: 'Open module' }
       ]},
       { id: 'ci', title: 'Customer Industries', short: 'Industry', hint: 'Where the service is delivered', cls: 'warn', items: [
-        { name: 'Municipal', desc: 'Street scene, litter picking, bins and grounds. Street Works always applies.', module: 'Municipal', equip: 'RCV, sweeper', pairs: 'Sweeper', jobs: 121, href: '15-municipal.html', cta: 'Open module' },
-        { name: 'Airport', desc: 'Airside, landside and terminal waste under airport security procedures.', module: 'Airport', equip: 'Airside-approved vehicle', pairs: 'Hazardous Waste', jobs: 11, href: '16-airport.html', cta: 'Open module' },
-        { name: 'Facilities Management', desc: 'Internal building and external grounds waste for FM contracts.', module: 'Facilities Management', equip: 'Varies by contract', pairs: 'Skip, Recycling', jobs: 19, href: '17-facilities-management.html', cta: 'Open module' }
+        { name: 'Municipal', desc: 'Street scene, litter picking, bins and grounds. Street Works always applies.', svc: 'Street cleansing, litter, bins, grounds', module: 'Municipal', equip: 'RCV, sweeper', pairs: 'Sweeper', jobs: 121, href: '15-municipal.html', cta: 'Open module' },
+        { name: 'Airport', desc: 'Airside, landside and terminal waste under airport security procedures.', svc: 'Terminal, airside and landside collections', module: 'Airport', equip: 'Airside-approved vehicle', pairs: 'Hazardous Waste', jobs: 11, href: '16-airport.html', cta: 'Open module' },
+        { name: 'Facilities Management', desc: 'Internal building and external grounds waste for FM contracts.', svc: 'Internal waste, grounds, contract collections', module: 'Facilities Management', equip: 'Varies by contract', pairs: 'Skip, Recycling', jobs: 19, href: '17-facilities-management.html', cta: 'Open module' }
       ]},
       { id: 'fa', title: 'Waste Infrastructure', short: 'Facility', hint: 'Sites where waste is received', cls: 'mute', items: [
-        { name: 'Transfer Station', desc: 'Receives, weighs and classifies loads before onward movement.', module: 'Material Recovery', equip: 'Weighbridge, loading shovel', pairs: 'C&D, Recycling, RORO', jobs: 84, href: '21-transfer-station.html', cta: 'Open module' }
+        { name: 'Transfer Station', desc: 'Receives, weighs and classifies loads before onward movement.', svc: 'Receiving, weighing, bulking, onward transfer', module: 'Material Recovery', equip: 'Weighbridge, loading shovel', pairs: 'C&D, Recycling, RORO', jobs: 84, href: '21-transfer-station.html', cta: 'Open module' }
       ]}
     ];
     const dim = this.state.dim;

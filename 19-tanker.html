@@ -9,6 +9,12 @@
 body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
 a{color:#1F5FD1}a:hover{color:#174AA6}
 .shell{display:flex;flex-wrap:wrap;min-height:100vh}
+.menubtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:8px;border:1px solid #C4CDD8;background:#fff;font:600 14px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
+#navtoggle:focus-visible ~ .shell .menubtn{outline:2px solid #1F5FD1;outline-offset:2px}
+.nav .sub{padding:8px 14px 8px 28px;font-size:13px;color:#AFC0D8}
+@media (max-width:899px){.side{display:none}#navtoggle:checked ~ .shell .side{display:block;flex-basis:100%}}
+@media (min-width:900px){#navtoggle:checked ~ .shell .side{display:none}}
+@media (max-width:600px){.topbar,.content{padding-left:16px;padding-right:16px}.h1{font-size:24px}.who{display:none}}
 .side{flex:1 1 240px;background:#0F1E36;padding:20px 12px;box-sizing:border-box}
 @media (min-width:900px){.side{min-height:100vh}}
 .mainc{flex:999 1 560px;min-width:0;display:flex;flex-direction:column}
@@ -48,26 +54,28 @@ a{color:#1F5FD1}a:hover{color:#174AA6}
 <div id="dc-root"></div>
 <script type="text/x-template" id="dc-tpl">
 
+<input type="checkbox" id="navtoggle" class="sr" aria-label="Show or hide the menu">
 <div class="shell">
 <aside class="side">
 <div style="padding: 0 14px 18px; border-bottom: 1px solid #22385A">
 <a href="index.html" style="text-decoration: none"><div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div></a>
 <div style="font-size: 12px; color: #8B9BB4; margin-top: 4px">Waste Sector · Phase 1</div>
 </div>
-<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="" href="01-dashboard.html">Dashboard</a><a class="" href="05-job-details.html">Jobs</a><a class="on" href="02-subsectors.html">Waste Sector</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="21-transfer-station.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="" href="06-workflow.html">Workflows</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="" href="32-settings.html">Settings</a></nav>
+<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="" href="01-dashboard.html">Dashboard</a><a class="" href="jobs.html">Jobs</a><a class="on" href="02-subsectors.html">Waste Sector</a><a class="sub" href="02-subsectors.html">All categories</a><a class="sub" href="02-subsectors.html#ct">Collection &amp; Transport</a><a class="sub" href="02-subsectors.html#ws">Waste &amp; Material Types</a><a class="sub" href="02-subsectors.html#ci">Customer Industries</a><a class="sub" href="02-subsectors.html#fa">Waste Facilities</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="facilities.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="" href="06-workflow.html">Workflows</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="" href="32-settings.html">Settings</a></nav>
 </aside>
 <div class="mainc">
 <header class="topbar">
+<label for="navtoggle" class="menubtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>Menu</label>
 <label for="gq" class="sr">Search jobs, evidence, customers</label>
 <input id="gq" type="search" placeholder="Search jobs, evidence, customers…" style="flex: 1 1 280px; max-width: 520px; height: 44px; padding: 0 14px; border: 1px solid #C4CDD8; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif">
 <div style="display: flex; align-items: center; gap: 10px; margin-left: auto">
-<a class="btn" href="31-mobile-field-app.html">Field app</a>
+<a class="btn who" href="31-mobile-field-app.html">Field app</a>
 <a class="btn" href="29-notifications.html" aria-label="Notifications, 6 unread">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
 <span class="b bad">6</span></a>
 <div style="display: flex; align-items: center; gap: 10px; padding-left: 6px">
 <div style="width: 36px; height: 36px; border-radius: 50%; background: #1C3358; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">PS</div>
-<div style="font-size: 13px; line-height: 1.3"><div style="font-weight: 600">Priya Shah</div><div style="color: #5A6778">Compliance Officer</div></div>
+<div class="who" style="font-size: 13px; line-height: 1.3"><div style="font-weight: 600">Priya Shah</div><div style="color: #5A6778">Compliance Officer</div></div>
 </div>
 </div>
 </header>
@@ -105,7 +113,7 @@ a{color:#1F5FD1}a:hover{color:#174AA6}
 <div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
 <section class="card" style="padding: 18px">
 <h2 style="margin: 0 0 12px; font-size: 17px">Job details</h2>
-<dl class="kv" style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px 20px">
+<dl class="kv" style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 14px 20px">
 <sc-for list="{{m.details}}" as="d" hint-placeholder-count="8"><div><dt>{{d.k}}</dt><dd>{{d.v}}</dd></div></sc-for>
 </dl>
 <sc-if value="{{m.hasToggle}}" hint-placeholder-val="{{ false }}">
@@ -287,7 +295,7 @@ class Component extends DCLogic {
       muni: { title: 'Municipal Operations', short: 'municipal', group: 'Customer Industries', job: 'WC-24768', tags: ['Municipal', 'Sweeper'], status: 'In progress', stCls: 'info',
         lead: 'Street scene, litter picking, public realm, bin collections and grounds waste. Street Works is mandatory on every municipal job.',
         details: kv({ Customer: 'City Council — Street Scene', 'Route start': 'Ward 7 — High Street', 'Task type': 'Litter pick + bin empty', Vehicle: 'SWP-01 · YF21 SWP', Crew: 'Lee Morgan (+2)', 'Waste type': 'Street litter, bagged' }),
-        panels: [{ title: 'Route evidence', rows: rows([['Route', 'High St → Market Sq → Bridge End', 'Recorded'], ['GPS trace', '82% of planned route', 'Pending'], ['Started / expected end', '06:30 / 11:00', 'N/A']]) }],
+        panels: [{ title: 'Street Works checks (mandatory)', rows: rows([['Permit', 'SW-2026-48102 · valid 14–16 Oct', 'Valid'], ['Traffic management', 'Chapter 8 signage photo', 'Recorded'], ['Safety zone', 'Photo · 06:40', 'Recorded'], ['Vehicle positioning', 'Photo · 06:42', 'Recorded']]) }, { title: 'Route evidence', rows: rows([['Route', 'High St → Market Sq → Bridge End', 'Recorded'], ['GPS trace', '82% of planned route', 'Pending'], ['Started / expected end', '06:30 / 11:00', 'N/A']]) }],
         ev: [['Job sheet', M, 'Uploaded 06:20', 'Validated'], ['Route evidence', M, 'GPS trace in progress', 'Pending'], ['Location evidence', M, 'Route start ±7 m', 'Validated'], ['Street Works evidence', M, 'Permit SW-2026-48102', 'Validated'], ['Waste/material type', M, 'Street litter', 'Validated'], ['Before/after photos', M, 'After photo missing', 'Pending'], ['Completion evidence', M, 'Not started', 'Pending']],
         rules: [['Street Works compliance', 'Pass', 'Permit, signage, safety zone and positioning recorded.'], ['Route evidence', 'Pending', 'Trace not complete.'], ['Before/after photos', 'Pending', 'After photo outstanding.'], ['Workflow completion', 'Pending', '6 of 9 steps done.']],
         sw: 'Mandatory: permit, traffic management where applicable, safety zone, vehicle positioning, route compliance and before/after photos.', swState: 'Mandatory · compliant so far', swCls: 'ok',
