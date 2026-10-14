@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clinical Waste — WasteCore mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
+a{color:#1F5FD1}a:hover{color:#174AA6}
+.shell{display:flex;flex-wrap:wrap;min-height:100vh}
+.side{flex:1 1 240px;background:#0F1E36;padding:20px 12px;box-sizing:border-box}
+@media (min-width:900px){.side{min-height:100vh}}
+.mainc{flex:999 1 560px;min-width:0;display:flex;flex-direction:column}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:12px 32px;background:#fff;border-bottom:1px solid #DDE3EA}
+.content{padding:24px 32px 48px;box-sizing:border-box}
+.nav a{display:block;padding:11px 14px;border-radius:6px;color:#C9D3E3;text-decoration:none;font-size:14px}
+.nav a:hover{background:#18304F;color:#fff}
+.nav a.on{background:#1F5FD1;color:#fff}
+.grp{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8B9BB4;margin:18px 14px 6px}
+.b{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.ok{background:#E3F3EA;color:#17633D}.warn{background:#FFF1D6;color:#7A4F00}.bad{background:#FDE7E5;color:#A1201A}.info{background:#E6EEFB;color:#1A4FAF}.mute{background:#EEF1F5;color:#4A5666}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;border:1px solid #C4CDD8;background:#fff;color:#16202E;cursor:pointer;text-decoration:none;box-sizing:border-box}
+.btn:hover{border-color:#8D9AAB}
+.btn.p{background:#1F5FD1;border-color:#1F5FD1;color:#fff}.btn.p:hover{background:#174AA6;color:#fff}
+.btn.sel{background:#16202E;border-color:#16202E;color:#fff}
+.card{background:#fff;border:1px solid #DDE3EA;border-radius:10px}
+.tbl{border-collapse:collapse;width:100%}
+.tbl th{text-align:left;font-size:12px;font-weight:600;color:#5A6778;text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;border-bottom:1px solid #DDE3EA;background:#F8FAFC;white-space:nowrap}
+.tbl td{padding:12px;border-bottom:1px solid #EEF1F5;font-size:14px;vertical-align:top}
+.kv dt{color:#5A6778;font-size:13px}.kv dd{margin:0;font-size:14px;font-weight:500}
+.fld{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}
+.fld input,.fld select,.fld textarea{min-height:44px;border:1px solid #C4CDD8;border-radius:8px;padding:0 10px;font:14px 'IBM Plex Sans',sans-serif;box-sizing:border-box}
+.crumb{font-size:13px;color:#5A6778}
+.h1{margin:6px 0 4px;font-size:28px;font-weight:700}
+.lead{margin:0;color:#5A6778;font-size:15px}
+.sr{position:absolute;left:-9999px}
+</style>
+<style>
+.chip{display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;border:1px solid #C4CDD8;background:#fff;font:600 13px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
+.chip.sel{background:#16202E;border-color:#16202E;color:#fff}
+.tg{display:inline-flex;align-items:center;gap:10px;min-height:44px;padding:0 14px;border-radius:8px;border:1px solid #C4CDD8;background:#fff;font:600 14px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
+</style>
+
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/x-template" id="dc-tpl">
+
+<div class="shell">
+<aside class="side">
+<div style="padding: 0 14px 18px; border-bottom: 1px solid #22385A">
+<a href="index.html" style="text-decoration: none"><div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div></a>
+<div style="font-size: 12px; color: #8B9BB4; margin-top: 4px">Waste Sector · Phase 1</div>
+</div>
+<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="" href="01-dashboard.html">Dashboard</a><a class="" href="05-job-details.html">Jobs</a><a class="on" href="02-subsectors.html">Waste Sector</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="21-transfer-station.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="" href="06-workflow.html">Workflows</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="" href="32-settings.html">Settings</a></nav>
+</aside>
+<div class="mainc">
+<header class="topbar">
+<label for="gq" class="sr">Search jobs, evidence, customers</label>
+<input id="gq" type="search" placeholder="Search jobs, evidence, customers…" style="flex: 1 1 280px; max-width: 520px; height: 44px; padding: 0 14px; border: 1px solid #C4CDD8; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif">
+<div style="display: flex; align-items: center; gap: 10px; margin-left: auto">
+<a class="btn" href="31-mobile-field-app.html">Field app</a>
+<a class="btn" href="29-notifications.html" aria-label="Notifications, 6 unread">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+<span class="b bad">6</span></a>
+<div style="display: flex; align-items: center; gap: 10px; padding-left: 6px">
+<div style="width: 36px; height: 36px; border-radius: 50%; background: #1C3358; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">PS</div>
+<div style="font-size: 13px; line-height: 1.3"><div style="font-weight: 600">Priya Shah</div><div style="color: #5A6778">Compliance Officer</div></div>
+</div>
+</div>
+</header>
+<main class="content">
+<div style="max-width: 1360px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: flex-end">
+<div>
+<div class="crumb"><a href="02-subsectors.html">Waste Sector</a> / {{m.group}} / {{m.title}}</div>
+<div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap">
+<h1 class="h1">{{m.title}}</h1><span class="b {{m.stCls}}">{{m.status}}</span>
+</div>
+<p class="lead" style="max-width: 860px">{{m.lead}} <span class="b mute">Sample data</span></p>
+<div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px">
+<span class="b info mono">{{m.job}}</span>
+<sc-for list="{{m.tags}}" as="t" hint-placeholder-count="3"><span class="b mute">{{t}}</span></sc-for>
+</div>
+</div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<a class="btn" href="06-workflow.html">Open workflow</a>
+<a class="btn p" href="04-create-job.html">+ New {{m.short}} job</a>
+</div>
+</div>
+<sc-if value="{{m.hasVariants}}" hint-placeholder-val="{{ false }}">
+<section class="card" style="padding: 16px 18px; display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<span style="font-size: 14px; font-weight: 600">{{m.variantLabel}}</span>
+<div role="radiogroup" aria-label="{{m.variantLabel}}" style="display: flex; gap: 8px; flex-wrap: wrap">
+<sc-for list="{{variants}}" as="v" hint-placeholder-count="3">
+<button role="radio" aria-checked="{{v.on}}" class="{{v.cls}}" onClick="{{v.pick}}">{{v.label}}</button>
+</sc-for>
+</div>
+<span style="font-size: 13px; color: #5A6778">{{variantNote}}</span>
+</section>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<section class="card" style="padding: 18px">
+<h2 style="margin: 0 0 12px; font-size: 17px">Job details</h2>
+<dl class="kv" style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px 20px">
+<sc-for list="{{m.details}}" as="d" hint-placeholder-count="8"><div><dt>{{d.k}}</dt><dd>{{d.v}}</dd></div></sc-for>
+</dl>
+<sc-if value="{{m.hasToggle}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px solid #EEF1F5; padding-top: 14px; margin-top: 14px">
+<button class="tg" role="switch" aria-checked="{{tg.on}}" onClick="{{tg.flip}}">
+<span style="width: 40px; height: 22px; border-radius: 11px; background: {{tg.track}}; position: relative; display: inline-block"><span style="position: absolute; top: 3px; left: {{tg.knob}}; width: 16px; height: 16px; border-radius: 50%; background: #FFFFFF"></span></span>
+{{m.toggleLabel}}
+</button>
+<span style="font-size: 13px; color: #5A6778">{{tg.note}}</span>
+</div>
+</sc-if>
+</section>
+<sc-for list="{{m.panels}}" as="p" hint-placeholder-count="1">
+<section class="card" style="padding: 18px">
+<h2 style="margin: 0 0 12px; font-size: 17px">{{p.title}}</h2>
+<div style="overflow-x: auto">
+<table class="tbl">
+<tbody>
+<sc-for list="{{p.rows}}" as="r" hint-placeholder-count="4">
+<tr><td style="width: 38%; color: #4A5666">{{r.k}}</td><td style="font-weight: 500">{{r.v}}</td><td style="text-align: right"><span class="b {{r.cls}}">{{r.s}}</span></td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</section>
+</sc-for>
+<section class="card">
+<div style="padding: 16px 18px"><h2 style="margin: 0; font-size: 17px">Evidence</h2></div>
+<div style="overflow-x: auto">
+<table class="tbl">
+<thead><tr><th>Requirement</th><th>Rule</th><th>Captured</th><th>Status</th></tr></thead>
+<tbody>
+<sc-for list="{{evidence}}" as="e" hint-placeholder-count="8">
+<tr><td style="font-weight: 500">{{e.name}}</td><td><span class="b {{e.ruleCls}}">{{e.rule}}</span></td><td style="font-size: 13px; color: #4A5666">{{e.meta}}</td><td><span class="b {{e.cls}}">{{e.status}}</span></td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<aside style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<section class="card" style="padding: 18px">
+<h2 style="margin: 0 0 12px; font-size: 17px">Validation results</h2>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{rules}}" as="r" hint-placeholder-count="6">
+<li style="padding: 10px 12px; border: 1px solid #EEF1F5; border-radius: 8px">
+<div style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 14px; font-weight: 600">{{r.name}}</span><span class="b {{r.cls}}">{{r.result}}</span></div>
+<div style="font-size: 13px; color: #5A6778; margin-top: 2px">{{r.why}}</div>
+</li>
+</sc-for>
+</ul>
+<a href="25-compliance.html" style="display: inline-block; margin-top: 12px; font-size: 14px; font-weight: 600">All rule results →</a>
+</section>
+<section class="card" style="padding: 18px; font-size: 14px; line-height: 1.55">
+<h2 style="margin: 0 0 8px; font-size: 17px">Street Works</h2>
+<div><span class="b {{m.swCls}}">{{m.swState}}</span></div>
+<p style="margin: 8px 0 0; color: #3A4656">{{m.sw}}</p>
+<a href="12-street-works.html" style="font-weight: 600">Street Works compliance →</a>
+</section>
+<section class="card" style="padding: 18px; font-size: 14px">
+<h2 style="margin: 0 0 8px; font-size: 17px">Excluded for this module</h2>
+<div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{m.exclusions}}" as="x" hint-placeholder-count="4"><span class="b mute">{{x}}</span></sc-for></div>
+</section>
+<section class="card" style="padding: 18px; font-size: 14px">
+<h2 style="margin: 0 0 8px; font-size: 17px">Future hooks</h2>
+<div style="display: flex; gap: 6px; flex-wrap: wrap"><sc-for list="{{m.hooks}}" as="h" hint-placeholder-count="3"><span class="b info">Planned · {{h}}</span></sc-for></div>
+</section>
+</aside>
+</div>
+</div>
+</main></div></div>
+</script>
+<script>// Minimal renderer for the prototype's .dc templates: {{holes}}, <sc-for>, <sc-if>,
+// onX="{{handler}}" events, and a DCLogic base class with setState.
+(function () {
+  var handlers = [], comp, root, TPL;
+  function get(scope, path) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return +path;
+    var v = scope, ks = path.split('.');
+    for (var i = 0; i < ks.length; i++) { if (v == null) return undefined; v = v[ks[i]]; }
+    return v;
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function holes(t, scope) {
+    t = t.replace(/\bon([A-Z]\w*)="\{\{([^}]+)\}\}"/g, function (m, ev, p) {
+      var f = get(scope, p);
+      if (typeof f !== 'function') return '';
+      handlers.push(f);
+      return 'data-dc-' + ev.toLowerCase() + '="' + (handlers.length - 1) + '"';
+    });
+    return t.replace(/\{\{([^}]+)\}\}/g, function (m, p) { var v = get(scope, p); return v == null ? '' : esc(v); });
+  }
+  var OPEN = /<(sc-for|sc-if)\b([^>]*)>/;
+  function findClose(t, tag, from) {
+    var depth = 1, i = from, o = new RegExp('<' + tag + '\\b', 'g'), c = new RegExp('</' + tag + '>', 'g');
+    while (true) {
+      o.lastIndex = i; c.lastIndex = i;
+      var mo = o.exec(t), mc = c.exec(t);
+      if (!mc) throw new Error('unclosed ' + tag);
+      if (mo && mo.index < mc.index) { depth++; i = mo.index + 1; }
+      else { depth--; i = mc.index + mc[0].length; if (depth === 0) return [mc.index, i]; }
+    }
+  }
+  function attr(a, name) {
+    var m = a.match(new RegExp(name + '="\\{\\{([^}]+)\\}\\}"')) || a.match(new RegExp(name + '="([^"]*)"'));
+    return m ? m[1] : null;
+  }
+  function render(t, scope) {
+    var out = '';
+    while (true) {
+      var m = OPEN.exec(t);
+      if (!m) return out + holes(t, scope);
+      out += holes(t.slice(0, m.index), scope);
+      var start = m.index + m[0].length, r = findClose(t, m[1], start), inner = t.slice(start, r[0]);
+      if (m[1] === 'sc-for') {
+        var list = get(scope, attr(m[2], 'list')) || [], as = attr(m[2], 'as') || 'item';
+        for (var i = 0; i < list.length; i++) {
+          var s = Object.create(scope); s[as] = list[i]; s.$index = i; out += render(inner, s);
+        }
+      } else if (get(scope, attr(m[2], 'value'))) {
+        out += render(inner, scope);
+      }
+      t = t.slice(r[1]);
+    }
+  }
+  function draw() {
+    handlers.length = 0;
+    var y = window.scrollY;
+    root.innerHTML = render(TPL, comp.renderVals());
+    window.scrollTo(0, y);
+  }
+  window.DCLogic = function (props) { this.props = props || {}; this.state = {}; };
+  DCLogic.prototype.setState = function (p) {
+    Object.assign(this.state, typeof p === 'function' ? p(this.state) : p); draw();
+  };
+  DCLogic.prototype.forceUpdate = function () { draw(); };
+  window.dcBoot = function (props) {
+    root = document.getElementById('dc-root');
+    TPL = document.getElementById('dc-tpl').textContent;
+    comp = new Component(props || {});
+    draw();
+    root.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-dc-click]');
+      if (el) { e.preventDefault(); handlers[+el.getAttribute('data-dc-click')](e); }
+    });
+  };
+})();
+</script>
+<script>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { v: 0, tg: true }; }
+  renderVals() {
+    const M = 'Mandatory', C = 'Conditional', O = 'Optional';
+    const kv = (o) => Object.entries(o).map(([k, v]) => ({ k, v }));
+    const rows = (a) => a.map(([k, v, s]) => ({ k, v, s, cls: { Valid: 'ok', Recorded: 'ok', Pass: 'ok', Missing: 'bad', Fail: 'bad', Pending: 'warn', 'N/A': 'mute' }[s] || 'mute' }));
+    const D = {
+      haz: { title: 'Hazardous Waste', short: 'hazardous', group: 'Waste & Material Types', job: 'WC-24812', tags: ['Hazardous Waste', 'Tanker'], status: 'In progress', stCls: 'info',
+        lead: 'Hazardous waste with full legal classification. Hazardous is a waste-stream attribute, so it can sit on a Tanker, Skip or RORO job without a second job.',
+        details: kv({ Customer: 'Kingsway Facilities', Site: 'Unit 4, Stourton, LS10 1XX', Vehicle: 'TNK-04 · YH72 TNK', Operator: 'Chris Hall', 'Waste description': 'Waste oil / water mixture', Destination: 'Aire Valley Treatment Centre' }),
+        panels: [{ title: 'Hazard classification', rows: rows([['EWC code', '13 05 07* — oily water from separators', 'Valid'], ['UN number', 'UN 3082', 'Valid'], ['ADR class / packing group', 'Class 9 · PG III', 'Valid'], ['Container & seal checks', '2 IBCs · seals intact', 'Recorded'], ['Consignment note', 'HWCN-KF-2026-0193', 'Pending']]) }],
+        ev: [['Job sheet', M, 'Uploaded 07:40', 'Validated'], ['Location evidence', M, '±5 m · geofence', 'Validated'], ['Hazard classification (UN/ADR/EWC)', M, 'Entered by operator', 'Validated'], ['Waste type confirmation', M, 'Waste oil / water', 'Validated'], ['Contamination evidence', M, 'Photo 07:58', 'Validated'], ['Seal checks', M, '2 seals recorded', 'Validated'], ['Manifest / consignment note', M, 'Awaiting customer signature', 'Pending'], ['Weighbridge ticket', C, 'If weighed at facility', 'Pending'], ['Completion evidence', M, 'Not started', 'Pending']],
+        rules: [['Hazardous classification', 'Pass', 'EWC, UN and ADR fields complete and consistent.'], ['Seal checks', 'Pass', 'All containers have a recorded seal check.'], ['Manifest / consignment note', 'Pending', 'Note not yet signed.'], ['Workflow completion', 'Pending', '7 of 10 steps done.']],
+        sw: 'Conditional: applies when operating on public highways or public-risk zones. Not triggered for this job (private yard).', swState: 'Not triggered', swCls: 'mute',
+        exclusions: ['Before/after photos (unless operator requires)', 'Route evidence'], hooks: ['DEFRA Digital Waste Tracking', 'Hazardous manifest API', 'Hazard classification intelligence'] },
+      bulk: { title: 'Bulk Material', short: 'bulk material', group: 'Waste & Material Types', job: 'WC-24790', tags: ['Tipper', 'Aggregates'], status: 'Non-compliant', stCls: 'bad',
+        lead: 'One module for loose bulk materials: aggregates, construction & demolition and tipper loading. Category-specific fields change with the material subtype.',
+        variantLabel: 'Material subtype', variants: [['Aggregates', 'Stone, sand and soils; EWC 17 05 04 typical.'], ['C&D', 'Mixed C&D; segregation and contamination checks are critical.'], ['Tipper (loose loading)', 'Tipper used for site loading. Tipper haulage runs in Bulk Transport.']],
+        details: kv({ Customer: 'Riverside Quarry', Site: 'Quarry Road, S9 1XX', Vehicle: 'TIP-05 · YK70 TPR', Operator: 'Ryan Cole', Material: 'Type 1 sub-base', Destination: 'Eastside Transfer Station' }),
+        panels: [{ title: 'Weighbridge', rows: rows([['Ticket', 'ES-557930', 'Recorded'], ['Gross / tare', '24.30 t / 17.32 t', 'Recorded'], ['Net on ticket', '7.42 t', 'Fail'], ['Gross − tare', '6.98 t', 'N/A']]) }],
+        ev: [['Job sheet', M, 'Uploaded 07:10', 'Validated'], ['Location evidence', M, '±4 m · geofence', 'Validated'], ['Material/waste type', M, 'Type 1 sub-base', 'Validated'], ['Load photos', M, '2 photos', 'Validated'], ['Contamination evidence', M, 'None observed', 'Validated'], ['Weighbridge ticket', M, 'ES-557930', 'Failed'], ['Street Works evidence', C, 'Private site — not triggered', 'Not required'], ['Completion evidence', M, 'Captured 09:02', 'Validated']],
+        rules: [['Material type vs evidence', 'Pass', 'Declared and photographed material match.'], ['Load photos', 'Pass', '2 photos within job window.'], ['Weighbridge accuracy', 'Fail', 'Net 7.42 t ≠ gross − tare 6.98 t.'], ['Workflow completion', 'Pass', 'All steps confirmed.']],
+        sw: 'Conditional: applies when loading or unloading on public highways or public-risk zones.', swState: 'Not triggered', swCls: 'mute',
+        exclusions: ['Seal checks', 'Hazard classification (unless declared hazardous)', 'Route evidence', 'Customer signature'], hooks: ['DEFRA Digital Waste Tracking', 'Weighbridge API', 'Material-type confirmation'] },
+      muni: { title: 'Municipal Operations', short: 'municipal', group: 'Customer Industries', job: 'WC-24768', tags: ['Municipal', 'Sweeper'], status: 'In progress', stCls: 'info',
+        lead: 'Street scene, litter picking, public realm, bin collections and grounds waste. Street Works is mandatory on every municipal job.',
+        details: kv({ Customer: 'City Council — Street Scene', 'Route start': 'Ward 7 — High Street', 'Task type': 'Litter pick + bin empty', Vehicle: 'SWP-01 · YF21 SWP', Crew: 'Lee Morgan (+2)', 'Waste type': 'Street litter, bagged' }),
+        panels: [{ title: 'Route evidence', rows: rows([['Route', 'High St → Market Sq → Bridge End', 'Recorded'], ['GPS trace', '82% of planned route', 'Pending'], ['Started / expected end', '06:30 / 11:00', 'N/A']]) }],
+        ev: [['Job sheet', M, 'Uploaded 06:20', 'Validated'], ['Route evidence', M, 'GPS trace in progress', 'Pending'], ['Location evidence', M, 'Route start ±7 m', 'Validated'], ['Street Works evidence', M, 'Permit SW-2026-48102', 'Validated'], ['Waste/material type', M, 'Street litter', 'Validated'], ['Before/after photos', M, 'After photo missing', 'Pending'], ['Completion evidence', M, 'Not started', 'Pending']],
+        rules: [['Street Works compliance', 'Pass', 'Permit, signage, safety zone and positioning recorded.'], ['Route evidence', 'Pending', 'Trace not complete.'], ['Before/after photos', 'Pending', 'After photo outstanding.'], ['Workflow completion', 'Pending', '6 of 9 steps done.']],
+        sw: 'Mandatory: permit, traffic management where applicable, safety zone, vehicle positioning, route compliance and before/after photos.', swState: 'Mandatory · compliant so far', swCls: 'ok',
+        exclusions: ['Weighbridge ticket', 'Load photos', 'Seal checks', 'Bulk transport manifest', 'Hazard classification', 'Customer signature'], hooks: ['DEFRA Digital Waste Tracking', 'Route-tracking API', 'Before/after photo validation'] },
+      air: { title: 'Airport Operations', short: 'airport', group: 'Customer Industries', job: 'WC-24795', tags: ['Airport', 'Recycling'], status: 'Compliant', stCls: 'ok',
+        lead: 'Airside, landside, terminal and security-controlled waste. Access and security checks follow the airport operator’s approved procedures.',
+        variantLabel: 'Site zone', variants: [['Airside', 'Airside: security escort and pass checks recorded.'], ['Landside', 'Landside: Street Works may apply on public roads.'], ['Terminal', 'Terminal: internal collection points.']],
+        details: kv({ Customer: 'Northern Regional Airport', 'Access point': 'Gate 3 — airside', 'Waste type': 'Mixed dry recyclables', Vehicle: 'RCV-11 · YC20 RCV', Operator: 'Amy Ross', 'Load / unload': 'Collected from 6 compactors' }),
+        panels: [{ title: 'Security compliance', rows: rows([['Airside pass', 'Checked at Gate 3', 'Valid'], ['Vehicle search', 'Completed 05:40', 'Recorded'], ['Escort', 'Assigned by airport ops', 'Recorded']]) }],
+        ev: [['Job sheet', M, 'Uploaded 05:30', 'Validated'], ['Location evidence', M, 'Gate 3 ±10 m', 'Validated'], ['Waste type confirmation', M, 'Mixed dry recyclables', 'Validated'], ['Security compliance evidence', M, 'Pass + search record', 'Validated'], ['Contamination evidence', M, 'None observed', 'Validated'], ['Completion evidence', M, 'Captured 07:15', 'Validated']],
+        rules: [['Security compliance', 'Pass', 'Pass, search and escort recorded.'], ['Waste type vs evidence', 'Pass', 'Matches photos.'], ['Workflow completion', 'Pass', 'All steps confirmed.']],
+        sw: 'Conditional: applies when operating landside on public highways or shared public-risk zones.', swState: 'Not triggered (airside)', swCls: 'mute',
+        exclusions: ['Weighbridge ticket', 'Load photos', 'Seal checks', 'Bulk transport manifest', 'Customer signature', 'Route evidence'], hooks: ['DEFRA Digital Waste Tracking', 'Airport security API', 'Automated contamination detection'] },
+      fm: { title: 'Facilities Management', short: 'FM', group: 'Customer Industries', job: 'WC-24786', tags: ['Facilities Management', 'Skip'], status: 'In progress', stCls: 'info',
+        lead: 'Internal building waste and external grounds waste for FM contracts.',
+        variantLabel: 'Task location', variants: [['Internal', 'Internal: Street Works never applies.'], ['External', 'External: Street Works applies near public highways.']],
+        details: kv({ Customer: 'Kingsway Facilities', 'Building / site': 'Kingsway House, LS1 5XX', 'Task': 'Office clear-out, 30 bags', 'Waste type': 'Mixed office waste', Operator: 'Sam Pearce', Vehicle: 'SKL-03 · YX71 BDZ' }),
+        panels: [],
+        ev: [['Job sheet', M, 'Uploaded 08:05', 'Validated'], ['Location evidence', M, '±8 m', 'Validated'], ['Waste type confirmation', M, 'Mixed office waste', 'Validated'], ['Before/after photos', M, 'Before captured', 'Pending'], ['Contamination evidence', M, 'Not yet', 'Pending'], ['Street Works evidence', C, 'Internal task', 'Not required'], ['Completion evidence', M, 'Not started', 'Pending']],
+        rules: [['Location accuracy', 'Pass', 'Inside site geofence.'], ['Before/after photos', 'Pending', 'After photo outstanding.'], ['Workflow completion', 'Pending', '4 of 9 steps done.']],
+        sw: 'Conditional: applies when working externally near public highways or public-risk zones.', swState: 'Not triggered', swCls: 'mute',
+        exclusions: ['Weighbridge ticket', 'Load photos', 'Seal checks', 'Bulk transport manifest', 'Hazard classification', 'Customer signature', 'Route evidence'], hooks: ['DEFRA Digital Waste Tracking', 'FM contractor compliance API', 'Automated contamination detection'] },
+      sweep: { title: 'Sweeper Operations', short: 'sweeper', group: 'Collection & Transport', job: 'WC-24764', tags: ['Sweeper', 'Municipal'], status: 'Compliant', stCls: 'ok',
+        lead: 'Road and vacuum sweeping across routes, sites and the public realm.',
+        details: kv({ Customer: 'City Council — Highways', Route: 'Ring Road inner loop', Vehicle: 'SWP-01 · YF21 SWP', Operator: 'Lee Morgan', 'Waste type': 'Road sweepings', 'Distance swept': '14.2 km' }),
+        panels: [{ title: 'Route evidence', rows: rows([['GPS trace', '100% of planned route', 'Valid'], ['Start / end', '04:10 / 06:05', 'Recorded']]) }],
+        ev: [['Job sheet', M, 'Uploaded 04:00', 'Validated'], ['Route evidence', M, 'GPS trace complete', 'Validated'], ['Location evidence', M, 'Route start ±6 m', 'Validated'], ['Street Works evidence', C, 'Permit SW-2026-47990', 'Validated'], ['Before/after photos', M, '4 photos', 'Validated'], ['Waste type confirmation', M, 'Road sweepings', 'Validated'], ['Completion evidence', M, 'Captured 06:08', 'Validated']],
+        rules: [['Route evidence', 'Pass', 'Planned route fully covered.'], ['Street Works compliance', 'Pass', 'Permit valid for route.'], ['Before/after photos', 'Pass', 'Taken at start and end.'], ['Workflow completion', 'Pass', 'All steps confirmed.']],
+        sw: 'Conditional: applies on public highways or public-risk zones — triggered for this route.', swState: 'Triggered · compliant', swCls: 'ok',
+        exclusions: ['Weighbridge ticket', 'Load photos', 'Seal checks', 'Bulk transport manifest', 'Customer signature'], hooks: ['DEFRA Digital Waste Tracking', 'Route-tracking API', 'Before/after photo validation'] },
+      tank: { title: 'Tanker Operations', short: 'tanker', group: 'Collection & Transport', job: 'WC-24781', tags: ['Tanker'], status: 'Compliant', stCls: 'ok',
+        lead: 'Liquid waste, sludge, drainage and interceptor emptying. A hazardous classification can be attached to the same job.',
+        toggleLabel: 'Hazardous classification attached',
+        details: kv({ Customer: 'Northgate Builders Ltd', Site: 'Holbeck Yard interceptor', Vehicle: 'TNK-04 · YH72 TNK', Operator: 'Chris Hall', 'Waste type': 'Interceptor sludge', 'Transport / discharge': 'Discharged at Aire Valley Treatment Centre' }),
+        panels: [{ title: 'Volume evidence', rows: rows([['Volume collected', '8,400 L', 'Valid'], ['Tank gauge photo', 'EV-88231', 'Recorded'], ['Weighbridge / volume ticket', 'Volume ticket VT-3381', 'Valid']]) }],
+        ev: [['Job sheet', M, 'Uploaded 13:10', 'Validated'], ['Location evidence', M, '±5 m', 'Validated'], ['Waste type (liquid/sludge)', M, 'Interceptor sludge', 'Validated'], ['Contamination evidence', M, 'Sample photo', 'Validated'], ['Load volume evidence', M, '8,400 L', 'Validated'], ['Weighbridge / volume ticket', C, 'VT-3381', 'Validated'], ['Completion evidence', M, 'Captured 15:02', 'Validated']],
+        rules: [['Waste type vs evidence', 'Pass', 'Sludge confirmed by photo.'], ['Volume evidence', 'Pass', 'Gauge and ticket agree.'], ['Workflow completion', 'Pass', 'All steps confirmed.']],
+        sw: 'Conditional: applies on public highways or public-risk zones.', swState: 'Not triggered', swCls: 'mute',
+        exclusions: ['Load photos', 'Seal checks (unless hazardous)', 'Bulk transport manifest (unless hazardous)', 'Customer signature', 'Route evidence'], hooks: ['DEFRA Digital Waste Tracking', 'Digital Waste Transfer Notes', 'Tanker telemetry API'] },
+      grab: { title: 'Grab Operations', short: 'grab', group: 'Collection & Transport', job: 'WC-24802', tags: ['Grab', 'Aggregates'], status: 'Compliant', stCls: 'ok',
+        lead: 'Grab loading of soils, aggregates and muck-away from ground, sites or the highway.',
+        details: kv({ Customer: 'Riverside Developments', Site: 'Kirkstall Road, LS4 2XX', Vehicle: 'GRB-02 · YJ22 GRB', Operator: 'Mark Evans', Material: 'Excavated soil (muck away)', 'Loading activity': 'Grab from roadside spoil heap' }),
+        panels: [{ title: 'Weighbridge', rows: rows([['Ticket', 'ES-558201', 'Valid'], ['Gross / tare / net', '26.84 / 14.10 / 12.74 t', 'Valid']]) }],
+        ev: [['Job sheet', M, 'Uploaded 09:12', 'Validated'], ['Location evidence', M, '±5 m', 'Validated'], ['Material/waste type', M, 'Excavated soil', 'Validated'], ['Load photos', M, '2 photos', 'Validated'], ['Contamination evidence', M, 'None observed', 'Validated'], ['Street Works evidence', C, 'Permit SW-2026-48213', 'Validated'], ['Weighbridge ticket', M, 'ES-558201', 'Validated'], ['Completion evidence', M, 'Captured 11:39', 'Validated']],
+        rules: [['Load photos', 'Pass', '2 photos within job window.'], ['Street Works compliance', 'Pass', 'Permit valid for date and place.'], ['Weighbridge accuracy', 'Pass', 'Net = gross − tare.'], ['Workflow completion', 'Pass', 'All steps confirmed.']],
+        sw: 'Conditional: applies on public highways or public-risk zones — triggered (roadside loading).', swState: 'Triggered · compliant', swCls: 'ok',
+        exclusions: ['Seal checks', 'Bulk transport manifest', 'Customer signature', 'Route evidence'], hooks: ['DEFRA Digital Waste Tracking', 'Weighbridge API', 'Material-type confirmation'] },
+      ts: { title: 'Transfer Station Operations', short: 'transfer station', group: 'Waste Infrastructure', job: 'WC-24749', tags: ['Transfer Station', 'C&D', 'RORO'], status: 'In progress', stCls: 'info',
+        lead: 'A Transfer Station is a facility, not a vehicle. Loads arrive by any collection method; weighing is mandatory and processing evidence is a toggle.',
+        toggleLabel: 'Processing enabled',
+        details: kv({ Facility: 'Eastside Transfer Station', 'Arrival record': 'ARR-26-10-0881 · 07:02', 'Arrived by': 'RORO · HKL-02 · YT23 RNA', 'Waste/material': 'Mixed C&D', Origin: 'Northgate Builders — Holbeck', Dispatch: 'Onward to MRF line' }),
+        panels: [{ title: 'Classification & weighing', rows: rows([['Weighbridge ticket', 'ES-558090 · 13.72 t net', 'Pending'], ['EWC classification', '17 09 04', 'Pending'], ['Load arrival photos', '3 photos', 'Valid']]) }],
+        ev: [['Arrival record / job sheet', M, 'ARR-26-10-0881', 'Validated'], ['Location evidence (site entry)', M, 'Gate camera 07:02', 'Validated'], ['Waste/material type', M, 'Mixed C&D', 'Validated'], ['Load arrival photos', M, '3 photos', 'Validated'], ['Contamination evidence', M, 'Plasterboard noted', 'Validated'], ['Weighbridge ticket', M, 'Manual entry', 'Pending'], ['EWC classification', M, 'Awaiting supervisor', 'Pending'], ['Processing evidence', C, 'Depends on toggle', 'Pending'], ['Dispatch evidence', C, 'If load leaves site', 'Pending'], ['Completion evidence', M, 'Not started', 'Pending']],
+        rules: [['Weighbridge accuracy', 'Pending', 'Manual entry awaiting check.'], ['EWC classification', 'Pending', 'Supervisor to confirm.'], ['Contamination evidence', 'Pass', 'Recorded with photo.'], ['Workflow completion', 'Pending', '6 of 12 steps done.']],
+        sw: 'Not applicable: the facility is private land. Street Works applies to collection modules, not this one.', swState: 'Not applicable', swCls: 'mute',
+        exclusions: ['Before/after photos', 'Seal checks', 'Customer signature', 'Route evidence', 'Street Works evidence'], hooks: ['DEFRA Digital Waste Tracking (mandatory)', 'Weighbridge API', 'EWC classification intelligence'] },
+      rec: { title: 'Recycling Operations', short: 'recycling', group: 'Waste & Material Types', job: 'WC-24758', tags: ['Recycling', 'Walking Floor'], status: 'Compliant', stCls: 'ok',
+        lead: 'Uses the Material Recovery module with processing switched on: material streams are sorted and output tonnages recorded.',
+        toggleLabel: 'Processing enabled',
+        variantLabel: 'Material stream', variants: [['Dry mixed recyclables', 'MRF line 1 · paper, card, plastics, cans.'], ['Wood', 'Wood shredding · grades A–C.'], ['Metals', 'Ferrous / non-ferrous separation.'], ['WEEE', 'Electrical items · separate treatment route.']],
+        details: kv({ Facility: 'Eastside MRF', 'Arrival record': 'ARR-26-10-0874', 'Waste/material': 'Dry mixed recyclables', 'EWC': '20 03 01 → 19 12 xx outputs', 'Sorting status': 'Complete', Dispatch: 'Baled outputs to reprocessors' }),
+        panels: [{ title: 'Material outputs', rows: rows([['Paper & card (19 12 01)', '5.10 t', 'Valid'], ['Plastics (19 12 04)', '2.35 t', 'Valid'], ['Ferrous metal (19 12 02)', '0.84 t', 'Valid'], ['Residual (19 12 12)', '1.12 t', 'Valid']]) }],
+        ev: [['Arrival record / job sheet', M, 'ARR-26-10-0874', 'Validated'], ['Waste/material type', M, 'DMR', 'Validated'], ['Load arrival photos', M, '2 photos', 'Validated'], ['Contamination evidence', M, '4% contamination noted', 'Validated'], ['Weighbridge ticket', M, '9.41 t in', 'Validated'], ['EWC classification', M, '20 03 01', 'Validated'], ['Processing evidence', C, 'Outputs recorded', 'Validated'], ['Dispatch evidence', C, '3 bales dispatched', 'Validated'], ['Completion evidence', M, 'Captured 16:20', 'Validated']],
+        rules: [['Weighbridge accuracy', 'Pass', 'Inputs equal outputs within the approved check.'], ['EWC classification', 'Pass', 'Input and output codes recorded.'], ['Processing evidence', 'Pass', 'Material outputs recorded.'], ['Workflow completion', 'Pass', 'All steps confirmed.']],
+        sw: 'Not applicable: processing happens on private land.', swState: 'Not applicable', swCls: 'mute',
+        exclusions: ['Before/after photos', 'Seal checks', 'Customer signature', 'Route evidence', 'Street Works evidence'], hooks: ['DEFRA Digital Waste Tracking (mandatory)', 'Material-output tracking', 'Automated contamination detection'] },
+      clin: { title: 'Clinical Waste', short: 'clinical', group: 'Waste & Material Types', job: 'WC-24756', tags: ['Clinical Waste'], status: 'Non-compliant', stCls: 'bad',
+        lead: 'Healthcare, sharps, infectious and pharmaceutical waste with healthcare and ADR compliance. Added in v2.0 as an extra module.',
+        details: kv({ Customer: 'Riverside General', Site: 'Bay 3, LS9 7XX', Vehicle: 'CLN-01 · YB23 CWV', Operator: 'Mark Evans', 'Clinical category': 'Infectious (orange bag) + sharps', Destination: 'Pennine Clinical Treatment Plant' }),
+        panels: [{ title: 'Classification & containers', rows: rows([['UN number / class', 'UN 3291 · Class 6.2', 'Valid'], ['Containers', '14 bags, 6 sharps bins', 'Recorded'], ['Seal checks', 'Not recorded', 'Missing'], ['Consignment note', 'EV-88277', 'Valid'], ['Incident', 'Minor fluid leak, spill kit used', 'Recorded']]) }],
+        ev: [['Job sheet', M, 'Uploaded 06:20', 'Validated'], ['Location evidence', M, '±9 m', 'Validated'], ['Clinical category', M, 'Infectious + sharps', 'Validated'], ['UN/ADR classification', M, 'UN 3291', 'Validated'], ['Container integrity & seal checks', M, 'Seals not recorded', 'Missing'], ['Incident evidence', C, 'EV-88281', 'Validated'], ['Manifest / consignment note', M, 'EV-88277', 'Validated'], ['Weighbridge / volume ticket', C, 'At treatment plant', 'Pending'], ['Completion evidence', M, 'Not started', 'Pending']],
+        rules: [['Clinical classification', 'Pass', 'Category and UN data consistent.'], ['Container integrity & seals', 'Fail', 'No seal check recorded — NC-1081 raised.'], ['Consignment note', 'Pass', 'Note uploaded.'], ['Workflow completion', 'Pending', '7 of 10 steps done.']],
+        sw: 'Conditional: applies on public highways or public-risk zones.', swState: 'Not triggered', swCls: 'mute',
+        exclusions: ['Before/after photos (unless operator requires)', 'Route evidence'], hooks: ['DEFRA Digital Waste Tracking', 'Clinical manifest API', 'Clinical classification intelligence'] }
+    };
+    const key = this.props.module || 'haz';
+    const m = D[key];
+    const ruleCls = { Mandatory: 'info', Conditional: 'warn', Optional: 'mute' };
+    const stCls = { Validated: 'ok', Pending: 'warn', Missing: 'bad', Failed: 'bad', 'Not required': 'mute' };
+    const vIdx = Math.min(this.state.v, (m.variants || [['']]).length - 1);
+    const on = this.state.tg;
+    const tgNotes = { tank: on ? 'Hazardous fields (UN/ADR/EWC, seals, manifest) are added to this job.' : 'Non-hazardous liquid waste.', ts: on ? 'Processing and output evidence are required.' : 'Pure transfer: processing evidence not required.', rec: on ? 'Processing ON for recycling — outputs required.' : 'Processing off: treated as pure transfer.' };
+    return {
+      m: { ...m, hasVariants: !!m.variants, hasToggle: !!m.toggleLabel, details: m.details },
+      variants: (m.variants || []).map(([label], i) => ({ label, on: i === vIdx ? 'true' : 'false', cls: i === vIdx ? 'chip sel' : 'chip', pick: () => this.setState({ v: i }) })),
+      variantNote: m.variants ? m.variants[vIdx][1] : '',
+      tg: { on: on ? 'true' : 'false', track: on ? '#1F5FD1' : '#8D9AAB', knob: on ? '21px' : '3px', note: tgNotes[key] || '', flip: () => this.setState({ tg: !on }) },
+      evidence: m.ev.map(([name, rule, meta, status]) => ({ name, rule, meta, status, ruleCls: ruleCls[rule], cls: stCls[status] })),
+      rules: m.rules.map(([name, result, why]) => ({ name, result, why, cls: { Pass: 'ok', Fail: 'bad', Pending: 'warn' }[result] }))
+    };
+  }
+}
+</script>
+<script>dcBoot({"module": "clin"});</script>
+</body>
+</html>

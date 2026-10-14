@@ -4,8 +4,41 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Waste Sector Dashboard — WasteCore mockup</title>
-
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
+a{color:#1F5FD1}a:hover{color:#174AA6}
+.shell{display:flex;flex-wrap:wrap;min-height:100vh}
+.side{flex:1 1 240px;background:#0F1E36;padding:20px 12px;box-sizing:border-box}
+@media (min-width:900px){.side{min-height:100vh}}
+.mainc{flex:999 1 560px;min-width:0;display:flex;flex-direction:column}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:12px 32px;background:#fff;border-bottom:1px solid #DDE3EA}
+.content{padding:24px 32px 48px;box-sizing:border-box}
+.nav a{display:block;padding:11px 14px;border-radius:6px;color:#C9D3E3;text-decoration:none;font-size:14px}
+.nav a:hover{background:#18304F;color:#fff}
+.nav a.on{background:#1F5FD1;color:#fff}
+.grp{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8B9BB4;margin:18px 14px 6px}
+.b{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.ok{background:#E3F3EA;color:#17633D}.warn{background:#FFF1D6;color:#7A4F00}.bad{background:#FDE7E5;color:#A1201A}.info{background:#E6EEFB;color:#1A4FAF}.mute{background:#EEF1F5;color:#4A5666}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;border:1px solid #C4CDD8;background:#fff;color:#16202E;cursor:pointer;text-decoration:none;box-sizing:border-box}
+.btn:hover{border-color:#8D9AAB}
+.btn.p{background:#1F5FD1;border-color:#1F5FD1;color:#fff}.btn.p:hover{background:#174AA6;color:#fff}
+.btn.sel{background:#16202E;border-color:#16202E;color:#fff}
+.card{background:#fff;border:1px solid #DDE3EA;border-radius:10px}
+.tbl{border-collapse:collapse;width:100%}
+.tbl th{text-align:left;font-size:12px;font-weight:600;color:#5A6778;text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;border-bottom:1px solid #DDE3EA;background:#F8FAFC;white-space:nowrap}
+.tbl td{padding:12px;border-bottom:1px solid #EEF1F5;font-size:14px;vertical-align:top}
+.kv dt{color:#5A6778;font-size:13px}.kv dd{margin:0;font-size:14px;font-weight:500}
+.fld{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}
+.fld input,.fld select,.fld textarea{min-height:44px;border:1px solid #C4CDD8;border-radius:8px;padding:0 10px;font:14px 'IBM Plex Sans',sans-serif;box-sizing:border-box}
+.crumb{font-size:13px;color:#5A6778}
+.h1{margin:6px 0 4px;font-size:28px;font-weight:700}
+.lead{margin:0;color:#5A6778;font-size:15px}
+.sr{position:absolute;left:-9999px}
+</style>
+
+
 <style>
 body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
 a{color:#1F5FD1}a:hover{color:#174AA6}
@@ -24,54 +57,37 @@ td{padding:12px;border-bottom:1px solid #EEF1F5;vertical-align:top}
 .btn:hover{border-color:#8D9AAB}.btn.p:hover{background:#174AA6;color:#fff}
 </style>
 
-<style>@media (min-width: 900px){#dc-root > div > aside{min-height:100vh}}</style>
+
 </head>
 <body>
 <div id="dc-root"></div>
 <script type="text/x-template" id="dc-tpl">
 
-<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
-<aside style="flex: 1 1 240px; background: #0F1E36; padding: 20px 12px; box-sizing: border-box">
+<div class="shell">
+<aside class="side">
 <div style="padding: 0 14px 18px; border-bottom: 1px solid #22385A">
-<div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div>
+<a href="index.html" style="text-decoration: none"><div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div></a>
 <div style="font-size: 12px; color: #8B9BB4; margin-top: 4px">Waste Sector · Phase 1</div>
 </div>
-<nav class="nav" aria-label="Main">
-<div class="grp">Operations</div>
-<a class="on" href="01-dashboard.html">Dashboard</a>
-<a href="04-job-details.html">Jobs</a>
-<a href="02-subsectors.html">Waste Sector</a>
-<span>Fleet &amp; Vehicles</span>
-<span>Facilities &amp; Transfer Stations</span>
-<div class="grp">Evidence &amp; compliance</div>
-<span>Evidence Centre</span>
-<a href="05-workflow.html">Workflows</a>
-<span>Street Works</span>
-<a href="07-compliance.html">Compliance &amp; Intelligence</a>
-<a href="08-non-compliance.html">Non-Compliance</a>
-<a href="09-chain-of-proof.html">Chain of Proof</a>
-<div class="grp">Admin</div>
-<span>Reports &amp; Audit</span>
-<span>Integrations</span>
-<span>Settings</span>
-</nav>
+<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="on" href="01-dashboard.html">Dashboard</a><a class="" href="05-job-details.html">Jobs</a><a class="" href="02-subsectors.html">Waste Sector</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="21-transfer-station.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="" href="06-workflow.html">Workflows</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="" href="32-settings.html">Settings</a></nav>
 </aside>
-<main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
-<header style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 12px 32px; background: #FFFFFF; border-bottom: 1px solid #DDE3EA">
-<label for="q" style="position: absolute; left: -9999px">Search jobs, evidence, customers</label>
-<input id="q" type="search" placeholder="Search jobs, evidence, customers…" style="flex: 1 1 280px; max-width: 520px; height: 44px; padding: 0 14px; border: 1px solid #C4CDD8; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif">
+<div class="mainc">
+<header class="topbar">
+<label for="gq" class="sr">Search jobs, evidence, customers</label>
+<input id="gq" type="search" placeholder="Search jobs, evidence, customers…" style="flex: 1 1 280px; max-width: 520px; height: 44px; padding: 0 14px; border: 1px solid #C4CDD8; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif">
 <div style="display: flex; align-items: center; gap: 10px; margin-left: auto">
-<button class="btn" aria-label="Notifications, 6 unread">
+<a class="btn" href="31-mobile-field-app.html">Field app</a>
+<a class="btn" href="29-notifications.html" aria-label="Notifications, 6 unread">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
-<span class="b bad">6</span>
-</button>
+<span class="b bad">6</span></a>
 <div style="display: flex; align-items: center; gap: 10px; padding-left: 6px">
-<div style="width: 36px; height: 36px; border-radius: 50%; background: #1C3358; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">CO</div>
+<div style="width: 36px; height: 36px; border-radius: 50%; background: #1C3358; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">PS</div>
 <div style="font-size: 13px; line-height: 1.3"><div style="font-weight: 600">Priya Shah</div><div style="color: #5A6778">Compliance Officer</div></div>
 </div>
 </div>
 </header>
-<div style="padding: 24px 32px 48px; display: flex; flex-direction: column; gap: 24px; max-width: 1360px; box-sizing: border-box; width: 100%">
+<main class="content">
+<div style="display: flex; flex-direction: column; gap: 24px; max-width: 1360px">
 <div style="display: flex; flex-wrap: wrap; align-items: flex-end; gap: 16px; justify-content: space-between">
 <div>
 <div style="font-size: 13px; color: #5A6778">Home / Waste Sector</div>
@@ -79,8 +95,8 @@ td{padding:12px;border-bottom:1px solid #EEF1F5;vertical-align:top}
 <p style="margin: 0; color: #5A6778; font-size: 15px">Jobs, evidence completeness and compliance across all 12 operational modules. <span class="b mute">Sample data</span></p>
 </div>
 <div style="display: flex; gap: 10px; flex-wrap: wrap">
-<a class="btn" href="07-compliance.html">View reports</a>
-<a class="btn p" href="03-create-job.html">+ Create job</a>
+<a class="btn" href="25-compliance.html">View reports</a>
+<a class="btn p" href="04-create-job.html">+ Create job</a>
 </div>
 </div>
 <form style="display: flex; flex-wrap: wrap; gap: 12px; padding: 16px; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px">
@@ -90,27 +106,27 @@ td{padding:12px;border-bottom:1px solid #EEF1F5;vertical-align:top}
 <label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 600; color: #5A6778">Status<select style="height: 40px; min-width: 160px; border: 1px solid #C4CDD8; border-radius: 8px; padding: 0 10px; font: 14px 'IBM Plex Sans', sans-serif"><option>Any status</option><option>Non-compliant</option><option>In progress</option></select></label>
 </form>
 <section aria-label="Key figures" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px">
-<a href="04-job-details.html" style="text-decoration: none; color: inherit; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 18px">
+<a href="05-job-details.html" style="text-decoration: none; color: inherit; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 18px">
 <div style="font-size: 13px; color: #5A6778; font-weight: 600">Total jobs</div>
 <div style="font-size: 32px; font-weight: 700; margin-top: 6px">1,284</div>
 <div style="font-size: 13px; color: #5A6778; margin-top: 4px">Last 30 days</div>
 </a>
-<a href="04-job-details.html" style="text-decoration: none; color: inherit; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 18px">
+<a href="05-job-details.html" style="text-decoration: none; color: inherit; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 18px">
 <div style="font-size: 13px; color: #5A6778; font-weight: 600">Completed</div>
 <div style="font-size: 32px; font-weight: 700; margin-top: 6px">1,032</div>
 <div style="margin-top: 6px"><span class="b ok">Chain of Proof issued</span></div>
 </a>
-<a href="05-workflow.html" style="text-decoration: none; color: inherit; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 18px">
+<a href="06-workflow.html" style="text-decoration: none; color: inherit; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 18px">
 <div style="font-size: 13px; color: #5A6778; font-weight: 600">In progress</div>
 <div style="font-size: 32px; font-weight: 700; margin-top: 6px">198</div>
 <div style="margin-top: 6px"><span class="b info">Workflow running</span></div>
 </a>
-<a href="08-non-compliance.html" style="text-decoration: none; color: inherit; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 18px">
+<a href="26-non-compliance.html" style="text-decoration: none; color: inherit; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 18px">
 <div style="font-size: 13px; color: #5A6778; font-weight: 600">Non-compliant</div>
 <div style="font-size: 32px; font-weight: 700; margin-top: 6px; color: #A1201A">54</div>
 <div style="margin-top: 6px"><span class="b bad">Needs action</span></div>
 </a>
-<a href="07-compliance.html" style="text-decoration: none; color: inherit; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 18px">
+<a href="25-compliance.html" style="text-decoration: none; color: inherit; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 18px">
 <div style="font-size: 13px; color: #5A6778; font-weight: 600">Evidence completeness</div>
 <div style="font-size: 32px; font-weight: 700; margin-top: 6px">91.6%</div>
 <div style="height: 8px; background: #EEF1F5; border-radius: 4px; margin-top: 10px"><div style="width: 91.6%; height: 8px; background: #1F7A4D; border-radius: 4px"></div></div>
@@ -132,11 +148,11 @@ td{padding:12px;border-bottom:1px solid #EEF1F5;vertical-align:top}
 <section style="background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 18px">
 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px">
 <h2 style="margin: 0; font-size: 17px">Compliance alerts</h2>
-<a href="08-non-compliance.html" style="font-size: 14px; font-weight: 600">View all</a>
+<a href="26-non-compliance.html" style="font-size: 14px; font-weight: 600">View all</a>
 </div>
 <div style="display: flex; flex-direction: column; gap: 10px">
 <sc-for list="{{alerts}}" as="a" hint-placeholder-count="5">
-<a href="08-non-compliance.html" style="display: flex; gap: 12px; align-items: flex-start; padding: 12px; border: 1px solid #EEF1F5; border-radius: 8px; text-decoration: none; color: inherit">
+<a href="26-non-compliance.html" style="display: flex; gap: 12px; align-items: flex-start; padding: 12px; border: 1px solid #EEF1F5; border-radius: 8px; text-decoration: none; color: inherit">
 <span class="b {{a.cls}}">{{a.level}}</span>
 <div style="flex: 1; min-width: 0">
 <div style="font-weight: 600; font-size: 14px">{{a.title}}</div>
@@ -151,7 +167,7 @@ td{padding:12px;border-bottom:1px solid #EEF1F5;vertical-align:top}
 <section style="background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px">
 <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 18px">
 <h2 style="margin: 0; font-size: 17px">Jobs requiring attention</h2>
-<a href="04-job-details.html" style="font-size: 14px; font-weight: 600">All jobs</a>
+<a href="05-job-details.html" style="font-size: 14px; font-weight: 600">All jobs</a>
 </div>
 <div style="overflow-x: auto">
 <table>
@@ -159,7 +175,7 @@ td{padding:12px;border-bottom:1px solid #EEF1F5;vertical-align:top}
 <tbody>
 <sc-for list="{{jobs}}" as="j" hint-placeholder-count="6">
 <tr>
-<td><a class="mono" href="04-job-details.html" style="font-weight: 600">{{j.ref}}</a></td>
+<td><a class="mono" href="05-job-details.html" style="font-weight: 600">{{j.ref}}</a></td>
 <td>{{j.module}}</td>
 <td><span style="font-size: 13px; color: #4A5666">{{j.tags}}</span></td>
 <td>{{j.site}}</td>
@@ -175,7 +191,7 @@ td{padding:12px;border-bottom:1px solid #EEF1F5;vertical-align:top}
 <section style="background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px">
 <div style="display: flex; justify-content: space-between; align-items: center; padding: 16px 18px">
 <h2 style="margin: 0; font-size: 17px">Recent Chain of Proof records</h2>
-<a href="09-chain-of-proof.html" style="font-size: 14px; font-weight: 600">Open Chain of Proof</a>
+<a href="27-chain-of-proof.html" style="font-size: 14px; font-weight: 600">Open Chain of Proof</a>
 </div>
 <div style="overflow-x: auto">
 <table>
@@ -183,7 +199,7 @@ td{padding:12px;border-bottom:1px solid #EEF1F5;vertical-align:top}
 <tbody>
 <sc-for list="{{proofs}}" as="p" hint-placeholder-count="4">
 <tr>
-<td><a class="mono" href="09-chain-of-proof.html" style="font-weight: 600">{{p.ref}}</a></td>
+<td><a class="mono" href="27-chain-of-proof.html" style="font-weight: 600">{{p.ref}}</a></td>
 <td class="mono">{{p.job}}</td>
 <td>{{p.module}}</td>
 <td>{{p.when}}</td>
@@ -196,39 +212,87 @@ td{padding:12px;border-bottom:1px solid #EEF1F5;vertical-align:top}
 </div>
 </section>
 </div>
-</main>
-</div>
+</main></div></div>
 </script>
-<script>
-(function(){
-var handlers=[],comp,root,TPL;
-function get(scope,path){path=path.trim();if(path==='true')return true;if(path==='false')return false;
- if(/^-?\d+(\.\d+)?$/.test(path))return +path;var v=scope,ks=path.split('.');
- for(var i=0;i<ks.length;i++){if(v==null)return undefined;v=v[ks[i]];}return v;}
-function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function holes(t,scope){
- t=t.replace(/\bon([A-Z]\w*)="\{\{([^}]+)\}\}"/g,function(m,ev,p){var f=get(scope,p);
-  if(typeof f!=='function')return '';handlers.push(f);return 'data-dc-'+ev.toLowerCase()+'="'+(handlers.length-1)+'"';});
- return t.replace(/\{\{([^}]+)\}\}/g,function(m,p){var v=get(scope,p);return v==null?'':esc(v);});}
-var OPEN=/<(sc-for|sc-if)\b([^>]*)>/;
-function findClose(t,tag,from){var depth=1,i=from,o=new RegExp('<'+tag+'\\b','g'),c=new RegExp('</'+tag+'>','g');
- while(true){o.lastIndex=i;c.lastIndex=i;var mo=o.exec(t),mc=c.exec(t);if(!mc)throw new Error('unclosed '+tag);
-  if(mo&&mo.index<mc.index){depth++;i=mo.index+1;}else{depth--;i=mc.index+mc[0].length;if(depth===0)return [mc.index,i];}}}
-function attr(a,name){var m=a.match(new RegExp(name+'="\\{\\{([^}]+)\\}\\}"'))||a.match(new RegExp(name+'="([^"]*)"'));return m?m[1]:null;}
-function render(t,scope){var out='';while(true){var m=OPEN.exec(t);if(!m){return out+holes(t,scope);}
- out+=holes(t.slice(0,m.index),scope);var start=m.index+m[0].length,r=findClose(t,m[1],start),inner=t.slice(start,r[0]);
- if(m[1]==='sc-for'){var list=get(scope,attr(m[2],'list'))||[],as=attr(m[2],'as')||'item';
-  for(var i=0;i<list.length;i++){var s=Object.create(scope);s[as]=list[i];s.$index=i;out+=render(inner,s);}}
- else if(get(scope,attr(m[2],'value'))){out+=render(inner,scope);}
- t=t.slice(r[1]);}}
-function draw(){handlers.length=0;root.innerHTML=render(TPL,comp.renderVals());}
-window.DCLogic=function(props){this.props=props||{};this.state={};};
-DCLogic.prototype.setState=function(p){Object.assign(this.state,typeof p==='function'?p(this.state):p);draw();};
-DCLogic.prototype.forceUpdate=function(){draw();};
-window.dcBoot=function(){root=document.getElementById('dc-root');TPL=document.getElementById('dc-tpl').textContent;
- comp=new Component({});draw();
- root.addEventListener('click',function(e){var el=e.target.closest('[data-dc-click]');
-  if(el){e.preventDefault();handlers[+el.getAttribute('data-dc-click')](e);}});};
+<script>// Minimal renderer for the prototype's .dc templates: {{holes}}, <sc-for>, <sc-if>,
+// onX="{{handler}}" events, and a DCLogic base class with setState.
+(function () {
+  var handlers = [], comp, root, TPL;
+  function get(scope, path) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return +path;
+    var v = scope, ks = path.split('.');
+    for (var i = 0; i < ks.length; i++) { if (v == null) return undefined; v = v[ks[i]]; }
+    return v;
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function holes(t, scope) {
+    t = t.replace(/\bon([A-Z]\w*)="\{\{([^}]+)\}\}"/g, function (m, ev, p) {
+      var f = get(scope, p);
+      if (typeof f !== 'function') return '';
+      handlers.push(f);
+      return 'data-dc-' + ev.toLowerCase() + '="' + (handlers.length - 1) + '"';
+    });
+    return t.replace(/\{\{([^}]+)\}\}/g, function (m, p) { var v = get(scope, p); return v == null ? '' : esc(v); });
+  }
+  var OPEN = /<(sc-for|sc-if)\b([^>]*)>/;
+  function findClose(t, tag, from) {
+    var depth = 1, i = from, o = new RegExp('<' + tag + '\\b', 'g'), c = new RegExp('</' + tag + '>', 'g');
+    while (true) {
+      o.lastIndex = i; c.lastIndex = i;
+      var mo = o.exec(t), mc = c.exec(t);
+      if (!mc) throw new Error('unclosed ' + tag);
+      if (mo && mo.index < mc.index) { depth++; i = mo.index + 1; }
+      else { depth--; i = mc.index + mc[0].length; if (depth === 0) return [mc.index, i]; }
+    }
+  }
+  function attr(a, name) {
+    var m = a.match(new RegExp(name + '="\\{\\{([^}]+)\\}\\}"')) || a.match(new RegExp(name + '="([^"]*)"'));
+    return m ? m[1] : null;
+  }
+  function render(t, scope) {
+    var out = '';
+    while (true) {
+      var m = OPEN.exec(t);
+      if (!m) return out + holes(t, scope);
+      out += holes(t.slice(0, m.index), scope);
+      var start = m.index + m[0].length, r = findClose(t, m[1], start), inner = t.slice(start, r[0]);
+      if (m[1] === 'sc-for') {
+        var list = get(scope, attr(m[2], 'list')) || [], as = attr(m[2], 'as') || 'item';
+        for (var i = 0; i < list.length; i++) {
+          var s = Object.create(scope); s[as] = list[i]; s.$index = i; out += render(inner, s);
+        }
+      } else if (get(scope, attr(m[2], 'value'))) {
+        out += render(inner, scope);
+      }
+      t = t.slice(r[1]);
+    }
+  }
+  function draw() {
+    handlers.length = 0;
+    var y = window.scrollY;
+    root.innerHTML = render(TPL, comp.renderVals());
+    window.scrollTo(0, y);
+  }
+  window.DCLogic = function (props) { this.props = props || {}; this.state = {}; };
+  DCLogic.prototype.setState = function (p) {
+    Object.assign(this.state, typeof p === 'function' ? p(this.state) : p); draw();
+  };
+  DCLogic.prototype.forceUpdate = function () { draw(); };
+  window.dcBoot = function (props) {
+    root = document.getElementById('dc-root');
+    TPL = document.getElementById('dc-tpl').textContent;
+    comp = new Component(props || {});
+    draw();
+    root.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-dc-click]');
+      if (el) { e.preventDefault(); handlers[+el.getAttribute('data-dc-click')](e); }
+    });
+  };
 })();
 </script>
 <script>
@@ -266,8 +330,7 @@ class Component extends DCLogic {
     };
   }
 }
-
-DCLogic.prototype.constructor = DCLogic;</script>
-<script>dcBoot();</script>
+</script>
+<script>dcBoot({});</script>
 </body>
 </html>

@@ -3,44 +3,39 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WasteCore — Waste Sector mockups</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&amp;family=IBM+Plex+Mono:wght@500&amp;display=swap" rel="stylesheet">
+<title>WasteCore — Waste Sector design mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
 header{background:#0F1E36;color:#fff;padding:32px 24px}
-header h1{margin:0;font-size:28px}header p{margin:8px 0 0;color:#C9D3E3;max-width:760px}
-main{max-width:1200px;margin:0 auto;padding:24px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
-.card{display:flex;flex-direction:column;gap:6px;padding:18px;background:#fff;border:1px solid #DDE3EA;border-radius:10px;color:inherit;text-decoration:none}
-.card:hover{border-color:#1F5FD1}.card span{font-size:14px;color:#4A5666;line-height:1.45}
-.card .n{font-family:'IBM Plex Mono',monospace;color:#1F5FD1;font-weight:500}
-footer{max-width:1200px;margin:0 auto;padding:0 24px 32px;font-size:13px;color:#5A6778}
+.wrap{max-width:1200px;margin:0 auto}
+header h1{margin:8px 0 0;font-size:28px}header p{margin:8px 0 0;color:#C9D3E3;max-width:760px}
+main{max-width:1200px;margin:0 auto;padding:24px}
+main h2{font-size:18px;margin:28px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.tile{display:flex;flex-direction:column;gap:6px;padding:16px;background:#fff;border:1px solid #DDE3EA;border-radius:10px;color:inherit;text-decoration:none}
+.tile:hover{border-color:#1F5FD1}.tile span{font-size:14px;color:#4A5666;line-height:1.45}
+.tile .n{font-family:'IBM Plex Mono',monospace;color:#1F5FD1;font-weight:500}
+.note{background:#fff;border:1px solid #DDE3EA;border-radius:10px;padding:18px 20px;font-size:15px;line-height:1.6}
+footer{max-width:1200px;margin:0 auto;padding:8px 24px 32px;font-size:13px;color:#5A6778}
 </style>
 </head>
 <body>
-<header>
+<header><div class="wrap">
 <div style="font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:#8B9BB4">4CORE Engine · WasteCore</div>
-<h1 style="margin-top:8px">Waste Sector platform — design mockups</h1>
-<p>Phase 1 screen designs for the Waste Sector, based on the Waste Sector Developer Pack (v1.0 and v2.0). Version 1 · October 2026.</p>
-</header>
+<h1>Waste Sector platform — design mockups</h1>
+<p>Phase 1 clickable prototype: 32 screens based on the Waste Sector Developer Pack (v1.0 and v2.0). Version 2 · October 2026.</p>
+</div></header>
 <main>
-<section style="grid-column:1/-1;background:#fff;border:1px solid #DDE3EA;border-radius:10px;padding:18px 20px;font-size:15px;line-height:1.6">
+<section class="note">
 <strong>How to review</strong>
 <ul style="margin:8px 0 0;padding-left:20px">
-<li>Open any screen below. The menu and buttons inside each screen move between screens, like the finished product.</li>
-<li>Highlighted items such as module cards, workflow steps, filters and toggles respond to clicks.</li>
+<li>Open any screen. The left menu, top bar and buttons move between screens, like the finished product.</li>
+<li>Module cards, workflow steps, filters, tabs and toggles respond to clicks.</li>
 <li>All names, jobs and figures are sample data for illustration only.</li>
 </ul>
 </section>
-<a class="card" href="01-dashboard.html"><span class="n">01</span><strong>Waste Sector Dashboard</strong><span>KPIs, jobs by module, compliance alerts, jobs needing attention, recent Chain of Proof.</span></a>
-<a class="card" href="02-subsectors.html"><span class="n">02</span><strong>All 15 Subsectors</strong><span>Categories grouped by Method, Waste Stream, Industry and Facility, with filters.</span></a>
-<a class="card" href="03-create-job.html"><span class="n">03</span><strong>Create Job Wizard</strong><span>Pick one of 12 modules; the evidence panel updates. Category tags toggle.</span></a>
-<a class="card" href="04-job-details.html"><span class="n">04</span><strong>Job Details</strong><span>One job: evidence table, open non-compliance and activity timeline.</span></a>
-<a class="card" href="05-workflow.html"><span class="n">05</span><strong>Job Workflow (Skip & RORO)</strong><span>12-step stepper. Click a step to see its evidence and validation result.</span></a>
-<a class="card" href="06-walking-floor.html"><span class="n">06</span><strong>Walking Floor / Bulk Transport</strong><span>The v1 vs v2 PDF rule conflict, kept pending until approved.</span></a>
-<a class="card" href="07-compliance.html"><span class="n">07</span><strong>Compliance & Intelligence</strong><span>Deterministic rule results with explanation, evidence and fix.</span></a>
-<a class="card" href="08-non-compliance.html"><span class="n">08</span><strong>Non-Compliance</strong><span>Issue list, detail, resolution notes and audit history.</span></a>
-<a class="card" href="09-chain-of-proof.html"><span class="n">09</span><strong>Chain of Proof</strong><span>Audit-ready record with hashes, completion checks and audit events.</span></a>
-<a class="card" href="10-mobile-field-app.html"><span class="n">10</span><strong>Mobile Field Worker</strong><span>Phone screen for the Street Works step with large touch targets.</span></a>
+<h2>Overview</h2><div class="grid"><a class="tile" href="01-dashboard.html"><span class="n">01</span><strong>Waste Sector Dashboard</strong><span>KPIs, jobs by module, alerts, jobs needing attention, recent Chain of Proof.</span></a><a class="tile" href="02-subsectors.html"><span class="n">02</span><strong>All 15 Subsectors</strong><span>Categories grouped by method, waste stream, industry and facility.</span></a><a class="tile" href="03-category-detail.html"><span class="n">03</span><strong>Category Detail</strong><span>One category: type, modules, equipment, evidence and related jobs.</span></a></div><h2>Jobs & workflow</h2><div class="grid"><a class="tile" href="04-create-job.html"><span class="n">04</span><strong>Create Job Wizard</strong><span>Pick a module and tags; evidence requirements update live.</span></a><a class="tile" href="05-job-details.html"><span class="n">05</span><strong>Job Details</strong><span>Evidence, open non-compliance and activity timeline for one job.</span></a><a class="tile" href="06-workflow.html"><span class="n">06</span><strong>Job Workflow</strong><span>12-step Skip & RORO stepper with per-step evidence and validation.</span></a></div><h2>Evidence</h2><div class="grid"><a class="tile" href="07-evidence-centre.html"><span class="n">07</span><strong>Evidence Centre</strong><span>All evidence with type filters, metadata, preview and verification.</span></a><a class="tile" href="08-gps-location.html"><span class="n">08</span><strong>GPS & Location Verification</strong><span>Expected vs captured location, accuracy and mismatch checks.</span></a><a class="tile" href="09-photo-contamination.html"><span class="n">09</span><strong>Photo & Contamination Evidence</strong><span>Before/after, load integrity and contamination photos.</span></a><a class="tile" href="11-weighbridge.html"><span class="n">11</span><strong>Weighbridge & Volume Records</strong><span>Gross, tare, net and volume records with validation.</span></a></div><h2>Fleet & Street Works</h2><div class="grid"><a class="tile" href="10-fleet.html"><span class="n">10</span><strong>Fleet & Vehicles</strong><span>Vehicles and equipment, supported modules and availability.</span></a><a class="tile" href="12-street-works.html"><span class="n">12</span><strong>Street Works Compliance</strong><span>Permits, safety zone, positioning and checklist results.</span></a></div><h2>Operational modules</h2><div class="grid"><a class="tile" href="13-hazardous.html"><span class="n">13</span><strong>Hazardous Waste</strong><span>UN/ADR/EWC classification, seals and consignment notes.</span></a><a class="tile" href="14-bulk-material.html"><span class="n">14</span><strong>Bulk Material</strong><span>Aggregates, C&D and tipper loose-material jobs.</span></a><a class="tile" href="15-municipal.html"><span class="n">15</span><strong>Municipal Operations</strong><span>Routes with mandatory Street Works.</span></a><a class="tile" href="16-airport.html"><span class="n">16</span><strong>Airport Operations</strong><span>Airside/landside waste with security compliance.</span></a><a class="tile" href="17-facilities-management.html"><span class="n">17</span><strong>Facilities Management</strong><span>Internal and external FM waste tasks.</span></a><a class="tile" href="18-sweeper.html"><span class="n">18</span><strong>Sweeper Operations</strong><span>Route sweeping with before/after evidence.</span></a><a class="tile" href="19-tanker.html"><span class="n">19</span><strong>Tanker Operations</strong><span>Liquid and sludge with volume evidence.</span></a><a class="tile" href="20-grab.html"><span class="n">20</span><strong>Grab Operations</strong><span>Grab loading with load photos and weighbridge.</span></a><a class="tile" href="21-transfer-station.html"><span class="n">21</span><strong>Transfer Station Operations</strong><span>Arrivals, weighing, EWC, processing and dispatch.</span></a><a class="tile" href="22-recycling.html"><span class="n">22</span><strong>Recycling Operations</strong><span>Material streams, sorting and material outputs.</span></a><a class="tile" href="23-walking-floor.html"><span class="n">23</span><strong>Walking Floor / Bulk Transport</strong><span>Bulk haulage with the v1/v2 rule conflict kept pending.</span></a><a class="tile" href="24-clinical.html"><span class="n">24</span><strong>Clinical Waste</strong><span>Clinical category, UN/ADR, seals and consignment notes.</span></a></div><h2>Compliance & audit</h2><div class="grid"><a class="tile" href="25-compliance.html"><span class="n">25</span><strong>Compliance & Intelligence</strong><span>Deterministic rule results with explanation and fix.</span></a><a class="tile" href="26-non-compliance.html"><span class="n">26</span><strong>Non-Compliance</strong><span>Issues, corrective actions and audit history.</span></a><a class="tile" href="27-chain-of-proof.html"><span class="n">27</span><strong>Chain of Proof</strong><span>Audit-ready record with hashes and completion checks.</span></a><a class="tile" href="28-reports.html"><span class="n">28</span><strong>Reports & Analytics</strong><span>Report library with filters and export.</span></a><a class="tile" href="29-notifications.html"><span class="n">29</span><strong>Notifications</strong><span>Alerts linked to their job or issue.</span></a></div><h2>Platform</h2><div class="grid"><a class="tile" href="30-integrations.html"><span class="n">30</span><strong>Integration Settings</strong><span>DEFRA DWT, waste transfer notes, weighbridge and more.</span></a><a class="tile" href="31-mobile-field-app.html"><span class="n">31</span><strong>Mobile Field Worker</strong><span>Phone screen for the Street Works step.</span></a><a class="tile" href="32-settings.html"><span class="n">32</span><strong>Settings & Classification</strong><span>Categories, module mappings, evidence rules and roles.</span></a></div>
 </main>
 <footer>Prepared for review. Feedback welcome on layout, wording and workflow before development starts.</footer>
 </body>

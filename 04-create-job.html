@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create Job Wizard — WasteCore mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
+a{color:#1F5FD1}a:hover{color:#174AA6}
+.shell{display:flex;flex-wrap:wrap;min-height:100vh}
+.side{flex:1 1 240px;background:#0F1E36;padding:20px 12px;box-sizing:border-box}
+@media (min-width:900px){.side{min-height:100vh}}
+.mainc{flex:999 1 560px;min-width:0;display:flex;flex-direction:column}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:12px 32px;background:#fff;border-bottom:1px solid #DDE3EA}
+.content{padding:24px 32px 48px;box-sizing:border-box}
+.nav a{display:block;padding:11px 14px;border-radius:6px;color:#C9D3E3;text-decoration:none;font-size:14px}
+.nav a:hover{background:#18304F;color:#fff}
+.nav a.on{background:#1F5FD1;color:#fff}
+.grp{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8B9BB4;margin:18px 14px 6px}
+.b{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.ok{background:#E3F3EA;color:#17633D}.warn{background:#FFF1D6;color:#7A4F00}.bad{background:#FDE7E5;color:#A1201A}.info{background:#E6EEFB;color:#1A4FAF}.mute{background:#EEF1F5;color:#4A5666}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;border:1px solid #C4CDD8;background:#fff;color:#16202E;cursor:pointer;text-decoration:none;box-sizing:border-box}
+.btn:hover{border-color:#8D9AAB}
+.btn.p{background:#1F5FD1;border-color:#1F5FD1;color:#fff}.btn.p:hover{background:#174AA6;color:#fff}
+.btn.sel{background:#16202E;border-color:#16202E;color:#fff}
+.card{background:#fff;border:1px solid #DDE3EA;border-radius:10px}
+.tbl{border-collapse:collapse;width:100%}
+.tbl th{text-align:left;font-size:12px;font-weight:600;color:#5A6778;text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;border-bottom:1px solid #DDE3EA;background:#F8FAFC;white-space:nowrap}
+.tbl td{padding:12px;border-bottom:1px solid #EEF1F5;font-size:14px;vertical-align:top}
+.kv dt{color:#5A6778;font-size:13px}.kv dd{margin:0;font-size:14px;font-weight:500}
+.fld{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}
+.fld input,.fld select,.fld textarea{min-height:44px;border:1px solid #C4CDD8;border-radius:8px;padding:0 10px;font:14px 'IBM Plex Sans',sans-serif;box-sizing:border-box}
+.crumb{font-size:13px;color:#5A6778}
+.h1{margin:6px 0 4px;font-size:28px;font-weight:700}
+.lead{margin:0;color:#5A6778;font-size:15px}
+.sr{position:absolute;left:-9999px}
+</style>
+
+
+<style>
+body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
+a{color:#1F5FD1}a:hover{color:#174AA6}
+.nav a,.nav span{display:block;padding:11px 14px;border-radius:6px;color:#C9D3E3;text-decoration:none;font-size:14px}
+.nav a:hover{background:#18304F;color:#fff}
+.nav .on{background:#1F5FD1;color:#fff}
+.grp{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8B9BB4;margin:18px 14px 6px}
+.b{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.ok{background:#E3F3EA;color:#17633D}.warn{background:#FFF1D6;color:#7A4F00}.bad{background:#FDE7E5;color:#A1201A}.info{background:#E6EEFB;color:#1A4FAF}.mute{background:#EEF1F5;color:#4A5666}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;border:1px solid #C4CDD8;background:#fff;color:#16202E;cursor:pointer;text-decoration:none;box-sizing:border-box}
+.btn.p{background:#1F5FD1;border-color:#1F5FD1;color:#fff}
+.mod{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;min-height:76px;padding:12px 14px;border-radius:10px;border:1px solid #C4CDD8;background:#fff;font:14px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
+.mod.sel{border:2px solid #1F5FD1;background:#F2F6FE}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border-radius:999px;border:1px solid #C4CDD8;background:#fff;font:13px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
+.chip.sel{background:#16202E;border-color:#16202E;color:#fff}
+</style>
+
+
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/x-template" id="dc-tpl">
+
+<div class="shell">
+<aside class="side">
+<div style="padding: 0 14px 18px; border-bottom: 1px solid #22385A">
+<a href="index.html" style="text-decoration: none"><div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div></a>
+<div style="font-size: 12px; color: #8B9BB4; margin-top: 4px">Waste Sector · Phase 1</div>
+</div>
+<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="" href="01-dashboard.html">Dashboard</a><a class="on" href="05-job-details.html">Jobs</a><a class="" href="02-subsectors.html">Waste Sector</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="21-transfer-station.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="" href="06-workflow.html">Workflows</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="" href="32-settings.html">Settings</a></nav>
+</aside>
+<div class="mainc">
+<header class="topbar">
+<label for="gq" class="sr">Search jobs, evidence, customers</label>
+<input id="gq" type="search" placeholder="Search jobs, evidence, customers…" style="flex: 1 1 280px; max-width: 520px; height: 44px; padding: 0 14px; border: 1px solid #C4CDD8; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif">
+<div style="display: flex; align-items: center; gap: 10px; margin-left: auto">
+<a class="btn" href="31-mobile-field-app.html">Field app</a>
+<a class="btn" href="29-notifications.html" aria-label="Notifications, 6 unread">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+<span class="b bad">6</span></a>
+<div style="display: flex; align-items: center; gap: 10px; padding-left: 6px">
+<div style="width: 36px; height: 36px; border-radius: 50%; background: #1C3358; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">PS</div>
+<div style="font-size: 13px; line-height: 1.3"><div style="font-weight: 600">Priya Shah</div><div style="color: #5A6778">Compliance Officer</div></div>
+</div>
+</div>
+</header>
+<main class="content">
+<div style="max-width: 1360px; display: flex; flex-direction: column; gap: 20px">
+<div>
+<div style="font-size: 13px; color: #5A6778">Home / Jobs / Create job</div>
+<h1 style="margin: 6px 0 4px; font-size: 28px; font-weight: 700">Create a Waste Sector job</h1>
+<p style="margin: 0; color: #5A6778; font-size: 15px">Pick one primary operational module. Category tags describe the job; the module decides the workflow and evidence.</p>
+</div>
+<ol aria-label="Wizard steps" style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="9">
+<li style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; background: {{s.bg}}; color: {{s.fg}}; font-size: 13px; font-weight: 600">
+<span class="mono" style="display: inline-flex; width: 22px; height: 22px; border-radius: 50%; align-items: center; justify-content: center; background: {{s.dotBg}}; color: {{s.dotFg}}; font-size: 12px">{{s.n}}</span>{{s.label}}
+</li>
+</sc-for>
+</ol>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<div style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+<section style="background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 20px">
+<h2 style="margin: 0 0 4px; font-size: 18px">1. Primary operational module</h2>
+<p style="margin: 0 0 16px; color: #5A6778; font-size: 14px">The 12 modules from WASTE SECTOR v2.0. Selecting one loads its form and workflow.</p>
+<div role="radiogroup" aria-label="Operational module" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px">
+<sc-for list="{{modules}}" as="m" hint-placeholder-count="12">
+<button role="radio" aria-checked="{{m.checked}}" class="{{m.cls}}" onClick="{{m.pick}}">
+<span style="font-weight: 600">{{m.name}}</span>
+<span style="font-size: 12px; color: #5A6778">{{m.covers}}</span>
+</button>
+</sc-for>
+</div>
+</section>
+<section style="background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 20px">
+<h2 style="margin: 0 0 4px; font-size: 18px">2. Category tags</h2>
+<p style="margin: 0 0 16px; color: #5A6778; font-size: 14px">Add every category that applies. Tags never override the module's rules.</p>
+<div style="display: flex; flex-direction: column; gap: 14px">
+<sc-for list="{{tagGroups}}" as="g" hint-placeholder-count="4">
+<div>
+<div style="font-size: 12px; font-weight: 600; color: #5A6778; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px">{{g.title}}</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{g.tags}}" as="t" hint-placeholder-count="4">
+<button class="{{t.cls}}" aria-pressed="{{t.on}}" onClick="{{t.toggle}}">{{t.name}}</button>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+<section style="background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 20px">
+<h2 style="margin: 0 0 16px; font-size: 18px">3. Customer and site</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">Customer<select style="height: 44px; border: 1px solid #C4CDD8; border-radius: 8px; padding: 0 10px; font: 14px 'IBM Plex Sans', sans-serif"><option>Northgate Builders Ltd</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">Site<select style="height: 44px; border: 1px solid #C4CDD8; border-radius: 8px; padding: 0 10px; font: 14px 'IBM Plex Sans', sans-serif"><option>Holbeck Yard, LS11 9XX</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">Placement<select style="height: 44px; border: 1px solid #C4CDD8; border-radius: 8px; padding: 0 10px; font: 14px 'IBM Plex Sans', sans-serif"><option>Public highway</option><option>Private land</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">Container action<select style="height: 44px; border: 1px solid #C4CDD8; border-radius: 8px; padding: 0 10px; font: 14px 'IBM Plex Sans', sans-serif"><option>Collection</option><option>Delivery</option><option>Exchange</option></select></label>
+</div>
+</section>
+<div style="display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap">
+<a class="btn" href="01-dashboard.html">Cancel</a>
+<div style="display: flex; gap: 10px">
+<button class="btn">Save draft</button>
+<a class="btn p" href="05-job-details.html">Continue to job details</a>
+</div>
+</div>
+</div>
+<aside style="flex: 1 1 340px; min-width: 0; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 12px">
+<div>
+<div style="font-size: 12px; font-weight: 600; color: #5A6778; text-transform: uppercase; letter-spacing: .05em">Evidence preview</div>
+<h2 style="margin: 4px 0 0; font-size: 18px">{{current.name}}</h2>
+<p style="margin: 6px 0 0; font-size: 13px; color: #5A6778">{{current.note}}</p>
+</div>
+<ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{current.evidence}}" as="e" hint-placeholder-count="9">
+<li style="display: flex; justify-content: space-between; gap: 10px; align-items: center; padding: 8px 10px; border: 1px solid #EEF1F5; border-radius: 8px; font-size: 14px">
+<span>{{e.label}}</span><span class="b {{e.cls}}">{{e.state}}</span>
+</li>
+</sc-for>
+</ul>
+<div style="font-size: 13px; color: #5A6778; border-top: 1px solid #EEF1F5; padding-top: 10px">Street Works: <strong style="color: #16202E">{{current.streetWorks}}</strong></div>
+</aside>
+</div>
+</div>
+</main></div></div>
+</script>
+<script>// Minimal renderer for the prototype's .dc templates: {{holes}}, <sc-for>, <sc-if>,
+// onX="{{handler}}" events, and a DCLogic base class with setState.
+(function () {
+  var handlers = [], comp, root, TPL;
+  function get(scope, path) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return +path;
+    var v = scope, ks = path.split('.');
+    for (var i = 0; i < ks.length; i++) { if (v == null) return undefined; v = v[ks[i]]; }
+    return v;
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function holes(t, scope) {
+    t = t.replace(/\bon([A-Z]\w*)="\{\{([^}]+)\}\}"/g, function (m, ev, p) {
+      var f = get(scope, p);
+      if (typeof f !== 'function') return '';
+      handlers.push(f);
+      return 'data-dc-' + ev.toLowerCase() + '="' + (handlers.length - 1) + '"';
+    });
+    return t.replace(/\{\{([^}]+)\}\}/g, function (m, p) { var v = get(scope, p); return v == null ? '' : esc(v); });
+  }
+  var OPEN = /<(sc-for|sc-if)\b([^>]*)>/;
+  function findClose(t, tag, from) {
+    var depth = 1, i = from, o = new RegExp('<' + tag + '\\b', 'g'), c = new RegExp('</' + tag + '>', 'g');
+    while (true) {
+      o.lastIndex = i; c.lastIndex = i;
+      var mo = o.exec(t), mc = c.exec(t);
+      if (!mc) throw new Error('unclosed ' + tag);
+      if (mo && mo.index < mc.index) { depth++; i = mo.index + 1; }
+      else { depth--; i = mc.index + mc[0].length; if (depth === 0) return [mc.index, i]; }
+    }
+  }
+  function attr(a, name) {
+    var m = a.match(new RegExp(name + '="\\{\\{([^}]+)\\}\\}"')) || a.match(new RegExp(name + '="([^"]*)"'));
+    return m ? m[1] : null;
+  }
+  function render(t, scope) {
+    var out = '';
+    while (true) {
+      var m = OPEN.exec(t);
+      if (!m) return out + holes(t, scope);
+      out += holes(t.slice(0, m.index), scope);
+      var start = m.index + m[0].length, r = findClose(t, m[1], start), inner = t.slice(start, r[0]);
+      if (m[1] === 'sc-for') {
+        var list = get(scope, attr(m[2], 'list')) || [], as = attr(m[2], 'as') || 'item';
+        for (var i = 0; i < list.length; i++) {
+          var s = Object.create(scope); s[as] = list[i]; s.$index = i; out += render(inner, s);
+        }
+      } else if (get(scope, attr(m[2], 'value'))) {
+        out += render(inner, scope);
+      }
+      t = t.slice(r[1]);
+    }
+  }
+  function draw() {
+    handlers.length = 0;
+    var y = window.scrollY;
+    root.innerHTML = render(TPL, comp.renderVals());
+    window.scrollTo(0, y);
+  }
+  window.DCLogic = function (props) { this.props = props || {}; this.state = {}; };
+  DCLogic.prototype.setState = function (p) {
+    Object.assign(this.state, typeof p === 'function' ? p(this.state) : p); draw();
+  };
+  DCLogic.prototype.forceUpdate = function () { draw(); };
+  window.dcBoot = function (props) {
+    root = document.getElementById('dc-root');
+    TPL = document.getElementById('dc-tpl').textContent;
+    comp = new Component(props || {});
+    draw();
+    root.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-dc-click]');
+      if (el) { e.preventDefault(); handlers[+el.getAttribute('data-dc-click')](e); }
+    });
+  };
+})();
+</script>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { mod: 'skip', tags: { Skip: true, 'C&D': true, Recycling: true } };
+  }
+  renderVals() {
+    const M = 'Mandatory', C = 'Conditional', O = 'Optional', X = 'Excluded';
+    const cls = { Mandatory: 'info', Conditional: 'warn', Optional: 'mute', Excluded: 'mute' };
+    const ev = (pairs) => pairs.map(([label, state]) => ({ label, state, cls: cls[state] }));
+    const defs = {
+      skip: { name: 'Skip & RORO', covers: 'Skip, RORO', streetWorks: 'Conditional — public highway placement', note: 'Container type is a parameter. Load integrity photos apply to collections.', evidence: ev([['Job sheet', M], ['Location evidence', M], ['Waste type confirmation', M], ['Street Works evidence', C], ['Before/after photos', M], ['Load integrity photos', C], ['Contamination evidence', M], ['Weighbridge ticket', M], ['Customer signature', O], ['Completion evidence', M], ['Seal checks', X]]) },
+      grab: { name: 'Grab', covers: 'Grab', streetWorks: 'Conditional', note: 'Soils, aggregates and muck away.', evidence: ev([['Job sheet', M], ['Location evidence', M], ['Material/waste type', M], ['Load photos', M], ['Contamination evidence', M], ['Street Works evidence', C], ['Weighbridge ticket', M], ['Completion evidence', M], ['Customer signature', X]]) },
+      sweeper: { name: 'Sweeper', covers: 'Sweeper', streetWorks: 'Conditional', note: 'Route-based sweeping work.', evidence: ev([['Job sheet', M], ['Route evidence', M], ['Location evidence', M], ['Street Works evidence', C], ['Before/after photos', M], ['Waste type confirmation', M], ['Completion evidence', M], ['Weighbridge ticket', X]]) },
+      tanker: { name: 'Tanker', covers: 'Tanker', streetWorks: 'Conditional', note: 'Liquid waste, sludge, drainage, interceptors.', evidence: ev([['Job sheet', M], ['Location evidence', M], ['Waste type (liquid/sludge)', M], ['Contamination evidence', M], ['Load volume evidence', M], ['Weighbridge / volume ticket', C], ['Completion evidence', M], ['Load photos', X]]) },
+      haz: { name: 'Hazardous Waste', covers: 'Hazardous', streetWorks: 'Conditional', note: 'Full legal compliance stream.', evidence: ev([['Job sheet', M], ['Location evidence', M], ['Hazard classification (UN/ADR/EWC)', M], ['Waste type confirmation', M], ['Contamination evidence', M], ['Seal checks', M], ['Manifest / consignment note', M], ['Weighbridge ticket', C], ['Completion evidence', M]]) },
+      bulkm: { name: 'Bulk Material', covers: 'Aggregates, C&D, Tipper', streetWorks: 'Conditional', note: 'Loose bulk material loading.', evidence: ev([['Job sheet', M], ['Location evidence', M], ['Material/waste type', M], ['Load photos', M], ['Contamination evidence', M], ['Weighbridge ticket', M], ['Completion evidence', M], ['Seal checks', X]]) },
+      muni: { name: 'Municipal', covers: 'Municipal', streetWorks: 'Mandatory on every job', note: 'Public highways and public-risk zones.', evidence: ev([['Job sheet', M], ['Route evidence', M], ['Location evidence', M], ['Street Works evidence', M], ['Waste/material type', M], ['Before/after photos', M], ['Completion evidence', M], ['Weighbridge ticket', X]]) },
+      air: { name: 'Airport', covers: 'Airport', streetWorks: 'Conditional — landside public roads', note: 'Follows the operator’s approved security procedures.', evidence: ev([['Job sheet', M], ['Location evidence', M], ['Waste type confirmation', M], ['Security compliance evidence', M], ['Contamination evidence', M], ['Completion evidence', M], ['Weighbridge ticket', X]]) },
+      fm: { name: 'Facilities Management', covers: 'FM', streetWorks: 'Conditional — external work', note: 'Internal building and external grounds waste.', evidence: ev([['Job sheet', M], ['Location evidence', M], ['Waste type confirmation', M], ['Before/after photos', M], ['Contamination evidence', M], ['Street Works evidence', C], ['Completion evidence', M]]) },
+      mrf: { name: 'Material Recovery', covers: 'Transfer Station, Recycling', streetWorks: 'Not applicable — private land', note: 'Processing evidence is a toggle: ON for recycling.', evidence: ev([['Arrival record / job sheet', M], ['Location evidence', M], ['Waste/material type', M], ['Load arrival photos', M], ['Contamination evidence', M], ['Weighbridge ticket', M], ['EWC classification', M], ['Processing evidence', C], ['Dispatch evidence', C], ['Completion evidence', M]]) },
+      bulkt: { name: 'Bulk Transport', covers: 'Walking Floor, Tipper haulage, RDF/SRF, Biomass', streetWorks: 'Conditional', note: 'Route and manifest rules await an approved interpretation.', evidence: ev([['Job sheet', M], ['Location evidence', M], ['Waste/material type', M], ['Load integrity photos', M], ['Contamination evidence', M], ['Weighbridge ticket', M], ['Completion evidence', M]]).concat([{ label: 'Route evidence', state: 'Pending clarification', cls: 'warn' }, { label: 'Bulk transport manifest', state: 'Pending clarification', cls: 'warn' }]) },
+      clin: { name: 'Clinical Waste', covers: 'Clinical (v2.0 extra)', streetWorks: 'Conditional', note: 'Healthcare and ADR compliance.', evidence: ev([['Job sheet', M], ['Location evidence', M], ['Clinical category', M], ['UN/ADR classification', M], ['Container integrity & seal checks', M], ['Incident evidence', C], ['Manifest / consignment note', M], ['Weighbridge / volume ticket', C], ['Completion evidence', M]]) }
+    };
+    const order = ['skip', 'grab', 'sweeper', 'tanker', 'haz', 'bulkm', 'muni', 'air', 'fm', 'mrf', 'bulkt', 'clin'];
+    const mod = this.state.mod;
+    const tagGroups = [
+      ['Collection & Transport', ['Skip', 'RORO', 'Grab', 'Tipper', 'Sweeper', 'Tanker', 'Walking Floor']],
+      ['Waste & Material Types', ['Hazardous Waste', 'Aggregates', 'C&D', 'Recycling']],
+      ['Customer Industries', ['Municipal', 'Airport', 'FM']],
+      ['Waste Infrastructure', ['Transfer Station']]
+    ].map(([title, names]) => ({ title, tags: names.map(name => {
+      const on = !!this.state.tags[name];
+      return { name, on: on ? 'true' : 'false', cls: on ? 'chip sel' : 'chip', toggle: () => this.setState({ tags: { ...this.state.tags, [name]: !on } }) };
+    }) }));
+    const labels = ['Module', 'Category tags', 'Customer & site', 'Job details', 'Vehicle & operator', 'Waste / material', 'Origin & destination', 'Evidence review', 'Confirm'];
+    return {
+      modules: order.map(k => ({ name: defs[k].name, covers: defs[k].covers, checked: k === mod ? 'true' : 'false', cls: k === mod ? 'mod sel' : 'mod', pick: () => this.setState({ mod: k }) })),
+      current: defs[mod],
+      tagGroups,
+      steps: labels.map((label, i) => {
+        const active = i < 3;
+        return { n: i + 1, label, bg: active ? '#E6EEFB' : '#FFFFFF', fg: active ? '#1A4FAF' : '#5A6778', dotBg: active ? '#1F5FD1' : '#EEF1F5', dotFg: active ? '#FFFFFF' : '#4A5666' };
+      })
+    };
+  }
+}
+</script>
+<script>dcBoot({});</script>
+</body>
+</html>
