@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Non-Compliance — WasteCore mockup</title>
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
+a{color:#1F5FD1}a:hover{color:#174AA6}
+.nav a,.nav span{display:block;padding:11px 14px;border-radius:6px;color:#C9D3E3;text-decoration:none;font-size:14px}
+.nav a:hover{background:#18304F;color:#fff}
+.nav .on{background:#1F5FD1;color:#fff}
+.grp{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8B9BB4;margin:18px 14px 6px}
+.b{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.ok{background:#E3F3EA;color:#17633D}.warn{background:#FFF1D6;color:#7A4F00}.bad{background:#FDE7E5;color:#A1201A}.info{background:#E6EEFB;color:#1A4FAF}.mute{background:#EEF1F5;color:#4A5666}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;border:1px solid #C4CDD8;background:#fff;color:#16202E;cursor:pointer;text-decoration:none;box-sizing:border-box}
+.btn.p{background:#1F5FD1;border-color:#1F5FD1;color:#fff}
+.row{display:flex;flex-direction:column;gap:4px;width:100%;padding:12px 14px;border:1px solid #EEF1F5;border-radius:8px;background:#fff;text-align:left;font:14px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
+.row:hover{border-color:#C4CDD8}
+.row.sel{border:2px solid #1F5FD1;background:#F2F6FE}
+dt{color:#5A6778;font-size:13px}dd{margin:0;font-size:14px;font-weight:500}
+</style>
+
+<style>@media (min-width: 900px){#dc-root > div > aside{min-height:100vh}}</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/x-template" id="dc-tpl">
+
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+<aside style="flex: 1 1 240px; background: #0F1E36; padding: 20px 12px; box-sizing: border-box">
+<div style="padding: 0 14px 18px; border-bottom: 1px solid #22385A">
+<div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div>
+<div style="font-size: 12px; color: #8B9BB4; margin-top: 4px">Waste Sector · Phase 1</div>
+</div>
+<nav class="nav" aria-label="Main">
+<div class="grp">Operations</div>
+<a href="01-dashboard.html">Dashboard</a>
+<a href="04-job-details.html">Jobs</a>
+<a href="02-subsectors.html">Waste Sector</a>
+<span>Fleet &amp; Vehicles</span>
+<span>Facilities &amp; Transfer Stations</span>
+<div class="grp">Evidence &amp; compliance</div>
+<span>Evidence Centre</span>
+<a href="05-workflow.html">Workflows</a>
+<span>Street Works</span>
+<a href="07-compliance.html">Compliance &amp; Intelligence</a>
+<a class="on" href="08-non-compliance.html">Non-Compliance</a>
+<a href="09-chain-of-proof.html">Chain of Proof</a>
+<div class="grp">Admin</div>
+<span>Reports &amp; Audit</span>
+<span>Integrations</span>
+<span>Settings</span>
+</nav>
+</aside>
+<main style="flex: 999 1 560px; min-width: 0; padding: 24px 32px 48px; box-sizing: border-box">
+<div style="max-width: 1360px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: flex-end">
+<div>
+<div style="font-size: 13px; color: #5A6778">Home / Non-Compliance</div>
+<h1 style="margin: 6px 0 4px; font-size: 28px; font-weight: 700">Non-compliance</h1>
+<p style="margin: 0; color: #5A6778; font-size: 15px">Raised automatically when a mandatory requirement fails. History is kept and every finding goes into the Chain of Proof. <span class="b mute">Sample data</span></p>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><span class="b bad">38 open</span><span class="b warn">11 in review</span><span class="b ok">5 resolved today</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<section aria-label="Issues" style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<sc-for list="{{issues}}" as="i" hint-placeholder-count="6">
+<button class="{{i.cls}}" aria-pressed="{{i.on}}" onClick="{{i.pick}}">
+<span style="display: flex; justify-content: space-between; gap: 8px; width: 100%"><strong>{{i.title}}</strong><span class="b {{i.stCls}}">{{i.status}}</span></span>
+<span style="font-size: 13px; color: #4A5666"><span class="mono">{{i.ref}}</span> · <span class="mono">{{i.job}}</span> · {{i.module}}</span>
+</button>
+</sc-for>
+</section>
+<section style="flex: 999 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 20px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: flex-start">
+<div>
+<div class="mono" style="font-size: 13px; color: #5A6778">{{sel.ref}}</div>
+<h2 style="margin: 4px 0 0; font-size: 21px">{{sel.title}}</h2>
+</div>
+<span class="b {{sel.stCls}}">{{sel.status}}</span>
+</div>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px 20px">
+<div><dt>Job</dt><dd><a class="mono" href="04-job-details.html">{{sel.job}}</a></dd></div>
+<div><dt>Module</dt><dd>{{sel.module}}</dd></div>
+<div><dt>Categories</dt><dd>{{sel.tags}}</dd></div>
+<div><dt>Rule</dt><dd class="mono">{{sel.rule}}</dd></div>
+<div><dt>Severity</dt><dd>{{sel.severity}}</dd></div>
+<div><dt>Responsible</dt><dd>{{sel.owner}}</dd></div>
+<div><dt>Surfaced to</dt><dd>Operator · Management</dd></div>
+<div><dt>Evidence</dt><dd class="mono">{{sel.ev}}</dd></div>
+</dl>
+<div style="padding: 14px; background: #F8FAFC; border: 1px solid #EEF1F5; border-radius: 8px">
+<div style="font-size: 13px; font-weight: 600; color: #5A6778">Failure reason</div>
+<div style="font-size: 15px; margin-top: 4px; line-height: 1.5">{{sel.why}}</div>
+<div style="font-size: 13px; font-weight: 600; color: #5A6778; margin-top: 12px">Corrective action</div>
+<div style="font-size: 15px; margin-top: 4px; line-height: 1.5">{{sel.fix}}</div>
+</div>
+<form style="display: flex; flex-direction: column; gap: 10px">
+<label for="note" style="font-size: 14px; font-weight: 600">Resolution notes</label>
+<textarea id="note" rows="3" placeholder="What was done, and which new evidence proves it…" style="border: 1px solid #C4CDD8; border-radius: 8px; padding: 10px 12px; font: 14px 'IBM Plex Sans', sans-serif; resize: vertical"></textarea>
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<button type="button" class="btn">Attach evidence</button>
+<button type="button" class="btn">Reassign</button>
+<button type="button" class="btn p" style="margin-left: auto">Submit for review</button>
+</div>
+</form>
+<div>
+<h3 style="margin: 0 0 10px; font-size: 15px">Audit history</h3>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{sel.history}}" as="h" hint-placeholder-count="3">
+<li style="display: grid; grid-template-columns: 110px 1fr; gap: 12px; font-size: 14px">
+<span class="mono" style="color: #5A6778; font-size: 13px">{{h.when}}</span>
+<span>{{h.text}}</span>
+</li>
+</sc-for>
+</ol>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+</script>
+<script>
+(function(){
+var handlers=[],comp,root,TPL;
+function get(scope,path){path=path.trim();if(path==='true')return true;if(path==='false')return false;
+ if(/^-?\d+(\.\d+)?$/.test(path))return +path;var v=scope,ks=path.split('.');
+ for(var i=0;i<ks.length;i++){if(v==null)return undefined;v=v[ks[i]];}return v;}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function holes(t,scope){
+ t=t.replace(/\bon([A-Z]\w*)="\{\{([^}]+)\}\}"/g,function(m,ev,p){var f=get(scope,p);
+  if(typeof f!=='function')return '';handlers.push(f);return 'data-dc-'+ev.toLowerCase()+'="'+(handlers.length-1)+'"';});
+ return t.replace(/\{\{([^}]+)\}\}/g,function(m,p){var v=get(scope,p);return v==null?'':esc(v);});}
+var OPEN=/<(sc-for|sc-if)\b([^>]*)>/;
+function findClose(t,tag,from){var depth=1,i=from,o=new RegExp('<'+tag+'\\b','g'),c=new RegExp('</'+tag+'>','g');
+ while(true){o.lastIndex=i;c.lastIndex=i;var mo=o.exec(t),mc=c.exec(t);if(!mc)throw new Error('unclosed '+tag);
+  if(mo&&mo.index<mc.index){depth++;i=mo.index+1;}else{depth--;i=mc.index+mc[0].length;if(depth===0)return [mc.index,i];}}}
+function attr(a,name){var m=a.match(new RegExp(name+'="\\{\\{([^}]+)\\}\\}"'))||a.match(new RegExp(name+'="([^"]*)"'));return m?m[1]:null;}
+function render(t,scope){var out='';while(true){var m=OPEN.exec(t);if(!m){return out+holes(t,scope);}
+ out+=holes(t.slice(0,m.index),scope);var start=m.index+m[0].length,r=findClose(t,m[1],start),inner=t.slice(start,r[0]);
+ if(m[1]==='sc-for'){var list=get(scope,attr(m[2],'list'))||[],as=attr(m[2],'as')||'item';
+  for(var i=0;i<list.length;i++){var s=Object.create(scope);s[as]=list[i];s.$index=i;out+=render(inner,s);}}
+ else if(get(scope,attr(m[2],'value'))){out+=render(inner,scope);}
+ t=t.slice(r[1]);}}
+function draw(){handlers.length=0;root.innerHTML=render(TPL,comp.renderVals());}
+window.DCLogic=function(props){this.props=props||{};this.state={};};
+DCLogic.prototype.setState=function(p){Object.assign(this.state,typeof p==='function'?p(this.state):p);draw();};
+DCLogic.prototype.forceUpdate=function(){draw();};
+window.dcBoot=function(){root=document.getElementById('dc-root');TPL=document.getElementById('dc-tpl').textContent;
+ comp=new Component({});draw();
+ root.addEventListener('click',function(e){var el=e.target.closest('[data-dc-click]');
+  if(el){e.preventDefault();handlers[+el.getAttribute('data-dc-click')](e);}});};
+})();
+</script>
+<script>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { i: 0 }; }
+  renderVals() {
+    const st = { Open: 'bad', 'In review': 'warn', Resolved: 'ok' };
+    const list = [
+      { ref: 'NC-1093', title: 'Missing Street Works permit', status: 'Open', job: 'WC-24817', module: 'Skip & RORO', tags: 'Skip, C&D, Recycling', rule: 'SW-01', severity: 'Not defined in PDF', owner: 'Sarah Collins', ev: 'EV-88412', why: 'The skip was placed on a public highway, which makes Street Works mandatory. No permit reference or permit document was captured.', fix: 'Add the permit reference and upload the permit, or record why placement was on private land.', history: [['09:06', 'Raised by rules engine (SW-01 failed)'], ['09:06', 'Sent to operator and depot manager'], ['09:20', 'Viewed by Sarah Collins']] },
+      { ref: 'NC-1094', title: 'Weighbridge ticket not uploaded', status: 'Open', job: 'WC-24817', module: 'Skip & RORO', tags: 'Skip, C&D', rule: 'WB-01', severity: 'Not defined in PDF', owner: 'Mark Evans', ev: '—', why: 'Mandatory weighbridge ticket missing after the load reached the facility.', fix: 'Upload the ticket from Eastside Transfer Station.', history: [['09:40', 'Raised by rules engine (WB-01 failed)']] },
+      { ref: 'NC-1088', title: 'Net weight mismatch', status: 'In review', job: 'WC-24790', module: 'Bulk Material', tags: 'Tipper, Aggregates', rule: 'WB-02', severity: 'Not defined in PDF', owner: 'Dev Kumar', ev: 'EV-88390', why: 'Ticket net weight does not equal gross minus tare.', fix: 'Re-capture the ticket or correct the tare weight.', history: [['08:51', 'Raised by rules engine (WB-02 failed)'], ['09:15', 'Corrected tare submitted'], ['09:16', 'Awaiting supervisor review']] },
+      { ref: 'NC-1081', title: 'Seal check not recorded', status: 'Open', job: 'WC-24756', module: 'Clinical Waste', tags: 'Clinical', rule: 'CL-03', severity: 'Not defined in PDF', owner: 'Mark Evans', ev: 'EV-88277', why: 'Clinical containers were collected without a recorded seal check.', fix: 'Record the seal check before the consignment is dispatched.', history: [['06:40', 'Raised by rules engine (CL-03 failed)']] },
+      { ref: 'NC-1077', title: 'Missing after photo', status: 'Resolved', job: 'WC-24768', module: 'Municipal', tags: 'Municipal, Sweeper', rule: 'PH-02', severity: 'Not defined in PDF', owner: 'Lee Morgan', ev: 'EV-88301', why: 'After photo not captured at route end.', fix: 'Capture after photo.', history: [['07:30', 'Raised'], ['07:52', 'After photo uploaded (EV-88301)'], ['08:05', 'Resolved by Alan Price']] }
+    ];
+    const cur = this.state.i;
+    const issues = list.map((x, i) => ({ ...x, stCls: st[x.status], on: i === cur ? 'true' : 'false', cls: i === cur ? 'row sel' : 'row', pick: () => this.setState({ i }) }));
+    const s = issues[cur];
+    return { issues, sel: { ...s, history: s.history.map(([when, text]) => ({ when, text })) } };
+  }
+}
+
+DCLogic.prototype.constructor = DCLogic;</script>
+<script>dcBoot();</script>
+</body>
+</html>

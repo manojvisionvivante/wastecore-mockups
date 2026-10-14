@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All 15 Subsectors — WasteCore mockup</title>
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
+a{color:#1F5FD1}a:hover{color:#174AA6}
+.nav a,.nav span{display:block;padding:11px 14px;border-radius:6px;color:#C9D3E3;text-decoration:none;font-size:14px}
+.nav a:hover{background:#18304F;color:#fff}
+.nav .on{background:#1F5FD1;color:#fff}
+.grp{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8B9BB4;margin:18px 14px 6px}
+.b{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.ok{background:#E3F3EA;color:#17633D}.warn{background:#FFF1D6;color:#7A4F00}.bad{background:#FDE7E5;color:#A1201A}.info{background:#E6EEFB;color:#1A4FAF}.mute{background:#EEF1F5;color:#4A5666}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;border:1px solid #C4CDD8;background:#fff;color:#16202E;cursor:pointer;text-decoration:none;box-sizing:border-box}
+.btn.p{background:#1F5FD1;border-color:#1F5FD1;color:#fff}
+.btn.sel{background:#16202E;border-color:#16202E;color:#fff}
+</style>
+
+<style>@media (min-width: 900px){#dc-root > div > aside{min-height:100vh}}</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/x-template" id="dc-tpl">
+
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+<aside style="flex: 1 1 240px; background: #0F1E36; padding: 20px 12px; box-sizing: border-box">
+<div style="padding: 0 14px 18px; border-bottom: 1px solid #22385A">
+<div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div>
+<div style="font-size: 12px; color: #8B9BB4; margin-top: 4px">Waste Sector · Phase 1</div>
+</div>
+<nav class="nav" aria-label="Main">
+<div class="grp">Operations</div>
+<a href="01-dashboard.html">Dashboard</a>
+<a href="04-job-details.html">Jobs</a>
+<a class="on" href="02-subsectors.html">Waste Sector</a>
+<span>Fleet &amp; Vehicles</span>
+<span>Facilities &amp; Transfer Stations</span>
+<div class="grp">Evidence &amp; compliance</div>
+<span>Evidence Centre</span>
+<a href="05-workflow.html">Workflows</a>
+<span>Street Works</span>
+<a href="07-compliance.html">Compliance &amp; Intelligence</a>
+<a href="08-non-compliance.html">Non-Compliance</a>
+<a href="09-chain-of-proof.html">Chain of Proof</a>
+<div class="grp">Admin</div>
+<span>Reports &amp; Audit</span>
+<span>Integrations</span>
+<span>Settings</span>
+</nav>
+</aside>
+<main style="flex: 999 1 560px; min-width: 0; padding: 24px 32px 48px; box-sizing: border-box">
+<div style="max-width: 1360px; display: flex; flex-direction: column; gap: 22px">
+<div>
+<div style="font-size: 13px; color: #5A6778">Home / Waste Sector / All categories</div>
+<h1 style="margin: 6px 0 4px; font-size: 28px; font-weight: 700">All 15 subsectors</h1>
+<p style="margin: 0; color: #5A6778; font-size: 15px; max-width: 820px">Categories are classifications, not separate workflows. A job carries several tags but runs one primary operational module from the PDF v2.0 set.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<label for="cs" style="position: absolute; left: -9999px">Search categories</label>
+<input id="cs" type="search" placeholder="Search categories…" style="flex: 1 1 260px; max-width: 380px; height: 44px; padding: 0 14px; border: 1px solid #C4CDD8; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif">
+<div role="group" aria-label="Filter by dimension" style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{filters}}" as="f" hint-placeholder-count="5">
+<button class="{{f.cls}}" onClick="{{f.pick}}">{{f.label}}</button>
+</sc-for>
+</div>
+</div>
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="4">
+<section style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap">
+<h2 style="margin: 0; font-size: 19px">{{g.title}}</h2>
+<span style="font-size: 14px; color: #5A6778">{{g.hint}}</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px">
+<sc-for list="{{g.items}}" as="c" hint-placeholder-count="4">
+<article style="background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 8px">
+<h3 style="margin: 0; font-size: 17px">{{c.name}}</h3>
+<span class="b {{c.dimCls}}">{{g.short}}</span>
+</div>
+<p style="margin: 0; font-size: 14px; color: #3A4656; line-height: 1.45">{{c.desc}}</p>
+<dl style="margin: 0; display: grid; grid-template-columns: 110px 1fr; gap: 6px 10px; font-size: 13px">
+<dt style="color: #5A6778">Module</dt><dd style="margin: 0; font-weight: 600">{{c.module}}</dd>
+<dt style="color: #5A6778">Equipment</dt><dd style="margin: 0">{{c.equip}}</dd>
+<dt style="color: #5A6778">Often with</dt><dd style="margin: 0">{{c.pairs}}</dd>
+</dl>
+<div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #EEF1F5; padding-top: 10px; margin-top: auto">
+<span style="font-size: 13px; color: #5A6778"><span class="mono">{{c.jobs}}</span> jobs</span>
+<a href="{{c.href}}" style="font-size: 14px; font-weight: 600">{{c.cta}}</a>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+</sc-for>
+<aside style="background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 16px; font-size: 14px; color: #3A4656">
+<strong style="color: #16202E">Also in the PDF:</strong> Clinical Waste is a v2.0 module outside the 15 supplied categories. Man &amp; Van is Phase 2 and not available.
+</aside>
+</div>
+</main>
+</div>
+</script>
+<script>
+(function(){
+var handlers=[],comp,root,TPL;
+function get(scope,path){path=path.trim();if(path==='true')return true;if(path==='false')return false;
+ if(/^-?\d+(\.\d+)?$/.test(path))return +path;var v=scope,ks=path.split('.');
+ for(var i=0;i<ks.length;i++){if(v==null)return undefined;v=v[ks[i]];}return v;}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function holes(t,scope){
+ t=t.replace(/\bon([A-Z]\w*)="\{\{([^}]+)\}\}"/g,function(m,ev,p){var f=get(scope,p);
+  if(typeof f!=='function')return '';handlers.push(f);return 'data-dc-'+ev.toLowerCase()+'="'+(handlers.length-1)+'"';});
+ return t.replace(/\{\{([^}]+)\}\}/g,function(m,p){var v=get(scope,p);return v==null?'':esc(v);});}
+var OPEN=/<(sc-for|sc-if)\b([^>]*)>/;
+function findClose(t,tag,from){var depth=1,i=from,o=new RegExp('<'+tag+'\\b','g'),c=new RegExp('</'+tag+'>','g');
+ while(true){o.lastIndex=i;c.lastIndex=i;var mo=o.exec(t),mc=c.exec(t);if(!mc)throw new Error('unclosed '+tag);
+  if(mo&&mo.index<mc.index){depth++;i=mo.index+1;}else{depth--;i=mc.index+mc[0].length;if(depth===0)return [mc.index,i];}}}
+function attr(a,name){var m=a.match(new RegExp(name+'="\\{\\{([^}]+)\\}\\}"'))||a.match(new RegExp(name+'="([^"]*)"'));return m?m[1]:null;}
+function render(t,scope){var out='';while(true){var m=OPEN.exec(t);if(!m){return out+holes(t,scope);}
+ out+=holes(t.slice(0,m.index),scope);var start=m.index+m[0].length,r=findClose(t,m[1],start),inner=t.slice(start,r[0]);
+ if(m[1]==='sc-for'){var list=get(scope,attr(m[2],'list'))||[],as=attr(m[2],'as')||'item';
+  for(var i=0;i<list.length;i++){var s=Object.create(scope);s[as]=list[i];s.$index=i;out+=render(inner,s);}}
+ else if(get(scope,attr(m[2],'value'))){out+=render(inner,scope);}
+ t=t.slice(r[1]);}}
+function draw(){handlers.length=0;root.innerHTML=render(TPL,comp.renderVals());}
+window.DCLogic=function(props){this.props=props||{};this.state={};};
+DCLogic.prototype.setState=function(p){Object.assign(this.state,typeof p==='function'?p(this.state):p);draw();};
+DCLogic.prototype.forceUpdate=function(){draw();};
+window.dcBoot=function(){root=document.getElementById('dc-root');TPL=document.getElementById('dc-tpl').textContent;
+ comp=new Component({});draw();
+ root.addEventListener('click',function(e){var el=e.target.closest('[data-dc-click]');
+  if(el){e.preventDefault();handlers[+el.getAttribute('data-dc-click')](e);}});};
+})();
+</script>
+<script>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { dim: 'all' }; }
+  renderVals() {
+    const dims = [['all', 'All'], ['ct', 'Collection & Transport'], ['ws', 'Waste & Material'], ['ci', 'Customer Industries'], ['fa', 'Waste Facilities']];
+    const groups = [
+      { id: 'ct', title: 'Collection & Transport', short: 'Method', hint: 'How waste is collected or moved', cls: 'info', items: [
+        { name: 'Skip', desc: 'Chain-lift skips placed on site or highway, swapped or collected.', module: 'Skip & RORO', equip: 'Skip loader', pairs: 'C&D, Recycling', jobs: 298, href: 'Workflow.dc.html', cta: 'Open workflow' },
+        { name: 'RORO', desc: 'Hook-lift roll-on/roll-off containers for high-volume sites.', module: 'Skip & RORO', equip: 'Hook-lift vehicle', pairs: 'C&D, Transfer Station', jobs: 114, href: 'Workflow.dc.html', cta: 'Open workflow' },
+        { name: 'Grab', desc: 'Grab loading of soils, aggregates and muck-away from ground or highway.', module: 'Grab', equip: 'Grab lorry', pairs: 'Aggregates, C&D', jobs: 96, href: 'JobDetails.dc.html', cta: 'View jobs' },
+        { name: 'Tipper', desc: 'Loose bulk loads. Runs Bulk Material for site loading, Bulk Transport for haulage.', module: 'Bulk Material / Bulk Transport', equip: 'Tipper', pairs: 'Aggregates, C&D', jobs: 87, href: 'JobDetails.dc.html', cta: 'View jobs' },
+        { name: 'Sweeper', desc: 'Road and vacuum sweeping across routes and public realm.', module: 'Sweeper', equip: 'Road / vacuum sweeper', pairs: 'Municipal', jobs: 41, href: 'JobDetails.dc.html', cta: 'View jobs' },
+        { name: 'Tanker', desc: 'Liquid waste, sludge, drainage and interceptor emptying.', module: 'Tanker', equip: 'Vacuum tanker', pairs: 'Hazardous Waste', jobs: 52, href: 'JobDetails.dc.html', cta: 'View jobs' },
+        { name: 'Walking Floor', desc: 'Bulk haulage of RDF/SRF, biomass and recyclate between facilities.', module: 'Bulk Transport', equip: 'Walking-floor trailer', pairs: 'Recycling', jobs: 74, href: 'BulkTransport.dc.html', cta: 'Open module' }
+      ]},
+      { id: 'ws', title: 'Waste & Material Types', short: 'Stream', hint: 'What is being handled', cls: 'ok', items: [
+        { name: 'Hazardous Waste', desc: 'Chemicals, oils, asbestos and other hazardous streams with UN/ADR/EWC data.', module: 'Hazardous Waste', equip: 'Any approved method', pairs: 'Tanker, Skip, RORO', jobs: 28, href: 'JobDetails.dc.html', cta: 'View jobs' },
+        { name: 'Aggregates', desc: 'Stone, sand, soils and hardcore moved as loose bulk.', module: 'Bulk Material', equip: 'Tipper, Grab', pairs: 'Tipper, Grab', jobs: 121, href: 'JobDetails.dc.html', cta: 'View jobs' },
+        { name: 'Construction & Demolition', desc: 'Mixed C&D waste from build, refurb and demolition sites.', module: 'Bulk Material', equip: 'Skip, RORO, Tipper', pairs: 'Skip, Recycling', jobs: 115, href: 'JobDetails.dc.html', cta: 'View jobs' },
+        { name: 'Recycling', desc: 'Segregated recyclate sorted and processed into material outputs.', module: 'Material Recovery', equip: 'Facility plant', pairs: 'Transfer Station, Walking Floor', jobs: 104, href: 'JobDetails.dc.html', cta: 'View jobs' }
+      ]},
+      { id: 'ci', title: 'Customer Industries', short: 'Industry', hint: 'Where the service is delivered', cls: 'warn', items: [
+        { name: 'Municipal', desc: 'Street scene, litter picking, bins and grounds. Street Works always applies.', module: 'Municipal', equip: 'RCV, sweeper', pairs: 'Sweeper', jobs: 121, href: 'JobDetails.dc.html', cta: 'View jobs' },
+        { name: 'Airport', desc: 'Airside, landside and terminal waste under airport security procedures.', module: 'Airport', equip: 'Airside-approved vehicle', pairs: 'Hazardous Waste', jobs: 11, href: 'JobDetails.dc.html', cta: 'View jobs' },
+        { name: 'Facilities Management', desc: 'Internal building and external grounds waste for FM contracts.', module: 'Facilities Management', equip: 'Varies by contract', pairs: 'Skip, Recycling', jobs: 19, href: 'JobDetails.dc.html', cta: 'View jobs' }
+      ]},
+      { id: 'fa', title: 'Waste Infrastructure', short: 'Facility', hint: 'Sites where waste is received', cls: 'mute', items: [
+        { name: 'Transfer Station', desc: 'Receives, weighs and classifies loads before onward movement.', module: 'Material Recovery', equip: 'Weighbridge, loading shovel', pairs: 'C&D, Recycling, RORO', jobs: 84, href: 'JobDetails.dc.html', cta: 'View jobs' }
+      ]}
+    ];
+    const dim = this.state.dim;
+    return {
+      filters: dims.map(([id, label]) => ({ label, cls: id === dim ? 'btn sel' : 'btn', pick: () => this.setState({ dim: id }) })),
+      groups: groups.filter(g => dim === 'all' || g.id === dim).map(g => ({ ...g, items: g.items.map(i => ({ ...i, dimCls: g.cls })) }))
+    };
+  }
+}
+
+DCLogic.prototype.constructor = DCLogic;</script>
+<script>dcBoot();</script>
+</body>
+</html>

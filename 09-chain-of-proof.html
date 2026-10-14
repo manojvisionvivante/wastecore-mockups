@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chain of Proof CoP-2026-10-0412 — WasteCore mockup</title>
+
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
+a{color:#1F5FD1}a:hover{color:#174AA6}
+.nav a,.nav span{display:block;padding:11px 14px;border-radius:6px;color:#C9D3E3;text-decoration:none;font-size:14px}
+.nav a:hover{background:#18304F;color:#fff}
+.nav .on{background:#1F5FD1;color:#fff}
+.grp{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8B9BB4;margin:18px 14px 6px}
+.b{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.ok{background:#E3F3EA;color:#17633D}.warn{background:#FFF1D6;color:#7A4F00}.bad{background:#FDE7E5;color:#A1201A}.info{background:#E6EEFB;color:#1A4FAF}.mute{background:#EEF1F5;color:#4A5666}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;border:1px solid #C4CDD8;background:#fff;color:#16202E;cursor:pointer;text-decoration:none;box-sizing:border-box}
+.btn.p{background:#1F5FD1;border-color:#1F5FD1;color:#fff}
+th{text-align:left;font-size:12px;font-weight:600;color:#5A6778;text-transform:uppercase;letter-spacing:.04em;padding:9px 12px;border-bottom:1px solid #DDE3EA;background:#F8FAFC;white-space:nowrap}
+td{padding:10px 12px;border-bottom:1px solid #EEF1F5;font-size:14px;vertical-align:top}
+dt{color:#5A6778;font-size:13px}dd{margin:0;font-size:14px;font-weight:500}
+h2.sec{margin:0 0 12px;font-size:16px;padding-bottom:8px;border-bottom:1px solid #DDE3EA}
+</style>
+
+<style>@media (min-width: 900px){#dc-root > div > aside{min-height:100vh}}</style>
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/x-template" id="dc-tpl">
+
+<div style="display: flex; flex-wrap: wrap; min-height: 100vh">
+<aside style="flex: 1 1 240px; background: #0F1E36; padding: 20px 12px; box-sizing: border-box">
+<div style="padding: 0 14px 18px; border-bottom: 1px solid #22385A">
+<div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div>
+<div style="font-size: 12px; color: #8B9BB4; margin-top: 4px">Waste Sector · Phase 1</div>
+</div>
+<nav class="nav" aria-label="Main">
+<div class="grp">Operations</div>
+<a href="01-dashboard.html">Dashboard</a>
+<a href="04-job-details.html">Jobs</a>
+<a href="02-subsectors.html">Waste Sector</a>
+<span>Fleet &amp; Vehicles</span>
+<span>Facilities &amp; Transfer Stations</span>
+<div class="grp">Evidence &amp; compliance</div>
+<span>Evidence Centre</span>
+<a href="05-workflow.html">Workflows</a>
+<span>Street Works</span>
+<a href="07-compliance.html">Compliance &amp; Intelligence</a>
+<a href="08-non-compliance.html">Non-Compliance</a>
+<a class="on" href="09-chain-of-proof.html">Chain of Proof</a>
+<div class="grp">Admin</div>
+<span>Reports &amp; Audit</span>
+<span>Integrations</span>
+<span>Settings</span>
+</nav>
+</aside>
+<main style="flex: 999 1 560px; min-width: 0; padding: 24px 32px 48px; box-sizing: border-box">
+<div style="max-width: 1100px; display: flex; flex-direction: column; gap: 18px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: flex-end">
+<div>
+<div style="font-size: 13px; color: #5A6778">Home / Chain of Proof / CoP-2026-10-0412</div>
+<h1 style="margin: 6px 0 0; font-size: 28px; font-weight: 700">Chain of Proof</h1>
+</div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap">
+<button class="btn">Verify hash</button>
+<button class="btn">Print</button>
+<button class="btn p">Export PDF</button>
+</div>
+</div>
+<article style="background: #FFFFFF; border: 1px solid #DDE3EA; border-radius: 10px; padding: 28px 32px; display: flex; flex-direction: column; gap: 26px">
+<header style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: flex-start">
+<div>
+<div class="mono" style="font-size: 20px; font-weight: 600">CoP-2026-10-0412</div>
+<div style="font-size: 14px; color: #5A6778; margin-top: 4px">Generated 14 Oct 2026, 11:42 · Immutable record · <span class="b mute">Sample data</span></div>
+<div class="mono" style="font-size: 12px; color: #4A5666; margin-top: 8px; word-break: break-all">sha256: 7f3a9e1c04b2d8f6a1e5c7093b4d2f8e6a0c1b9d7e5f3a2c4b6d8e0f1a3c91e</div>
+</div>
+<div style="text-align: right">
+<div style="font-size: 13px; color: #5A6778; font-weight: 600">Final compliance status</div>
+<div style="margin-top: 6px"><span class="b ok" style="font-size: 15px; padding: 6px 14px">Compliant</span></div>
+<div style="font-size: 12px; color: #5A6778; margin-top: 6px">All 4 completion checks passed</div>
+</div>
+</header>
+<section>
+<h2 class="sec">1. Job and categories</h2>
+<dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px 20px">
+<div><dt>Job</dt><dd class="mono">WC-24802</dd></div>
+<div><dt>Module</dt><dd>Grab (v1.0 module spec)</dd></div>
+<div><dt>Category tags</dt><dd>Grab · Aggregates</dd></div>
+<div><dt>Customer / site</dt><dd>Riverside Developments · Kirkstall Road</dd></div>
+<div><dt>Vehicle / operator</dt><dd class="mono">GRB-02 · Mark Evans</dd></div>
+<div><dt>Destination</dt><dd>Eastside Transfer Station</dd></div>
+</dl>
+</section>
+<section>
+<h2 class="sec">2. Completion checks</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px">
+<sc-for list="{{checks}}" as="c" hint-placeholder-count="4">
+<div style="padding: 12px; border: 1px solid #CDE7D8; background: #F5FBF7; border-radius: 8px">
+<div style="font-size: 14px; font-weight: 600">{{c.name}}</div>
+<div style="font-size: 13px; color: #17633D; margin-top: 4px">{{c.detail}}</div>
+</div>
+</sc-for>
+</div>
+</section>
+<section>
+<h2 class="sec">3. Validated evidence</h2>
+<div style="overflow-x: auto">
+<table style="border-collapse: collapse; width: 100%">
+<thead><tr><th>Ref</th><th>Evidence</th><th>Captured</th><th>By</th><th>Metadata</th><th>File hash</th></tr></thead>
+<tbody>
+<sc-for list="{{evidence}}" as="e" hint-placeholder-count="8">
+<tr><td class="mono">{{e.ref}}</td><td>{{e.name}}</td><td style="white-space: nowrap">{{e.when}}</td><td>{{e.by}}</td><td style="font-size: 13px; color: #4A5666">{{e.meta}}</td><td class="mono" style="font-size: 12px; color: #4A5666">{{e.hash}}</td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</section>
+<section>
+<h2 class="sec">4. Workflow confirmations and intelligence outputs</h2>
+<div style="overflow-x: auto">
+<table style="border-collapse: collapse; width: 100%">
+<thead><tr><th>Step / rule</th><th>Result</th><th>Explanation</th><th>Evidence</th></tr></thead>
+<tbody>
+<sc-for list="{{rules}}" as="r" hint-placeholder-count="8">
+<tr><td><span class="mono" style="font-weight: 600">{{r.id}}</span> {{r.name}}</td><td><span class="b {{r.cls}}">{{r.result}}</span></td><td>{{r.why}}</td><td class="mono" style="font-size: 13px">{{r.ev}}</td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</section>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px">
+<section>
+<h2 class="sec">5. Street Works</h2>
+<ul style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.8">
+<li>Applied: loading from public highway</li>
+<li>Permit <span class="mono">SW-2026-48213</span> — validated</li>
+<li>Safety zone and vehicle positioning — validated</li>
+<li>Before/after photos — validated</li>
+</ul>
+</section>
+<section>
+<h2 class="sec">6. Weighbridge record</h2>
+<dl style="margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px">
+<div><dt>Ticket</dt><dd class="mono">ES-558201</dd></div>
+<div><dt>Registration</dt><dd class="mono">YX24 KHP</dd></div>
+<div><dt>Gross</dt><dd class="mono">26.84 t</dd></div>
+<div><dt>Tare</dt><dd class="mono">14.10 t</dd></div>
+<div><dt>Net</dt><dd class="mono">12.74 t</dd></div>
+<div><dt>Check</dt><dd><span class="b ok">Net = gross − tare</span></dd></div>
+</dl>
+</section>
+</div>
+<section>
+<h2 class="sec">7. Non-compliance findings</h2>
+<p style="margin: 0; font-size: 14px">1 finding, resolved before generation: <span class="mono">NC-1069</span> load photo missing → photo <span class="mono">EV-88322</span> added 10:58, closed by Alan Price 11:05.</p>
+</section>
+<section>
+<h2 class="sec">8. Audit events</h2>
+<ol style="margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.8">
+<sc-for list="{{audit}}" as="a" hint-placeholder-count="6">
+<li><span class="mono" style="color: #5A6778">{{a.when}}</span> — {{a.text}}</li>
+</sc-for>
+</ol>
+</section>
+</article>
+</div>
+</main>
+</div>
+</script>
+<script>
+(function(){
+var handlers=[],comp,root,TPL;
+function get(scope,path){path=path.trim();if(path==='true')return true;if(path==='false')return false;
+ if(/^-?\d+(\.\d+)?$/.test(path))return +path;var v=scope,ks=path.split('.');
+ for(var i=0;i<ks.length;i++){if(v==null)return undefined;v=v[ks[i]];}return v;}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function holes(t,scope){
+ t=t.replace(/\bon([A-Z]\w*)="\{\{([^}]+)\}\}"/g,function(m,ev,p){var f=get(scope,p);
+  if(typeof f!=='function')return '';handlers.push(f);return 'data-dc-'+ev.toLowerCase()+'="'+(handlers.length-1)+'"';});
+ return t.replace(/\{\{([^}]+)\}\}/g,function(m,p){var v=get(scope,p);return v==null?'':esc(v);});}
+var OPEN=/<(sc-for|sc-if)\b([^>]*)>/;
+function findClose(t,tag,from){var depth=1,i=from,o=new RegExp('<'+tag+'\\b','g'),c=new RegExp('</'+tag+'>','g');
+ while(true){o.lastIndex=i;c.lastIndex=i;var mo=o.exec(t),mc=c.exec(t);if(!mc)throw new Error('unclosed '+tag);
+  if(mo&&mo.index<mc.index){depth++;i=mo.index+1;}else{depth--;i=mc.index+mc[0].length;if(depth===0)return [mc.index,i];}}}
+function attr(a,name){var m=a.match(new RegExp(name+'="\\{\\{([^}]+)\\}\\}"'))||a.match(new RegExp(name+'="([^"]*)"'));return m?m[1]:null;}
+function render(t,scope){var out='';while(true){var m=OPEN.exec(t);if(!m){return out+holes(t,scope);}
+ out+=holes(t.slice(0,m.index),scope);var start=m.index+m[0].length,r=findClose(t,m[1],start),inner=t.slice(start,r[0]);
+ if(m[1]==='sc-for'){var list=get(scope,attr(m[2],'list'))||[],as=attr(m[2],'as')||'item';
+  for(var i=0;i<list.length;i++){var s=Object.create(scope);s[as]=list[i];s.$index=i;out+=render(inner,s);}}
+ else if(get(scope,attr(m[2],'value'))){out+=render(inner,scope);}
+ t=t.slice(r[1]);}}
+function draw(){handlers.length=0;root.innerHTML=render(TPL,comp.renderVals());}
+window.DCLogic=function(props){this.props=props||{};this.state={};};
+DCLogic.prototype.setState=function(p){Object.assign(this.state,typeof p==='function'?p(this.state):p);draw();};
+DCLogic.prototype.forceUpdate=function(){draw();};
+window.dcBoot=function(){root=document.getElementById('dc-root');TPL=document.getElementById('dc-tpl').textContent;
+ comp=new Component({});draw();
+ root.addEventListener('click',function(e){var el=e.target.closest('[data-dc-click]');
+  if(el){e.preventDefault();handlers[+el.getAttribute('data-dc-click')](e);}});};
+})();
+</script>
+<script>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      checks: [
+        { name: 'Evidence completeness', detail: '8 of 8 required items validated' },
+        { name: 'Workflow completeness', detail: '10 of 10 steps confirmed' },
+        { name: 'Intelligence completeness', detail: '8 rules: 8 pass, 0 fail' },
+        { name: 'Chain of Proof completeness', detail: 'All sections populated' }
+      ],
+      evidence: [
+        { ref: 'EV-88315', name: 'Job sheet', when: '09:12', by: 'Mark Evans', meta: 'PDF · 1 page', hash: '3b1c…a7e2' },
+        { ref: 'EV-88316', name: 'Location evidence', when: '09:31', by: 'Device GPS', meta: '±5 m · inside geofence', hash: '91fe…0c4d' },
+        { ref: 'EV-88317', name: 'Material type confirmation', when: '09:33', by: 'Mark Evans', meta: 'Aggregates · EWC 17 05 04', hash: 'c07a…5b18' },
+        { ref: 'EV-88318', name: 'Street Works permit', when: '09:34', by: 'Mark Evans', meta: 'Permit doc · valid dates', hash: '6d2e…f913' },
+        { ref: 'EV-88322', name: 'Load photos', when: '10:58', by: 'Mark Evans', meta: '2 photos · EXIF time match', hash: 'a4b9…27c0' },
+        { ref: 'EV-88320', name: 'Contamination evidence', when: '10:02', by: 'Mark Evans', meta: 'None observed · photo', hash: 'e815…d6a3' },
+        { ref: 'EV-88319', name: 'Weighbridge ticket', when: '10:47', by: 'Eastside TS', meta: 'Ticket ES-558201', hash: '2fa0…8e71' },
+        { ref: 'EV-88324', name: 'Completion evidence', when: '11:39', by: 'Mark Evans', meta: 'Confirmation + photo', hash: '7c63…b2d5' }
+      ],
+      rules: [
+        { id: 'LOC-01', name: 'Location accuracy', result: 'Pass', cls: 'ok', why: 'Inside site geofence.', ev: 'EV-88316' },
+        { id: 'WT-01', name: 'Material type vs evidence', result: 'Pass', cls: 'ok', why: 'Declared and confirmed type match.', ev: 'EV-88317' },
+        { id: 'PH-01', name: 'Load photos present', result: 'Pass', cls: 'ok', why: '2 photos, taken during job window.', ev: 'EV-88322' },
+        { id: 'CT-01', name: 'Contamination evidence', result: 'Pass', cls: 'ok', why: 'Check completed with photo.', ev: 'EV-88320' },
+        { id: 'SW-01', name: 'Street Works compliance', result: 'Pass', cls: 'ok', why: 'Permit valid for date and location.', ev: 'EV-88318' },
+        { id: 'WB-01', name: 'Weighbridge ticket present', result: 'Pass', cls: 'ok', why: 'Ticket matched to vehicle registration.', ev: 'EV-88319' },
+        { id: 'WB-02', name: 'Weighbridge accuracy', result: 'Pass', cls: 'ok', why: 'Net equals gross minus tare.', ev: 'EV-88319' },
+        { id: 'WF-01', name: 'Workflow completion', result: 'Pass', cls: 'ok', why: 'All mandatory steps confirmed in order.', ev: '—' }
+      ],
+      audit: [
+        { when: '09:10', text: 'Job started by Mark Evans' },
+        { when: '10:02', text: 'NC-1069 raised: load photos missing' },
+        { when: '10:58', text: 'Load photos uploaded (EV-88322)' },
+        { when: '11:05', text: 'NC-1069 resolved by Alan Price' },
+        { when: '11:39', text: 'Completion evidence captured' },
+        { when: '11:42', text: 'Completion checks passed; record generated and hashed' }
+      ]
+    };
+  }
+}
+
+DCLogic.prototype.constructor = DCLogic;</script>
+<script>dcBoot();</script>
+</body>
+</html>
