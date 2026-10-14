@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workflow Library — WasteCore mockup</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F3F5F8;font-family:'IBM Plex Sans',system-ui,sans-serif;color:#16202E}
+a{color:#1F5FD1}a:hover{color:#174AA6}
+.shell{display:flex;flex-wrap:wrap;min-height:100vh}
+.menubtn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:8px;border:1px solid #C4CDD8;background:#fff;font:600 14px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
+#navtoggle:focus-visible ~ .shell .menubtn{outline:2px solid #1F5FD1;outline-offset:2px}
+.nav .sub{padding:8px 14px 8px 28px;font-size:13px;color:#AFC0D8}
+@media (max-width:899px){.side{display:none}#navtoggle:checked ~ .shell .side{display:block;flex-basis:100%}}
+@media (min-width:900px){#navtoggle:checked ~ .shell .side{display:none}}
+@media (max-width:600px){.topbar,.content{padding-left:16px;padding-right:16px}.h1{font-size:24px}.who{display:none}}
+.side{flex:1 1 240px;background:#0F1E36;padding:20px 12px;box-sizing:border-box}
+@media (min-width:900px){.side{min-height:100vh}}
+.mainc{flex:999 1 560px;min-width:0;display:flex;flex-direction:column}
+.topbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:12px 32px;background:#fff;border-bottom:1px solid #DDE3EA}
+.content{padding:24px 32px 48px;box-sizing:border-box}
+.nav a{display:block;padding:11px 14px;border-radius:6px;color:#C9D3E3;text-decoration:none;font-size:14px}
+.nav a:hover{background:#18304F;color:#fff}
+.nav a.on{background:#1F5FD1;color:#fff}
+.grp{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8B9BB4;margin:18px 14px 6px}
+.b{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}
+.ok{background:#E3F3EA;color:#17633D}.warn{background:#FFF1D6;color:#7A4F00}.bad{background:#FDE7E5;color:#A1201A}.info{background:#E6EEFB;color:#1A4FAF}.mute{background:#EEF1F5;color:#4A5666}
+.mono{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:8px;font:600 14px 'IBM Plex Sans',sans-serif;border:1px solid #C4CDD8;background:#fff;color:#16202E;cursor:pointer;text-decoration:none;box-sizing:border-box}
+.btn:hover{border-color:#8D9AAB}
+.btn.p{background:#1F5FD1;border-color:#1F5FD1;color:#fff}.btn.p:hover{background:#174AA6;color:#fff}
+.btn.sel{background:#16202E;border-color:#16202E;color:#fff}
+.card{background:#fff;border:1px solid #DDE3EA;border-radius:10px}
+.tbl{border-collapse:collapse;width:100%}
+.tbl th{text-align:left;font-size:12px;font-weight:600;color:#5A6778;text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;border-bottom:1px solid #DDE3EA;background:#F8FAFC;white-space:nowrap}
+.tbl td{padding:12px;border-bottom:1px solid #EEF1F5;font-size:14px;vertical-align:top}
+.kv dt{color:#5A6778;font-size:13px}.kv dd{margin:0;font-size:14px;font-weight:500}
+.fld{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600}
+.fld input,.fld select,.fld textarea{min-height:44px;border:1px solid #C4CDD8;border-radius:8px;padding:0 10px;font:14px 'IBM Plex Sans',sans-serif;box-sizing:border-box}
+.crumb{font-size:13px;color:#5A6778}
+.h1{margin:6px 0 4px;font-size:28px;font-weight:700}
+.lead{margin:0;color:#5A6778;font-size:15px}
+.sr{position:absolute;left:-9999px}
+</style>
+<style>
+.mrow{display:flex;justify-content:space-between;gap:10px;align-items:center;width:100%;min-height:52px;padding:10px 12px;border:1px solid #EEF1F5;border-radius:8px;background:#fff;text-align:left;font:14px 'IBM Plex Sans',sans-serif;color:#16202E;cursor:pointer}
+.mrow.sel{border:2px solid #1F5FD1;background:#F2F6FE}
+</style>
+
+</head>
+<body>
+<div id="dc-root"></div>
+<script type="text/x-template" id="dc-tpl">
+
+<input type="checkbox" id="navtoggle" class="sr" aria-label="Show or hide the menu">
+<div class="shell">
+<aside class="side">
+<div style="padding: 0 14px 18px; border-bottom: 1px solid #22385A">
+<a href="index.html" style="text-decoration: none"><div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div></a>
+<div style="font-size: 12px; color: #8B9BB4; margin-top: 4px">Waste Sector · Phase 1</div>
+</div>
+<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="" href="01-dashboard.html">Dashboard</a><a class="" href="jobs.html">Jobs</a><a class="" href="02-subsectors.html">Waste Sector</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="facilities.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="on" href="workflows.html">Workflows</a><a class="sub" href="workflows.html">Workflow library</a><a class="sub" href="06-workflow.html">Live job example</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="" href="32-settings.html">Settings</a></nav>
+</aside>
+<div class="mainc">
+<header class="topbar">
+<label for="navtoggle" class="menubtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>Menu</label>
+<label for="gq" class="sr">Search jobs, evidence, customers</label>
+<input id="gq" type="search" placeholder="Search jobs, evidence, customers…" style="flex: 1 1 280px; max-width: 520px; height: 44px; padding: 0 14px; border: 1px solid #C4CDD8; border-radius: 8px; font: 14px 'IBM Plex Sans', sans-serif">
+<div style="display: flex; align-items: center; gap: 10px; margin-left: auto">
+<a class="btn who" href="31-mobile-field-app.html">Field app</a>
+<a class="btn" href="29-notifications.html" aria-label="Notifications, 6 unread">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+<span class="b bad">6</span></a>
+<div style="display: flex; align-items: center; gap: 10px; padding-left: 6px">
+<div style="width: 36px; height: 36px; border-radius: 50%; background: #1C3358; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">PS</div>
+<div class="who" style="font-size: 13px; line-height: 1.3"><div style="font-weight: 600">Priya Shah</div><div style="color: #5A6778">Compliance Officer</div></div>
+</div>
+</div>
+</header>
+<main class="content">
+<div style="max-width: 1360px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: flex-end">
+<div>
+<div class="crumb">Home / Workflows</div>
+<h1 class="h1">Workflow library</h1>
+<p class="lead">Each operational module runs its own workflow from the Waste Sector pack v2.0. A job follows the workflow of its primary module, never a single generic one.</p>
+</div>
+<a class="btn" href="06-workflow.html">Open live job example</a>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start">
+<section aria-label="Modules" style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<sc-for list="{{mods}}" as="m" hint-placeholder-count="12">
+<button class="{{m.cls}}" aria-pressed="{{m.on}}" onClick="{{m.pick}}"><span style="font-weight: 600">{{m.name}}</span><span class="b mute">{{m.count}} steps</span></button>
+</sc-for>
+</section>
+<section class="card" style="flex: 999 1 560px; min-width: 0; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: flex-start">
+<div><h2 style="margin: 0; font-size: 21px">{{sel.name}}</h2><p style="margin: 6px 0 0; font-size: 14px; color: #4A5666">{{sel.note}}</p></div>
+<a class="btn" href="{{sel.href}}">Open module</a>
+</div>
+<div style="display: flex; gap: 8px; flex-wrap: wrap"><span class="b info">{{sel.m}} mandatory</span><span class="b warn">{{sel.c}} conditional</span><span class="b mute">{{sel.o}} optional</span><sc-if value="{{sel.hasP}}" hint-placeholder-val="{{ false }}"><span class="b warn">{{sel.p}} pending clarification</span></sc-if></div>
+<ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0">
+<sc-for list="{{sel.steps}}" as="s" hint-placeholder-count="10">
+<li style="display: grid; grid-template-columns: 36px 1fr auto; gap: 12px; align-items: start; padding: 12px 0; border-bottom: 1px solid #EEF1F5">
+<span class="mono" style="display: inline-flex; width: 30px; height: 30px; border-radius: 50%; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; background: #EEF1F5; color: #3A4656">{{s.n}}</span>
+<div><div style="font-size: 15px; font-weight: 500">{{s.title}}</div><div style="font-size: 13px; color: #5A6778; margin-top: 2px">{{s.when}}</div></div>
+<span class="b {{s.cls}}">{{s.rule}}</span>
+</li>
+</sc-for>
+</ol>
+<p style="margin: 0; font-size: 13px; color: #5A6778">Step order and conditions are configured in <a href="32-settings.html#workflows">Settings → Workflow steps</a>. Changes need approval and are audited.</p>
+</section>
+</div>
+</div>
+</main></div></div>
+</script>
+<script>// Minimal renderer for the prototype's .dc templates: {{holes}}, <sc-for>, <sc-if>,
+// onX="{{handler}}" events, and a DCLogic base class with setState.
+(function () {
+  var handlers = [], comp, root, TPL;
+  function get(scope, path) {
+    path = path.trim();
+    if (path === 'true') return true;
+    if (path === 'false') return false;
+    if (/^-?\d+(\.\d+)?$/.test(path)) return +path;
+    var v = scope, ks = path.split('.');
+    for (var i = 0; i < ks.length; i++) { if (v == null) return undefined; v = v[ks[i]]; }
+    return v;
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function holes(t, scope) {
+    t = t.replace(/\bon([A-Z]\w*)="\{\{([^}]+)\}\}"/g, function (m, ev, p) {
+      var f = get(scope, p);
+      if (typeof f !== 'function') return '';
+      handlers.push(f);
+      return 'data-dc-' + ev.toLowerCase() + '="' + (handlers.length - 1) + '"';
+    });
+    return t.replace(/\{\{([^}]+)\}\}/g, function (m, p) { var v = get(scope, p); return v == null ? '' : esc(v); });
+  }
+  var OPEN = /<(sc-for|sc-if)\b([^>]*)>/;
+  function findClose(t, tag, from) {
+    var depth = 1, i = from, o = new RegExp('<' + tag + '\\b', 'g'), c = new RegExp('</' + tag + '>', 'g');
+    while (true) {
+      o.lastIndex = i; c.lastIndex = i;
+      var mo = o.exec(t), mc = c.exec(t);
+      if (!mc) throw new Error('unclosed ' + tag);
+      if (mo && mo.index < mc.index) { depth++; i = mo.index + 1; }
+      else { depth--; i = mc.index + mc[0].length; if (depth === 0) return [mc.index, i]; }
+    }
+  }
+  function attr(a, name) {
+    var m = a.match(new RegExp(name + '="\\{\\{([^}]+)\\}\\}"')) || a.match(new RegExp(name + '="([^"]*)"'));
+    return m ? m[1] : null;
+  }
+  function render(t, scope) {
+    var out = '';
+    while (true) {
+      var m = OPEN.exec(t);
+      if (!m) return out + holes(t, scope);
+      out += holes(t.slice(0, m.index), scope);
+      var start = m.index + m[0].length, r = findClose(t, m[1], start), inner = t.slice(start, r[0]);
+      if (m[1] === 'sc-for') {
+        var list = get(scope, attr(m[2], 'list')) || [], as = attr(m[2], 'as') || 'item';
+        for (var i = 0; i < list.length; i++) {
+          var s = Object.create(scope); s[as] = list[i]; s.$index = i; out += render(inner, s);
+        }
+      } else if (get(scope, attr(m[2], 'value'))) {
+        out += render(inner, scope);
+      }
+      t = t.slice(r[1]);
+    }
+  }
+  function draw() {
+    handlers.length = 0;
+    var y = window.scrollY;
+    root.innerHTML = render(TPL, comp.renderVals());
+    window.scrollTo(0, y);
+  }
+  window.DCLogic = function (props) { this.props = props || {}; this.state = {}; };
+  DCLogic.prototype.setState = function (p) {
+    Object.assign(this.state, typeof p === 'function' ? p(this.state) : p); draw();
+  };
+  DCLogic.prototype.forceUpdate = function () { draw(); };
+  window.dcBoot = function (props) {
+    root = document.getElementById('dc-root');
+    TPL = document.getElementById('dc-tpl').textContent;
+    comp = new Component(props || {});
+    draw();
+    root.addEventListener('click', function (e) {
+      var el = e.target.closest('[data-dc-click]');
+      if (el) { e.preventDefault(); handlers[+el.getAttribute('data-dc-click')](e); }
+    });
+  };
+})();
+</script>
+<script>// Workflow steps per operational module, from WASTE SECTOR v2.0 (section 3 of each module).
+// Step rule: M = mandatory, C = conditional (if applicable), O = optional, P = pending clarification.
+window.WC_WORKFLOWS = [
+  { key: 'skip', name: 'Skip & RORO', href: '06-workflow.html', note: 'Container type (Skip or RORO) is a parameter. Load integrity photos apply to collections only.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm waste type', 'M'], ['Capture Street Works evidence', 'C', 'Public highway or public-risk zone'],
+    ['Drop or collect container', 'M'], ['Capture before/after photos', 'M'], ['Capture load integrity photos', 'C', 'Collections only'], ['Capture contamination evidence', 'M'],
+    ['Capture weighbridge ticket', 'M'], ['Capture customer signature', 'O'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'grab', name: 'Grab', href: '20-grab.html', note: 'Soils, aggregates and muck away.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm material/waste type', 'M'], ['Capture Street Works evidence', 'C', 'Public highway or public-risk zone'],
+    ['Load material via grab', 'M'], ['Capture load photos', 'M'], ['Capture contamination evidence', 'M'], ['Capture weighbridge ticket', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'sweeper', name: 'Sweeper', href: '18-sweeper.html', note: 'Route-based; no weighbridge, load photos or signature.', steps: [
+    ['Arrive at route start', 'M'], ['Capture location evidence', 'M'], ['Capture Street Works evidence', 'C', 'Public highway or public-risk zone'], ['Capture route evidence', 'M'],
+    ['Perform sweeping task', 'M'], ['Capture before/after photos', 'M'], ['Confirm waste type', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'tanker', name: 'Tanker', href: '19-tanker.html', note: 'Liquid waste, sludge, drainage and interceptors.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm waste type', 'M'], ['Load liquid/sludge', 'M'], ['Capture contamination evidence', 'M'],
+    ['Capture volume/weighbridge evidence', 'C', 'If required for the load'], ['Transport and discharge', 'O', 'Optional evidence'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'haz', name: 'Hazardous Waste', href: '13-hazardous.html', note: 'Full legal compliance: UN/ADR/EWC classification, seals and consignment note.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm hazardous waste type', 'M'], ['Capture hazard classification evidence', 'M'], ['Capture seal checks', 'M'],
+    ['Capture contamination evidence', 'M'], ['Capture manifest/consignment note', 'M'], ['Capture weighbridge ticket', 'C', 'If weighed'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'bulkm', name: 'Bulk Material', href: '14-bulk-material.html', note: 'Aggregates, C&D and tipper loose-material loading.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm material/waste type', 'M'], ['Load material', 'M'], ['Capture load photos', 'M'],
+    ['Capture contamination evidence', 'M'], ['Capture weighbridge ticket', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'muni', name: 'Municipal', href: '15-municipal.html', note: 'Street Works is mandatory on every municipal job.', steps: [
+    ['Arrive at route start point', 'M'], ['Capture location evidence', 'M'], ['Capture Street Works evidence', 'M', 'Always required'], ['Capture route evidence', 'M'],
+    ['Perform municipal task', 'M'], ['Capture before/after photos', 'M'], ['Confirm waste/material type', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'air', name: 'Airport', href: '16-airport.html', note: 'Security checks follow the airport operator’s approved procedures.', steps: [
+    ['Arrive at airport access point', 'M'], ['Capture location evidence', 'M'], ['Confirm waste type', 'M'], ['Capture security compliance evidence', 'M'],
+    ['Load or unload airport waste', 'M'], ['Capture contamination evidence', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'fm', name: 'Facilities Management', href: '17-facilities-management.html', note: 'Internal building waste and external grounds waste.', steps: [
+    ['Arrive at FM site or asset', 'M'], ['Capture location evidence', 'M'], ['Confirm waste type', 'M'], ['Capture Street Works evidence', 'C', 'External / public-risk work'],
+    ['Perform FM waste task', 'M'], ['Capture before/after photos', 'M'], ['Capture contamination evidence', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'mrf', name: 'Material Recovery', href: '21-transfer-station.html', note: 'Transfer Station and Recycling. Processing steps apply when processing is on.', steps: [
+    ['Vehicle arrives at facility', 'M'], ['Capture location evidence', 'M'], ['Capture load arrival photos', 'M'], ['Confirm waste/material type', 'M'], ['Capture contamination evidence', 'M'],
+    ['Capture weighbridge ticket', 'M'], ['Classify waste/material (EWC code)', 'M'], ['Sort/process material', 'C', 'Processing enabled'], ['Capture processing evidence', 'C', 'Processing enabled'],
+    ['Capture dispatch evidence', 'C', 'If leaving site'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'bulkt', name: 'Bulk Transport', href: '23-walking-floor.html', note: 'v2.0 steps. Walking Floor v1.0 adds manifest, seal check and route evidence — pending clarification.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm waste/material type', 'M'], ['Load bulk material', 'M'], ['Capture load integrity photos', 'M'],
+    ['Capture contamination evidence', 'M'], ['Capture weighbridge ticket', 'M'], ['Capture unloading evidence', 'O', 'Optional toggle'],
+    ['Bulk transport manifest (v1.0)', 'P', 'Conflicts with v2.0 exclusions'], ['Seal check (v1.0)', 'P', 'Conflicts with v2.0 exclusions'], ['Route evidence (v1.0)', 'P', 'Conflicts with v2.0 exclusions'],
+    ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'clin', name: 'Clinical Waste', href: '24-clinical.html', note: 'Healthcare and ADR compliance (v2.0 extra module).', steps: [
+    ['Arrive at healthcare site', 'M'], ['Capture location evidence', 'M'], ['Confirm clinical waste type', 'M'], ['Capture UN/ADR classification evidence', 'M'],
+    ['Capture container integrity and seal checks', 'M'], ['Capture contamination/incident evidence', 'C', 'If an incident occurs'], ['Capture manifest/consignment note', 'M'],
+    ['Capture weighbridge/volume evidence', 'C', 'If applicable'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] }
+];
+window.WC_RULE = { M: ['Mandatory', 'info'], C: ['Conditional', 'warn'], O: ['Optional', 'mute'], P: ['Pending clarification', 'warn'] };
+</script>
+<script>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { i: 0 }; }
+  renderVals() {
+    const W = window.WC_WORKFLOWS, R = window.WC_RULE;
+    const i = this.state.i, w = W[i];
+    const count = (k) => w.steps.filter(s => s[1] === k).length;
+    return {
+      mods: W.map((m, k) => ({ name: m.name, count: m.steps.length, on: k === i ? 'true' : 'false', cls: k === i ? 'mrow sel' : 'mrow', pick: () => this.setState({ i: k }) })),
+      sel: { name: w.name, note: w.note, href: w.href, m: count('M'), c: count('C'), o: count('O'), p: count('P'), hasP: count('P') > 0,
+        steps: w.steps.map((s, k) => ({ n: k + 1, title: s[0], rule: R[s[1]][0], cls: R[s[1]][1], when: s[2] || (s[1] === 'M' ? 'Every job' : '') })) }
+    };
+  }
+}
+</script>
+<script>dcBoot({});</script>
+</body>
+</html>

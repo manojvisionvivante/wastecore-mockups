@@ -60,7 +60,7 @@ a{color:#1F5FD1}a:hover{color:#174AA6}
 <a href="index.html" style="text-decoration: none"><div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div></a>
 <div style="font-size: 12px; color: #8B9BB4; margin-top: 4px">Waste Sector · Phase 1</div>
 </div>
-<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="" href="01-dashboard.html">Dashboard</a><a class="" href="jobs.html">Jobs</a><a class="" href="02-subsectors.html">Waste Sector</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="facilities.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="" href="06-workflow.html">Workflows</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="on" href="32-settings.html">Settings</a></nav>
+<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="" href="01-dashboard.html">Dashboard</a><a class="" href="jobs.html">Jobs</a><a class="" href="02-subsectors.html">Waste Sector</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="facilities.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="" href="workflows.html">Workflows</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="on" href="32-settings.html">Settings</a></nav>
 </aside>
 <div class="mainc">
 <header class="topbar">
@@ -134,6 +134,46 @@ a{color:#1F5FD1}a:hover{color:#174AA6}
 <div style="grid-column: 1 / -1; display: flex"><button type="button" class="btn p" style="margin-left: auto">Submit for approval</button></div>
 </form>
 <div style="padding: 12px 14px; border-radius: 8px; background: #FFF1D6; color: #5C3B00; font-size: 14px"><strong>Rule conflict:</strong> Walking Floor route, manifest and seal check rules are pending. <a href="23-walking-floor.html">Review conflict →</a></div>
+</section>
+</sc-if>
+<sc-if value="{{show.workflows}}" hint-placeholder-val="{{ false }}">
+<section class="card" style="padding: 18px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; align-items: flex-start">
+<div><h2 style="margin: 0; font-size: 17px">Workflow steps</h2><p style="margin: 4px 0 0; font-size: 14px; color: #5A6778">Order, rule and condition for each step. Defaults come from WASTE SECTOR v2.0.</p></div>
+<button class="btn">+ Add step</button>
+</div>
+<div role="radiogroup" aria-label="Module" style="display: flex; gap: 8px; flex-wrap: wrap">
+<sc-for list="{{wfMods}}" as="m" hint-placeholder-count="12"><button role="radio" aria-checked="{{m.on}}" class="{{m.cls}}" onClick="{{m.pick}}">{{m.name}}</button></sc-for>
+</div>
+<div style="overflow-x: auto">
+<table class="tbl">
+<thead><tr><th>#</th><th>Step</th><th>Rule</th><th>Condition</th><th>Order</th></tr></thead>
+<tbody>
+<sc-for list="{{wfSteps}}" as="w" hint-placeholder-count="10">
+<tr><td class="mono">{{w.n}}</td><td style="font-weight: 500">{{w.title}}</td>
+<td><select aria-label="Rule for {{w.title}}" style="min-height: 36px; border: 1px solid #C4CDD8; border-radius: 6px; padding: 0 8px; font: 13px 'IBM Plex Sans', sans-serif"><option>{{w.rule}}</option><option>Mandatory</option><option>Conditional</option><option>Optional</option><option>Excluded</option></select></td>
+<td style="font-size: 13px; color: #4A5666">{{w.cond}}</td>
+<td style="white-space: nowrap"><button class="btn" aria-label="Move {{w.title}} up" style="min-height: 36px; padding: 0 10px">↑</button> <button class="btn" aria-label="Move {{w.title}} down" style="min-height: 36px; padding: 0 10px">↓</button></td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+<div style="display: flex"><button class="btn p" style="margin-left: auto">Submit changes for approval</button></div>
+</section>
+</sc-if>
+<sc-if value="{{show.triggers}}" hint-placeholder-val="{{ false }}">
+<section class="card">
+<div style="padding: 16px 18px"><h2 style="margin: 0; font-size: 17px">Non-compliance triggers</h2><p style="margin: 4px 0 0; font-size: 14px; color: #5A6778">From the Stage 2 map and each module’s triggers. Every trigger is surfaced to the operator and management and included in the Chain of Proof. Severity is not defined in the PDF.</p></div>
+<div style="overflow-x: auto">
+<table class="tbl">
+<thead><tr><th>Trigger</th><th>Rule</th><th>Modules</th><th>Surfaced to</th><th>In Chain of Proof</th><th>Status</th></tr></thead>
+<tbody>
+<sc-for list="{{triggers}}" as="t" hint-placeholder-count="12">
+<tr><td style="font-weight: 500">{{t.name}}</td><td class="mono">{{t.rule}}</td><td style="font-size: 13px; color: #4A5666; max-width: 360px">{{t.mods}}</td><td style="white-space: nowrap">Operator · Management</td><td><span class="b ok">Yes</span></td><td><span class="b {{t.cls}}">{{t.status}}</span></td></tr>
+</sc-for>
+</tbody>
+</table>
+</div>
 </section>
 </sc-if>
 <sc-if value="{{show.roles}}" hint-placeholder-val="{{ false }}">
@@ -245,11 +285,62 @@ a{color:#1F5FD1}a:hover{color:#174AA6}
   };
 })();
 </script>
+<script>// Workflow steps per operational module, from WASTE SECTOR v2.0 (section 3 of each module).
+// Step rule: M = mandatory, C = conditional (if applicable), O = optional, P = pending clarification.
+window.WC_WORKFLOWS = [
+  { key: 'skip', name: 'Skip & RORO', href: '06-workflow.html', note: 'Container type (Skip or RORO) is a parameter. Load integrity photos apply to collections only.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm waste type', 'M'], ['Capture Street Works evidence', 'C', 'Public highway or public-risk zone'],
+    ['Drop or collect container', 'M'], ['Capture before/after photos', 'M'], ['Capture load integrity photos', 'C', 'Collections only'], ['Capture contamination evidence', 'M'],
+    ['Capture weighbridge ticket', 'M'], ['Capture customer signature', 'O'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'grab', name: 'Grab', href: '20-grab.html', note: 'Soils, aggregates and muck away.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm material/waste type', 'M'], ['Capture Street Works evidence', 'C', 'Public highway or public-risk zone'],
+    ['Load material via grab', 'M'], ['Capture load photos', 'M'], ['Capture contamination evidence', 'M'], ['Capture weighbridge ticket', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'sweeper', name: 'Sweeper', href: '18-sweeper.html', note: 'Route-based; no weighbridge, load photos or signature.', steps: [
+    ['Arrive at route start', 'M'], ['Capture location evidence', 'M'], ['Capture Street Works evidence', 'C', 'Public highway or public-risk zone'], ['Capture route evidence', 'M'],
+    ['Perform sweeping task', 'M'], ['Capture before/after photos', 'M'], ['Confirm waste type', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'tanker', name: 'Tanker', href: '19-tanker.html', note: 'Liquid waste, sludge, drainage and interceptors.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm waste type', 'M'], ['Load liquid/sludge', 'M'], ['Capture contamination evidence', 'M'],
+    ['Capture volume/weighbridge evidence', 'C', 'If required for the load'], ['Transport and discharge', 'O', 'Optional evidence'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'haz', name: 'Hazardous Waste', href: '13-hazardous.html', note: 'Full legal compliance: UN/ADR/EWC classification, seals and consignment note.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm hazardous waste type', 'M'], ['Capture hazard classification evidence', 'M'], ['Capture seal checks', 'M'],
+    ['Capture contamination evidence', 'M'], ['Capture manifest/consignment note', 'M'], ['Capture weighbridge ticket', 'C', 'If weighed'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'bulkm', name: 'Bulk Material', href: '14-bulk-material.html', note: 'Aggregates, C&D and tipper loose-material loading.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm material/waste type', 'M'], ['Load material', 'M'], ['Capture load photos', 'M'],
+    ['Capture contamination evidence', 'M'], ['Capture weighbridge ticket', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'muni', name: 'Municipal', href: '15-municipal.html', note: 'Street Works is mandatory on every municipal job.', steps: [
+    ['Arrive at route start point', 'M'], ['Capture location evidence', 'M'], ['Capture Street Works evidence', 'M', 'Always required'], ['Capture route evidence', 'M'],
+    ['Perform municipal task', 'M'], ['Capture before/after photos', 'M'], ['Confirm waste/material type', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'air', name: 'Airport', href: '16-airport.html', note: 'Security checks follow the airport operator’s approved procedures.', steps: [
+    ['Arrive at airport access point', 'M'], ['Capture location evidence', 'M'], ['Confirm waste type', 'M'], ['Capture security compliance evidence', 'M'],
+    ['Load or unload airport waste', 'M'], ['Capture contamination evidence', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'fm', name: 'Facilities Management', href: '17-facilities-management.html', note: 'Internal building waste and external grounds waste.', steps: [
+    ['Arrive at FM site or asset', 'M'], ['Capture location evidence', 'M'], ['Confirm waste type', 'M'], ['Capture Street Works evidence', 'C', 'External / public-risk work'],
+    ['Perform FM waste task', 'M'], ['Capture before/after photos', 'M'], ['Capture contamination evidence', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'mrf', name: 'Material Recovery', href: '21-transfer-station.html', note: 'Transfer Station and Recycling. Processing steps apply when processing is on.', steps: [
+    ['Vehicle arrives at facility', 'M'], ['Capture location evidence', 'M'], ['Capture load arrival photos', 'M'], ['Confirm waste/material type', 'M'], ['Capture contamination evidence', 'M'],
+    ['Capture weighbridge ticket', 'M'], ['Classify waste/material (EWC code)', 'M'], ['Sort/process material', 'C', 'Processing enabled'], ['Capture processing evidence', 'C', 'Processing enabled'],
+    ['Capture dispatch evidence', 'C', 'If leaving site'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'bulkt', name: 'Bulk Transport', href: '23-walking-floor.html', note: 'v2.0 steps. Walking Floor v1.0 adds manifest, seal check and route evidence — pending clarification.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm waste/material type', 'M'], ['Load bulk material', 'M'], ['Capture load integrity photos', 'M'],
+    ['Capture contamination evidence', 'M'], ['Capture weighbridge ticket', 'M'], ['Capture unloading evidence', 'O', 'Optional toggle'],
+    ['Bulk transport manifest (v1.0)', 'P', 'Conflicts with v2.0 exclusions'], ['Seal check (v1.0)', 'P', 'Conflicts with v2.0 exclusions'], ['Route evidence (v1.0)', 'P', 'Conflicts with v2.0 exclusions'],
+    ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'clin', name: 'Clinical Waste', href: '24-clinical.html', note: 'Healthcare and ADR compliance (v2.0 extra module).', steps: [
+    ['Arrive at healthcare site', 'M'], ['Capture location evidence', 'M'], ['Confirm clinical waste type', 'M'], ['Capture UN/ADR classification evidence', 'M'],
+    ['Capture container integrity and seal checks', 'M'], ['Capture contamination/incident evidence', 'C', 'If an incident occurs'], ['Capture manifest/consignment note', 'M'],
+    ['Capture weighbridge/volume evidence', 'C', 'If applicable'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] }
+];
+window.WC_RULE = { M: ['Mandatory', 'info'], C: ['Conditional', 'warn'], O: ['Optional', 'mute'], P: ['Pending clarification', 'warn'] };
+</script>
 <script>
 class Component extends DCLogic {
-  constructor(props) { super(props); this.state = { t: 'cats' }; }
+  constructor(props) {
+    super(props);
+    const h = window.location.hash.replace('#', '');
+    this.state = { t: ['evidence', 'workflows', 'triggers', 'thresholds', 'roles', 'audit'].indexOf(h) >= 0 ? h : 'cats', wf: 0 };
+  }
   renderVals() {
-    const tabs = [['cats', 'Categories & mapping'], ['evidence', 'Evidence rules'], ['thresholds', 'Thresholds'], ['roles', 'Roles & permissions'], ['audit', 'Audit history']];
+    const tabs = [['cats', 'Categories & mapping'], ['evidence', 'Evidence rules'], ['workflows', 'Workflow steps'], ['triggers', 'Non-compliance triggers'], ['thresholds', 'Thresholds'], ['roles', 'Roles & permissions'], ['audit', 'Audit history']];
     const t = this.state.t;
     const show = {}; tabs.forEach(([k]) => show[k] = k === t);
     const cats = [
@@ -274,7 +365,33 @@ class Component extends DCLogic {
       ['Capture evidence', 'YYYNN'], ['Complete workflow steps', 'YYNNN'], ['Resolve non-compliance', 'NYYYN'],
       ['Approve thresholds / rule changes', 'NNNYN'], ['Edit categories & mappings', 'NNNYN'], ['View hazardous & clinical records', 'NYYYY'], ['Export Chain of Proof', 'NYYYY']
     ];
+    const W = window.WC_WORKFLOWS, R = window.WC_RULE, wf = this.state.wf;
+    const all = 'All modules';
+    const triggers = [
+      ['Missing mandatory evidence', 'EV-REQ', all, 'Enabled'], ['Incorrect waste / material type', 'WT-01', all, 'Enabled'], ['Incomplete workflow', 'WF-01', all, 'Enabled'],
+      ['Missing Street Works permit', 'SW-01', 'Skip & RORO, Grab, Sweeper, Tanker, Hazardous, Bulk Material, Municipal, Airport, FM, Bulk Transport, Clinical (when triggered)', 'Enabled'],
+      ['Missing safety zone / vehicle positioning', 'SW-02', 'Municipal, Airport, FM, and other modules when Street Works applies', 'Enabled'],
+      ['Incorrect weighbridge', 'WB-02', 'Skip & RORO, Grab, Bulk Material, Material Recovery, Bulk Transport', 'Enabled'],
+      ['Missing weighbridge ticket', 'WB-01', 'Material Recovery, Bulk Transport, Skip & RORO, Grab, Bulk Material', 'Enabled'],
+      ['Missing contamination check', 'CT-01', 'All except Sweeper and Municipal', 'Enabled'],
+      ['Missing before/after photos', 'PH-02', 'Skip & RORO, Sweeper, Municipal, FM', 'Enabled'],
+      ['Missing load / load integrity photos', 'PH-01', 'Skip & RORO (collections), Grab, Bulk Material, Bulk Transport', 'Enabled'],
+      ['Missing load arrival photos', 'PH-03', 'Material Recovery', 'Enabled'],
+      ['Missing route evidence', 'RT-01', 'Sweeper, Municipal; Walking Floor pending', 'Enabled'],
+      ['Missing manifest / consignment note', 'MF-01', 'Hazardous, Clinical; Walking Floor pending', 'Enabled'],
+      ['Missing hazard classification', 'HZ-01', 'Hazardous Waste', 'Enabled'],
+      ['Missing seal checks', 'HZ-02', 'Hazardous Waste, Clinical Waste', 'Enabled'],
+      ['Missing UN/ADR classification', 'CL-01', 'Clinical Waste', 'Enabled'],
+      ['Missing security compliance evidence', 'AP-01', 'Airport', 'Enabled'],
+      ['Missing volume / weighbridge evidence (if required)', 'TK-01', 'Tanker', 'Enabled'],
+      ['Incorrect waste classification (EWC)', 'MR-04', 'Material Recovery', 'Enabled'],
+      ['Missing processing evidence (if enabled)', 'MR-05', 'Material Recovery', 'Enabled'],
+      ['Walking Floor route / manifest / seal (v1.0)', 'WF-BT', 'Bulk Transport', 'Pending clarification']
+    ].map(([name, rule, mods, status]) => ({ name, rule, mods, status, cls: status === 'Enabled' ? 'ok' : 'warn' }));
     return {
+      wfMods: W.map((m, k) => ({ name: m.name, on: k === wf ? 'true' : 'false', cls: k === wf ? 'btn sel' : 'btn', pick: () => this.setState({ wf: k }) })),
+      wfSteps: W[wf].steps.map((x, k) => ({ n: k + 1, title: x[0], rule: R[x[1]][0], cond: x[2] || '—' })),
+      triggers,
       tabs: tabs.map(([k, label]) => ({ label, on: k === t ? 'true' : 'false', cls: k === t ? 'tab sel' : 'tab', pick: () => this.setState({ t: k }) })),
       show, cats, modCols: cols,
       matrix: mx.map(([name, s]) => ({ name, cells: s.split('').map(v => ({ v, cls: CC[v][0], title: CC[v][1] })) })),

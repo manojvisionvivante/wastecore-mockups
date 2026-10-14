@@ -73,7 +73,7 @@ dt{color:#5A6778;font-size:13px}dd{margin:0;font-size:14px;font-weight:500}
 <a href="index.html" style="text-decoration: none"><div style="font-weight: 700; font-size: 18px; color: #FFFFFF; letter-spacing: .02em">4CORE · WasteCore</div></a>
 <div style="font-size: 12px; color: #8B9BB4; margin-top: 4px">Waste Sector · Phase 1</div>
 </div>
-<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="" href="01-dashboard.html">Dashboard</a><a class="on" href="jobs.html">Jobs</a><a class="sub" href="jobs.html">All jobs</a><a class="sub" href="04-create-job.html">Create job</a><a class="sub" href="jobs.html#assigned">Assigned jobs</a><a class="sub" href="jobs.html#progress">In progress</a><a class="sub" href="jobs.html#completed">Completed</a><a class="" href="02-subsectors.html">Waste Sector</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="facilities.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="" href="06-workflow.html">Workflows</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="" href="32-settings.html">Settings</a></nav>
+<nav class="nav" aria-label="Main"><div class="grp">Operations</div><a class="" href="01-dashboard.html">Dashboard</a><a class="on" href="jobs.html">Jobs</a><a class="sub" href="jobs.html">All jobs</a><a class="sub" href="04-create-job.html">Create job</a><a class="sub" href="jobs.html#assigned">Assigned jobs</a><a class="sub" href="jobs.html#progress">In progress</a><a class="sub" href="jobs.html#completed">Completed</a><a class="" href="02-subsectors.html">Waste Sector</a><a class="" href="10-fleet.html">Fleet &amp; Vehicles</a><a class="" href="facilities.html">Facilities &amp; Transfer Stations</a><div class="grp">Evidence &amp; compliance</div><a class="" href="07-evidence-centre.html">Evidence Centre</a><a class="" href="workflows.html">Workflows</a><a class="" href="12-street-works.html">Street Works</a><a class="" href="25-compliance.html">Compliance &amp; Intelligence</a><a class="" href="26-non-compliance.html">Non-Compliance</a><a class="" href="27-chain-of-proof.html">Chain of Proof</a><div class="grp">Admin</div><a class="" href="28-reports.html">Reports &amp; Audit</a><a class="" href="30-integrations.html">Integrations</a><a class="" href="32-settings.html">Settings</a></nav>
 </aside>
 <div class="mainc">
 <header class="topbar">
@@ -285,6 +285,53 @@ dt{color:#5A6778;font-size:13px}dd{margin:0;font-size:14px;font-weight:500}
     });
   };
 })();
+</script>
+<script>// Workflow steps per operational module, from WASTE SECTOR v2.0 (section 3 of each module).
+// Step rule: M = mandatory, C = conditional (if applicable), O = optional, P = pending clarification.
+window.WC_WORKFLOWS = [
+  { key: 'skip', name: 'Skip & RORO', href: '06-workflow.html', note: 'Container type (Skip or RORO) is a parameter. Load integrity photos apply to collections only.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm waste type', 'M'], ['Capture Street Works evidence', 'C', 'Public highway or public-risk zone'],
+    ['Drop or collect container', 'M'], ['Capture before/after photos', 'M'], ['Capture load integrity photos', 'C', 'Collections only'], ['Capture contamination evidence', 'M'],
+    ['Capture weighbridge ticket', 'M'], ['Capture customer signature', 'O'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'grab', name: 'Grab', href: '20-grab.html', note: 'Soils, aggregates and muck away.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm material/waste type', 'M'], ['Capture Street Works evidence', 'C', 'Public highway or public-risk zone'],
+    ['Load material via grab', 'M'], ['Capture load photos', 'M'], ['Capture contamination evidence', 'M'], ['Capture weighbridge ticket', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'sweeper', name: 'Sweeper', href: '18-sweeper.html', note: 'Route-based; no weighbridge, load photos or signature.', steps: [
+    ['Arrive at route start', 'M'], ['Capture location evidence', 'M'], ['Capture Street Works evidence', 'C', 'Public highway or public-risk zone'], ['Capture route evidence', 'M'],
+    ['Perform sweeping task', 'M'], ['Capture before/after photos', 'M'], ['Confirm waste type', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'tanker', name: 'Tanker', href: '19-tanker.html', note: 'Liquid waste, sludge, drainage and interceptors.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm waste type', 'M'], ['Load liquid/sludge', 'M'], ['Capture contamination evidence', 'M'],
+    ['Capture volume/weighbridge evidence', 'C', 'If required for the load'], ['Transport and discharge', 'O', 'Optional evidence'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'haz', name: 'Hazardous Waste', href: '13-hazardous.html', note: 'Full legal compliance: UN/ADR/EWC classification, seals and consignment note.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm hazardous waste type', 'M'], ['Capture hazard classification evidence', 'M'], ['Capture seal checks', 'M'],
+    ['Capture contamination evidence', 'M'], ['Capture manifest/consignment note', 'M'], ['Capture weighbridge ticket', 'C', 'If weighed'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'bulkm', name: 'Bulk Material', href: '14-bulk-material.html', note: 'Aggregates, C&D and tipper loose-material loading.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm material/waste type', 'M'], ['Load material', 'M'], ['Capture load photos', 'M'],
+    ['Capture contamination evidence', 'M'], ['Capture weighbridge ticket', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'muni', name: 'Municipal', href: '15-municipal.html', note: 'Street Works is mandatory on every municipal job.', steps: [
+    ['Arrive at route start point', 'M'], ['Capture location evidence', 'M'], ['Capture Street Works evidence', 'M', 'Always required'], ['Capture route evidence', 'M'],
+    ['Perform municipal task', 'M'], ['Capture before/after photos', 'M'], ['Confirm waste/material type', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'air', name: 'Airport', href: '16-airport.html', note: 'Security checks follow the airport operator’s approved procedures.', steps: [
+    ['Arrive at airport access point', 'M'], ['Capture location evidence', 'M'], ['Confirm waste type', 'M'], ['Capture security compliance evidence', 'M'],
+    ['Load or unload airport waste', 'M'], ['Capture contamination evidence', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'fm', name: 'Facilities Management', href: '17-facilities-management.html', note: 'Internal building waste and external grounds waste.', steps: [
+    ['Arrive at FM site or asset', 'M'], ['Capture location evidence', 'M'], ['Confirm waste type', 'M'], ['Capture Street Works evidence', 'C', 'External / public-risk work'],
+    ['Perform FM waste task', 'M'], ['Capture before/after photos', 'M'], ['Capture contamination evidence', 'M'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'mrf', name: 'Material Recovery', href: '21-transfer-station.html', note: 'Transfer Station and Recycling. Processing steps apply when processing is on.', steps: [
+    ['Vehicle arrives at facility', 'M'], ['Capture location evidence', 'M'], ['Capture load arrival photos', 'M'], ['Confirm waste/material type', 'M'], ['Capture contamination evidence', 'M'],
+    ['Capture weighbridge ticket', 'M'], ['Classify waste/material (EWC code)', 'M'], ['Sort/process material', 'C', 'Processing enabled'], ['Capture processing evidence', 'C', 'Processing enabled'],
+    ['Capture dispatch evidence', 'C', 'If leaving site'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'bulkt', name: 'Bulk Transport', href: '23-walking-floor.html', note: 'v2.0 steps. Walking Floor v1.0 adds manifest, seal check and route evidence — pending clarification.', steps: [
+    ['Arrive on site', 'M'], ['Capture location evidence', 'M'], ['Confirm waste/material type', 'M'], ['Load bulk material', 'M'], ['Capture load integrity photos', 'M'],
+    ['Capture contamination evidence', 'M'], ['Capture weighbridge ticket', 'M'], ['Capture unloading evidence', 'O', 'Optional toggle'],
+    ['Bulk transport manifest (v1.0)', 'P', 'Conflicts with v2.0 exclusions'], ['Seal check (v1.0)', 'P', 'Conflicts with v2.0 exclusions'], ['Route evidence (v1.0)', 'P', 'Conflicts with v2.0 exclusions'],
+    ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] },
+  { key: 'clin', name: 'Clinical Waste', href: '24-clinical.html', note: 'Healthcare and ADR compliance (v2.0 extra module).', steps: [
+    ['Arrive at healthcare site', 'M'], ['Capture location evidence', 'M'], ['Confirm clinical waste type', 'M'], ['Capture UN/ADR classification evidence', 'M'],
+    ['Capture container integrity and seal checks', 'M'], ['Capture contamination/incident evidence', 'C', 'If an incident occurs'], ['Capture manifest/consignment note', 'M'],
+    ['Capture weighbridge/volume evidence', 'C', 'If applicable'], ['Capture completion evidence', 'M'], ['Generate chain of proof', 'M']] }
+];
+window.WC_RULE = { M: ['Mandatory', 'info'], C: ['Conditional', 'warn'], O: ['Optional', 'mute'], P: ['Pending clarification', 'warn'] };
 </script>
 <script>
 class Component extends DCLogic {
